@@ -1,3 +1,38 @@
+html,body {
+    margin: 0;
+    font-family: 'Nunito', cursive;
+}
 .navigation-bar {
-    padding: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+.navigation-brand {
+    display: inline-block;
+    width: 130px;
+    margin-top: 8px;
+}
+.navigation-brand img {
+    width: 100%;;
+}
+nav button {
+    display: none;
+}
+
+.navigation {
+    margin: auto 30px auto auto;
+}
+.navigation-ul {
+    list-style: none;
+    margin: 0;
+}
+.navigation-li {
+    display: inline-block;
+    padding: 20px 10px;
+}
+.navigation-li:hover {
+    background-color: rgb(0,0,0,.3);
+}
+.navigation-li a {
+    text-decoration: none;
 }
