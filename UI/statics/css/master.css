@@ -5,10 +5,9 @@ html,body {
 .navigation-bar {
     display: flex;
     flex-wrap: wrap;
-    background-color: rgba(0,0,0,.5);
     align-items: center;
     font-size: 20px;
-    padding: 20px;
+    padding: 15px;
 }
 .navigation-brand {
     display: inline-block;
@@ -23,7 +22,12 @@ nav button {
     display: none;
 }
 .navigation {
-    margin: 0 30px 0 auto;
+    margin: 0 10px 0 auto;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
 }
 .navigation-ul {
     list-style: none;
@@ -31,15 +35,14 @@ nav button {
 }
 .navigation-li {
     display: inline-block;
-    width: 100px;
     text-align: center;
 }
 
 .navigation-li a {
     text-decoration: none;
     padding: 5px 10px;
-    line-height: 2;
-    border-radius: 3px;
+    border-radius: 5px;
+    border: 1px solid transparent;
 }
 .navigation-li a:hover {
     background-color: rgb(0,0,0,.3);
@@ -47,6 +50,9 @@ nav button {
 }
 
 @media screen and (max-width: 768px) {
+    .navigation-bar {
+        font-size: 18px;
+    }
     nav button {
         display: inline-block;
         margin: 0 30px 0 auto;
@@ -56,7 +62,7 @@ nav button {
         flex-grow: 1;
         align-items: center;
         margin: 0;
-        height: 100px;
+        height: 0;
         overflow: hidden;
     }
     .navigation-ul {
@@ -67,7 +73,7 @@ nav button {
     .navigation-li {
         width: 100%;
         text-align: center;
-        padding: 5px;
+        padding: 1px;
     }
     .navigation-li a:hover {
         border: none;
