@@ -49,6 +49,24 @@ nav button {
     border: 1px solid white;
 }
 
+.content-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    color: white;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
 @media screen and (max-width: 768px) {
     .navigation-bar {
         font-size: 18px;
