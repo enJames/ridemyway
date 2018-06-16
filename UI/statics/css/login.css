@@ -110,3 +110,17 @@ img {
 .form-footer a:hover {
     color: rgba(14,113,191)
 }
+
+
+@media screen and (max-width: 500px) {
+    .content-wrapper {
+        width: 95%;
+    }
+    .input-wrapper label, .input-wrapper input, .form-btn {
+        font-size: 18px;
+    }
+
+    .input-wrapper input::placeholder {
+        font-size: 16px;
+    }
+}
