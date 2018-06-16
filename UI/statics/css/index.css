@@ -122,7 +122,7 @@ html,body {
     width: 100%;
 }
 .search-form input, .search-form button {
-    height: 50px;
+    height: 40px;
     font-family: 'Nunito';
     font-size: 18px;
     border-radius: 5px;
@@ -158,6 +158,32 @@ html,body {
 .search-form button:hover {
     background-position: left;
     color: white;
+}
+.btn-container {
+    width: 200px;
+    margin: 50px auto auto;
+    padding: 10px;
+    background-color: rgb(14,113,191);
+    border-radius: 5px;
+    text-align: center;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+}
+.btn-container:hover {
+    background-color: rgba(14,113,191,.6);
+}
+.btn-container a {
+    width: 100%;
+    color: white;
+    text-decoration: none;
 }
 
 /* Best Offers Section */
@@ -248,7 +274,25 @@ html,body {
     font-size: 30px !important;
     color: white;
 }
-
+footer {
+    background-color: black;
+    padding: 70px 0;
+    color: rgb(180,180,180);
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+footer h3 {
+    text-align: center;
+}
+.footer-wrapper {
+    display: flex;
+}
+.footer-wrapper div:nth-child(2) {
+    padding: 0 10px;
+}
 
 
 @media screen and (max-width: 992px) {
@@ -309,7 +353,7 @@ html,body {
         flex-direction: column;
     }
     .search-form input, .search-form button {
-        height: 40px;
+        height: 35px;
     }
     .search-form input {
         flex-basis: 100%;
