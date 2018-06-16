@@ -9,7 +9,7 @@ html,body {
 
 /* Banner visible Section */
 .banner {
-    background-image: url('../img/car.jpg');
+    background-image: url('../img/index.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
