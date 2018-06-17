@@ -30,7 +30,7 @@ body {
 .offer-item-wrapper {
     display: flex;
     width: 400px;
-    margin-left: 25%;
+    margin: 0 auto 15px 25%;
 }
 .offer-item {
     flex-basis: 35%;

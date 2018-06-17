@@ -229,12 +229,12 @@ html,body {
     .navigation-ul {
         display: flex;
         flex-direction: column;
-        padding: 0;
+        padding: 10px 0;
     }
     .navigation-li {
         width: 100%;
         text-align: center;
-        padding: 1px;
+        margin: 0 0 10px;
     }
     .navigation-li a:hover {
         border: none;
