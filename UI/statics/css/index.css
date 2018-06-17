@@ -7,7 +7,7 @@ html,body {
     font-family: 'Nunito', cursive;
 }
 
-/* Banner visible Section */
+/* -----------Banner visible Section---------- */
 .banner {
     background-image: url('../img/index.jpg');
 }
@@ -15,57 +15,11 @@ html,body {
     position: relative;
     background-color: rgba(0,10,40,.6);
 }
-/* navigation */
-.navigation-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    font-size: 20px;
-    padding: 15px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-}
-.navigation-brand {
-    display: inline-block;
-    width: 130px;
-    padding: 5px;
-}
-.navigation-brand img {
-    width: 100%;
-    height: 50px;
-}
-.navigation {
-    margin: 0 10px 0 auto;
-    transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -moz-transition: all .4s ease-in-out;
-    -ms-transition: all .4s ease-in-out;
-}
-.navigation-ul {
-    list-style: none;
-    margin: 0;
-}
-.navigation-li {
-    display: inline-block;
-    text-align: center;
-}
+/* ---------- navigation -----------*/
+/* As is in master */
 
-.navigation-li a {
-    text-decoration: none;
-    padding: 5px 10px;
-    color: white;
-    border-radius: 5px;
-    border: 1px solid transparent;
-}
-.navigation-li a:hover {
-    border: 1px solid white;
-}
 
-/* Content division */
+/* ---------- Content division ------------- */
 .content-wrapper .mantra {
     width: 100%;
     font-size: 23px;
@@ -76,6 +30,7 @@ html,body {
 /* search division */
 .search-area {
     width: 100%;
+    margin: auto auto 50px;
     text-align: center;
 }
 .search-wrapper {
@@ -138,7 +93,7 @@ html,body {
 }
 .btn-container {
     width: 200px;
-    margin: 50px auto auto;
+    margin: auto auto 50px;
     padding: 10px;
     background-color: rgb(14,113,191);
     border-radius: 5px;
@@ -173,7 +128,7 @@ html,body {
     -ms-box-sizing: border-box;
 }
 .best-offers {
-    padding: 60px 0;
+    padding: 60px 0 20px;
     text-align: center;
 }
 .best-offers h1 {
@@ -287,6 +242,7 @@ footer h3 {
     }
 }
 
+
 @media screen and (max-width: 768px) {
     .navigation-bar {
         font-size: 18px;
@@ -297,10 +253,19 @@ footer h3 {
     .navigation-brand img {
         height: 39px;
     }
+    .navigation {
+        flex-basis: auto;
+        display: flex;
+        height: auto;
+    }
     .navigation-ul {
+        display: unset;
+        margin: auto 10px auto auto;
         padding: 0;
     }
-
+    .navigation-li {
+        width: auto;
+    }
     .content-wrapper {
         width: 100%;
         padding: 0 5%;
@@ -348,9 +313,24 @@ footer h3 {
     }
 }
 
+@media screen and (max-width: 455px) {
+    .mantra h1 span {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 390px) {
     .content-wrapper .mantra {
         width: 80%;
         margin: auto;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .mantra h1 {
+        margin: 10px auto;
+    }
+    .banner .btn-container {
+        margin: auto auto -40px;
     }
 }
