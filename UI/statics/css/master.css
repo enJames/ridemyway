@@ -88,7 +88,7 @@ nav button {
 }
 
 /* ---------------- Form ------------------ */
-.form-header, .form-body {
+.form-header, .form-body, .intro {
     border-bottom: 1px solid rgba(180,180,180,.3);
 }
 .form-header .logo {
@@ -110,7 +110,7 @@ nav button {
 .input-wrapper {
     margin-bottom: 20px;
 }
-.input-wrapper label, .input-wrapper input, .form-btn {
+.input-wrapper label, .input-wrapper input, select, .form-btn {
     display: block;
     font-size: 20px;
 }

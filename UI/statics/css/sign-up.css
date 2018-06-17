@@ -1,5 +1,5 @@
 html, body {
-    min-height: 100% !important;
+    height: auto;
 }
 .banner {
     background-image: url('../img/sign-up.jpg');
@@ -10,8 +10,9 @@ html, body {
 .sign-up-wrapper {
     background-color: rgba(0,30,80,.3);
     width: 70%;
-    margin: auto;
-    padding: 30px 0 0;
+    margin: auto auto 50px;
+    padding: 30px 0;
+    color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0,0,10,.3);
 
@@ -27,9 +28,10 @@ html, body {
 }
 .input-wrapper {
     flex: 1;
-}
-.input-wrapper:first-child {
     margin-right: 10px;
+}
+.input-wrapper:last-child {
+    margin-right: 0;
 }
 .form-btn {
     width: 200px;
