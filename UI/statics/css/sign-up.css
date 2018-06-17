@@ -5,6 +5,8 @@ html, body {
     background-image: url('../img/sign-up.jpg');
 }
 .tint {
+    position: relative;
+    background-color: rgba(0,30,80,.6);
     padding-top: 20px;
 }
 .sign-up-wrapper {
