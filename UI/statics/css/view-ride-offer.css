@@ -1,0 +1,82 @@
+body {
+    background-color: rgb(240,240,240)
+}
+.navigation-bar {
+    background-color: rgb(0,30,80);
+    box-shadow: 0 1px 5px 1px rgba(0,0,0,.5);
+}
+
+.view-offer {
+    background-color: white;
+    width: 70%;
+    margin: 50px auto;
+    box-shadow: 1px 1px 5px -1px rgba(0,0,0,.3);
+}
+.ride-offer-wrapper, .view-offer-details {
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+}
+.ride-offer-wrapper {
+    border-bottom: 1px solid rgba(180,180,180,.3);
+}
+.ride-offer {
+    padding: 10px 80px;
+}
+.view-offer-details {
+    display: block;
+    padding: 30px;
+}
+.offer-item-wrapper {
+    display: flex;
+    width: 400px;
+    margin-left: 25%;
+}
+.offer-item {
+    flex-basis: 35%;
+}
+.item-details {
+    flex-basis: 65%;
+}
+
+@media screen and (max-width: 768px) {
+    .offer-item-wrapper {
+        margin-left: 17%;
+    }
+    .ride-offer {
+        padding: 10px 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .ride-offer {
+        flex-direction: column;
+    }
+    .offer-details {
+        text-align: center;
+    }
+    .offer-item-wrapper {
+        flex-direction: column;
+        width: 100%;
+        margin: auto auto 15px;;
+    }
+    .offer-item, .item-details {
+        width: 100%;
+        text-align: center;
+    }
+    .offer-item {
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .view-offer {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .view-offer {
+        width: 96%;
+    }
+}
