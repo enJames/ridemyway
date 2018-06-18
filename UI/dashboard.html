@@ -6,7 +6,7 @@
         <link rel="shortcut icon" href="statics/img/logormw.png">
         <link rel="stylesheet" href="statics/css/master.css">
         <link rel="stylesheet" href="statics/css/ride-offer-general.css">
-        <link rel="stylesheet" href="statics/css/all-offers.css">
+        <link rel="stylesheet" href="statics/css/dashboard.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Ride offer — Ride My Way</title>
@@ -53,21 +53,24 @@
             <div class="indicators">
                 <div class="currently-running">
                     <div class="header">
-                        <h3>currently Running</h3>
+                        <h3>Currently Running</h3>
                     </div>
                     <div class="running-offer">
                         <div class="sub-header">
                             <h4>Ride Offer</h4>
                         </div>
                         <div class="ride-summary">
-                            <div class="trip">
-                                <span>Lagos</span>
-                                <i class="fa fa-long-arrow-right"></i>
-                                <span>Ogun</span>
-                            </div>
-                            <div class="departure">
-                                <span>10:00 am, Jun 29</span>
-                            </div>
+                            <a href="#currentlyRunning">
+                                <div class="trip">
+                                    <span>Lagos</span>
+                                    <i class="fa fa-long-arrow-right"></i>
+                                    <span>Ogun</span>
+                                </div>
+                                <div class="departure">
+                                    <p>Departure: <span>10:00 am, Jun 29</span></p>
+                                </div>
+                            </a>
+
                         </div>
                     </div>
                     <div class="running-bookings">
@@ -81,29 +84,32 @@
                                 <span>Lagos</span>
                             </div>
                             <div class="departure">
-                                <span>10:00 am, Jul 5</span>
+                                <p>Departure: <span>10:00 am, Jul 5</span></p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="space"></div>
                 <div class="history">
                     <div class="header">
                         <h3>Rides History</h3>
                     </div>
                     <div class="statistics-group">
-                        <div class="sub-header">
-                            <h4>Rides Offered</h4>
+                        <div class="statistics">
+                            <div class="sub-header">
+                                <h4>Rides Offered</h4>
+                            </div>
+                            <div class="stat-item">
+                                <p>25</p>
+                            </div>
                         </div>
                         <div class="statistics">
-                            <span>25</span>
-                        </div>
-                    </div>
-                    <div class="statistics-group">
-                        <div class="sub-header">
-                            <h4>Rides Taken</h4>
-                        </div>
-                        <div class="statistics">
-                            <span>19</span>
+                            <div class="sub-header">
+                                <h4>Rides Taken</h4>
+                            </div>
+                            <div class="stat-item">
+                                <p>19</p>
+                            </div>
                         </div>
                     </div>
                 </div>
