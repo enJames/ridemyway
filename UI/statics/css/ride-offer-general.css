@@ -1,5 +1,10 @@
+/* ------ Blue navigation for non index pages ---- */
+.navigation-bar {
+    background-color: rgb(0,30,80);
+    box-shadow: 0 1px 5px 1px rgba(0,0,0,.5);
+}
 
-/* ----COntainer for index */
+/* ----Container for index */
 .container {
     padding: 0 7%;
     box-sizing: border-box;
@@ -83,7 +88,7 @@
     align-items: center;
     background-color: rgb(0,30,80);
     width: 20px;
-    height: 85px;
+    height: 100%;
     margin: auto 0 auto auto;
     text-align: center;
     border-radius: 0 5px 5px 0;

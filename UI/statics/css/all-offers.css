@@ -1,0 +1,12 @@
+.view-offer {
+    width: 90%;
+    margin: auto;
+    padding: 20px 0 50px;
+}
+.view-offer h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.ride-offer-wrapper {
+    width: 100%;
+}
