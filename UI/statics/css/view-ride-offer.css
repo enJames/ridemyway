@@ -10,6 +10,7 @@ body {
     background-color: white;
     width: 70%;
     margin: 50px auto;
+    padding-bottom: 1px;
     box-shadow: 1px 1px 5px -1px rgba(0,0,0,.3);
 }
 .ride-offer-wrapper, .view-offer-details {
