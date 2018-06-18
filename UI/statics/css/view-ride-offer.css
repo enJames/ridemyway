@@ -19,25 +19,35 @@ body {
     box-shadow: none;
 }
 .ride-offer-wrapper {
-    border-bottom: 1px solid rgba(180,180,180,.3);
+    border-bottom: 2px solid rgba(180,180,180,.3);
 }
 .ride-offer {
     padding: 10px 80px;
 }
 .view-offer-details {
     display: block;
-    padding: 30px;
+    padding: 30px 0;
+}
+.offer-items-container {
+    width: 300px;
+    margin: auto;
 }
 .offer-item-wrapper {
     display: flex;
-    width: 400px;
-    margin: 0 auto 15px 25%;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(180,180,180,.3);
+}
+.offer-item-wrapper:last-child {
+    border-bottom: none;
 }
 .offer-item {
-    flex-basis: 35%;
+    flex-basis: 38%;
+    font-weight: bold;
 }
 .item-details {
-    flex-basis: 65%;
+    flex-basis: 62%;
+    text-align: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -59,14 +69,11 @@ body {
     .offer-item-wrapper {
         flex-direction: column;
         width: 100%;
-        margin: auto auto 15px;;
+        margin: auto;
     }
     .offer-item, .item-details {
         width: 100%;
         text-align: center;
-    }
-    .offer-item {
-        font-weight: bold;
     }
 }
 

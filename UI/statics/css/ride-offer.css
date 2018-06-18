@@ -52,8 +52,9 @@
 }
 /* start: children of .offer-details */
 .from {
-    flex-grow: 1;
+    flex-grow: 2;
     flex-basis: 0;
+    text-align: center;
 }
 .from h3, .from p, .to h3, .to p {
     margin: 0;
@@ -69,6 +70,7 @@
 .to {
     flex-grow: 2;
     flex-basis: 0;
+    text-align: center;
 }
 /* end: children of .offer-details */
 
