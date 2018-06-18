@@ -118,26 +118,6 @@ html,body {
     text-decoration: none;
 }
 
-footer {
-    background-color: black;
-    padding: 70px 0;
-    color: rgb(180,180,180);
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-}
-footer h3 {
-    text-align: center;
-}
-.footer-wrapper {
-    display: flex;
-}
-.footer-wrapper div:nth-child(2) {
-    padding: 0 10px;
-}
-
 
 @media screen and (max-width: 992px) {
     .container {
