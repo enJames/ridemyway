@@ -22,6 +22,9 @@
     margin: 0 auto 60px;
 }
 
+.ride-offer-wrapper {
+    background-color: white;
+}
 
 .ride-offer-wrapper, .view-offer-details {
     display: flex;
