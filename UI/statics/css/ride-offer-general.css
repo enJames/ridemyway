@@ -107,3 +107,22 @@
     font-size: 30px !important;
     color: white;
 }
+
+
+@media screen and (max-width: 600px) {
+    .ride-offer {
+        flex-direction: column;
+    }
+    .offer-details {
+        text-align: center;
+    }
+    .offer-item-wrapper {
+        flex-direction: column;
+        width: 100%;
+        margin: auto;
+    }
+    .offer-item, .item-details {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -115,3 +115,26 @@ body {
 .dash-section h1 {
     text-align: center;
 }
+.section-wrapper {
+    width: 90%;
+    margin: auto;
+}
+.ride-offer-wrapper {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .indicators {
+        flex-direction: column;
+    }
+    .currently-running, .history {
+        margin: auto auto 30px;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .currently-running, .history {
+        width: 96%;
+    }
+}
