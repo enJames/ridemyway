@@ -102,6 +102,10 @@ body {
     color: white;
     border-radius: 10000px;
 }
+.stat-item a {
+    text-decoration: none;
+    color: white;
+}
 .stat-item p {
     margin: auto;
     padding: 16px;

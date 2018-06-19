@@ -16,39 +16,51 @@
             <a class="navigation-brand" href="index.html">
                 <img src="statics/img/logormww.png" alt="">
             </a>
-            <button type="button" data-toggle="navigation" data-target="#navigationId" aria-controls="navigation" aria-expanded="false" id="navigationToggler">
+            <button type="button" data-toggle="navigation" data-target="#navigationId" aria-controls="navigation" aria-expanded="false" class="navigation-toggler" id="navigationToggler">
                 <i class="fa fa-bars"></i>
             </button>
             <div class="navigation" id="navigationId">
-                <ul class="navigation-ul">
-                    <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
-                    <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
-                    <li class="navigation-li"><a href="/logout.html">Log out</a></li>
-                </ul>
+                <div class="navigation-items-wrapper">
+                    <form class="navigation-form" method="POST">
+                        <input type="search" id="searchInput" placeholder="Search a ride">
+                        <button type="submit" id="submit">Search</button>
+                    </form>
+                    <ul class="navigation-ul">
+                        <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
+                        <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
+                        <li class="navigation-li"><a href="/logout.html">Log out</a></li>
+                    </ul>
+                </div>                
             </div>
             <div class="user-navigation">
                 <div class="user-nav-wrapper">
-                    <div class="notification">
+                    <div class="dash-icon">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                    <div class="dash-icon">
                         <i class="fa fa-bell"></i>
                     </div>
-                    <div class="notification">
+                    <div class="dash-icon">
                         <i class="fa fa-envelope"></i>
                     </div>
+                    <div class="dash-icon">
+                        <i class="fa fa-user"></i>
+                    </div>
                 </div>
-                <div class="user">
+                <div class="user" id="userNavToggler">
                     <div class="user-wrapper">
-                        <a href="profile.html">
-                            <div class="avatar">
-                                <img src="statics/img/user-avatar.jpg" alt="Avatar">
-                            </div>
-                        </a>
-                        <div class="caret" id="userNavToggler">
+                        <div class="avatar">
+                            <img src="statics/img/user-avatar.jpg" alt="Avatar">
+                        </div>
+                        <div class="caret">
                             <i class="fa fa-caret-down"></i>
                         </div>
                         <div class="dropdown" id="userNav">
                             <ul class="dropdown-ul">
                                 <li class="dropdown-li"><a href="profile.html">Profile</a></li>
-                                <li class="dropdown-li"><a href="all-offers.html">Create ride offer</a></li>
+                                <li class="dropdown-li"><a href="all-offers.html">Notification</a></li>
+                                <li class="dropdown-li"><a href="all-offers.html">Messages</a></li>
+                                <li class="dropdown-li"><a href="all-offers.html">Ride history</a></li>
                                 <li class="dropdown-li"><a href="/logout.html">Log out</a></li>
                             </ul>
                         </div>
@@ -101,36 +113,40 @@
                 <div class="space"></div>
                 <div class="history">
                     <div class="header">
-                        <h3>Rides History</h3>
+                        <a href="#ridesHistory"></a>
+                        <h3>Rides Statistics</h3>
                     </div>
                     <div class="statistics-group">
                         <div class="statistics">
                             <div class="sub-header">
                                 <h4>Rides Offered</h4>
                             </div>
-                            <a href="#ridesOffered">
-                                <div class="stat-item">
+                            <div class="stat-item">
+                                <a href="/offered">
                                     <p>25</p>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                         <div class="statistics">
                             <div class="sub-header">
                                 <h4>Rides Taken</h4>
                             </div>
-                            <a href="#ridesTaken">
-                                <div class="stat-item">
+                            <div class="stat-item">
+                                <a href="/taken">
                                     <p>19</p>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="dash-section">
-                <h1 id="ridesOffered">Rides offered</h1>
+                <h1 id="ridesHistory">Recent Ride History</h1>
                 <div class="section-wrapper">
                     <div class="ride-offer-wrapper">
+                        <div class="ride-type">
+                            <i class="fa fa-share"></i>
+                        </div>
                         <div class="ride-offer">
                             <div class="offer-details">
                                 <div class="from">
@@ -156,6 +172,9 @@
                         </a>
                     </div>
                     <div class="ride-offer-wrapper">
+                        <div class="ride-type">
+                            <i class="fa fa-reply"></i>
+                        </div>
                         <div class="ride-offer">
                             <div class="offer-details">
                                 <div class="from">
@@ -166,62 +185,12 @@
                                     <span class="fa fa-long-arrow-right"></span>
                                 </div>
                                 <div class="to">
-                                    <h3 class="to-state">Oyo</h3>
-                                    <p class="to-city">Bodija</p>
+                                    <h3 class="to-state">Ondo</h3>
+                                    <p class="to-city">Ore</p>
                                 </div>
                             </div>
                             <div class="offer-price">
-                                <h3>₦<span>2,500</span></h3>
-                            </div>
-                        </div>
-                        <a href="ride-offer.html">
-                            <div class="view-offer-btn">
-                                <i class="fa fa-caret-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="ride-offer-wrapper">
-                        <div class="ride-offer">
-                            <div class="offer-details">
-                                <div class="from">
-                                    <h3 class="from-state">Lagos</h3>
-                                    <p class="from-city">Oshodi</p>
-                                </div>
-                                <div class="arrow-icon">
-                                    <span class="fa fa-long-arrow-right"></span>
-                                </div>
-                                <div class="to">
-                                    <h3 class="to-state">Rivers</h3>
-                                    <p class="to-city">Port Harcourt</p>
-                                </div>
-                            </div>
-                            <div class="offer-price">
-                                <h3>₦<span>4,500</span></h3>
-                            </div>
-                        </div>
-                        <a href="ride-offer.html">
-                            <div class="view-offer-btn">
-                                <i class="fa fa-caret-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="ride-offer-wrapper">
-                        <div class="ride-offer">
-                            <div class="offer-details">
-                                <div class="from">
-                                    <h3 class="from-state">Ogun</h3>
-                                    <p class="from-city">Sango Ota</p>
-                                </div>
-                                <div class="arrow-icon">
-                                    <span class="fa fa-long-arrow-right"></span>
-                                </div>
-                                <div class="to">
-                                    <h3 class="to-state">Taraba</h3>
-                                    <p class="to-city">Jalingo</p>
-                                </div>
-                            </div>
-                            <div class="offer-price">
-                                <h3>₦<span>7,000</span></h3>
+                                <h3>₦<span>3,500</span></h3>
                             </div>
                         </div>
                         <a href="ride-offer.html">
@@ -231,160 +200,8 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="dash-section">
-                <h1 id="ridesTaken">Rides Taken</h1>
-                <div class="section-wrapper">
-                    <div class="ride-offer-wrapper">
-                        <div class="ride-offer">
-                            <div class="offer-details">
-                                <div class="from">
-                                    <h3 class="from-state">Lagos</h3>
-                                    <p class="from-city">Gbagada</p>
-                                </div>
-                                <div class="arrow-icon">
-                                    <span class="fa fa-long-arrow-right"></span>
-                                </div>
-                                <div class="to">
-                                    <h3 class="to-state">Oyo</h3>
-                                    <p class="to-city">Bodija</p>
-                                </div>
-                            </div>
-                            <div class="offer-price">
-                                <h3>₦<span>2,500</span></h3>
-                            </div>
-                        </div>
-                        <a href="ride-offer.html">
-                            <div class="view-offer-btn">
-                                <i class="fa fa-caret-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="ride-offer-wrapper">
-                        <div class="ride-offer">
-                            <div class="offer-details">
-                                <div class="from">
-                                    <h3 class="from-state">Ogun</h3>
-                                    <p class="from-city">Sagamu</p>
-                                </div>
-                                <div class="arrow-icon">
-                                    <span class="fa fa-long-arrow-right"></span>
-                                </div>
-                                <div class="to">
-                                    <h3 class="to-state">Benue</h3>
-                                    <p class="to-city">Otukpo</p>
-                                </div>
-                            </div>
-                            <div class="offer-price">
-                                <h3>₦<span>7,500</span></h3>
-                            </div>
-                        </div>
-                        <a href="ride-offer.html">
-                            <div class="view-offer-btn">
-                                <i class="fa fa-caret-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="ride-offer-wrapper">
-                        <div class="ride-offer">
-                            <div class="offer-details">
-                                <div class="from">
-                                    <h3 class="from-state">Rivers</h3>
-                                    <p class="from-city">Buguma</p>
-                                </div>
-                                <div class="arrow-icon">
-                                    <span class="fa fa-long-arrow-right"></span>
-                                </div>
-                                <div class="to">
-                                    <h3 class="to-state">Cross River</h3>
-                                    <p class="to-city">Ikom</p>
-                                </div>
-                            </div>
-                            <div class="offer-price">
-                                <h3>₦<span>5,000</span></h3>
-                            </div>
-                        </div>
-                        <a href="ride-offer.html">
-                            <div class="view-offer-btn">
-                                <i class="fa fa-caret-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="ride-offer-wrapper">
-                        <div class="ride-offer">
-                            <div class="offer-details">
-                                <div class="from">
-                                    <h3 class="from-state">Bayelsa</h3>
-                                    <p class="from-city">Imbiama</p>
-                                </div>
-                                <div class="arrow-icon">
-                                    <span class="fa fa-long-arrow-right"></span>
-                                </div>
-                                <div class="to">
-                                    <h3 class="to-state">Edo</h3>
-                                    <p class="to-city">Ikpoba Hills</p>
-                                </div>
-                            </div>
-                            <div class="offer-price">
-                                <h3>₦<span>5,000</span></h3>
-                            </div>
-                        </div>
-                        <a href="ride-offer.html">
-                            <div class="view-offer-btn">
-                                <i class="fa fa-caret-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="ride-offer-wrapper">
-                        <div class="ride-offer">
-                            <div class="offer-details">
-                                <div class="from">
-                                    <h3 class="from-state">Kaduna</h3>
-                                    <p class="from-city">Aminu Kano</p>
-                                </div>
-                                <div class="arrow-icon">
-                                    <span class="fa fa-long-arrow-right"></span>
-                                </div>
-                                <div class="to">
-                                    <h3 class="to-state">Abuja</h3>
-                                    <p class="to-city">Gwagwalada</p>
-                                </div>
-                            </div>
-                            <div class="offer-price">
-                                <h3>₦<span>2,000</span></h3>
-                            </div>
-                        </div>
-                        <a href="ride-offer.html">
-                            <div class="view-offer-btn">
-                                <i class="fa fa-caret-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="ride-offer-wrapper">
-                        <div class="ride-offer">
-                            <div class="offer-details">
-                                <div class="from">
-                                    <h3 class="from-state">Imo</h3>
-                                    <p class="from-city">Owerri</p>
-                                </div>
-                                <div class="arrow-icon">
-                                    <span class="fa fa-long-arrow-right"></span>
-                                </div>
-                                <div class="to">
-                                    <h3 class="to-state">Anambra</h3>
-                                    <p class="to-city">Onitsha</p>
-                                </div>
-                            </div>
-                            <div class="offer-price">
-                                <h3>₦<span>3,000</span></h3>
-                            </div>
-                        </div>
-                        <a href="ride-offer.html">
-                            <div class="view-offer-btn">
-                                <i class="fa fa-caret-right"></i>
-                            </div>
-                        </a>
-                    </div>
+                <div class="btn-container">
+                    <a href="all-offers.html">See all history</a>
                 </div>
             </div>
         </div>

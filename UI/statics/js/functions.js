@@ -8,8 +8,8 @@ const collapseToggle = (toggler, collapsible, collapsibleContent) => {
     }
 };
 
-const displayToggle = (element) => {
-    if (!element.style.display || element.style.display === 'none') {
+const displayToggle = (e, element) => {
+    if (e.target.offsetParent.className === 'user-wrapper') {
         element.style.display = 'block';
     } else {
         element.style.display = 'none';

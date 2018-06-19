@@ -41,6 +41,15 @@
 .ride-offer-wrapper a {
     text-decoration: none;
 }
+.ride-type {
+    display: flex;
+    align-items: center;
+    width: 50px;
+    text-align: center;
+}
+.ride-type i {
+    margin-left: 30px;
+}
 .ride-offer {
     flex-basis: 100%;
     display: flex;

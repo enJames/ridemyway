@@ -2,6 +2,14 @@ html,body {
     margin: 0;
     font-family: 'Nunito', cursive;
 }
+.fa-share {
+    color: rgb(0,100,10);
+    font-size: 25px !important;
+}
+.fa-reply {
+    color: rgb(100,10,0);
+    font-size: 25px !important;
+}
 
 /* ---------Navigation-----------*/
 .navigation-bar {
@@ -25,7 +33,7 @@ html,body {
     width: 100%;
     height: 50px;
 }
-.navigation-bar button {
+.navigation-toggler {
     display: none;
     background-color: transparent;
     font-size: 30px;
@@ -33,23 +41,81 @@ html,body {
     border: 1px solid white;
     border-radius: 5px;
 }
-.navigation-bar button:focus {
+.navigation-toggler:focus {
     background-color: rgb(14,113,191);
     color: white !important;
     border: 2px solid white;
     outline: none;
 }
+
+
+
+
+/* --------- Nav div ---------- */
 .navigation {
-    margin: 0 10px 0 auto;
+    margin: 0 0 0 auto;
     transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
     -moz-transition: all .4s ease-in-out;
     -ms-transition: all .4s ease-in-out;
 }
+.navigation-items-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+/* -------Navigation form --------- */
+.navigation-form {
+    margin-right: 140px;
+}
+.navigation-form input {
+    width: 220px;
+    height: 35px;
+    text-indent: 10px;
+    color: rgb(0,30,80);
+    border: none;
+    border-radius: 5px;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+}
+.navigation-form input::placeholder {
+    font-style: italic;
+}
+.navigation-form input:focus {
+    outline: none;
+    border: 1.5px solid rgb(14,113,191);
+    text-indent: 15px;
+}
+.navigation-form button {
+    background-color: transparent;
+    width: 70px;
+    height: 35px;
+    font-weight: bold;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+}
+.navigation-form button:hover {
+    background-color: white;
+    color: rgb(0,30,80);
+}
+
+/* --------- Navigation ul --------- */
 .navigation-ul {
+    flex-direction: row;
     background-color: rgb(0,30,80);
-    margin: 0;
+    margin: 0 15px 0 auto;
+    padding: 0;
 }
 .navigation-li {
     display: inline-block;
@@ -79,11 +145,10 @@ html,body {
 }
 .user-nav-wrapper {
     display: flex;
-    width: 100px;
     margin: auto;
 }
-.user-nav-wrapper div {
-    flex: 1;
+.user-nav-wrapper .dash-icon {
+    margin-right: 35px;
 }
 .user-wrapper {
     position: relative;
@@ -113,7 +178,7 @@ html,body {
 .dropdown {
     display: none;
     position: absolute;
-    top: 40px;
+    top: 45px;
     right: 0;
     width: 200px;
     padding: 5px;
@@ -130,9 +195,10 @@ html,body {
     margin: 0;
     padding: 5px 0;
     border-radius: 5px;
+    box-shadow: 1px 1px 15px 0 rgba(0,0,0,.4);
 }
 .dropdown-li {
-
+    list-style-type: none;
 }
 
 .dropdown-li a {
@@ -324,26 +390,46 @@ footer h3 {
 }
 
 
+@media screen and (max-width: 900px) {
+    .navigation-form {
+        margin-right: 70px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .navigation-form {
+        margin-right: 30px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .navigation-bar {
         font-size: 18px;
     }
-    .navigation-bar button {
+    .navigation-toggler {
         display: inline-block;
-        margin: 0 10px 0 auto;
+        margin: 0 20px 0 auto;
     }
     .navigation {
-        flex-basis: 100%;
-        flex-grow: 1;
-        align-items: center;
-        margin: 0;
+        display: block;
+        width: 100%;
         height: 0;
         overflow: hidden;
+    }
+    .navigation-items-wrapper {
+        flex-wrap: wrap;
+        text-align: center;
+    }
+    .navigation-form {
+        width: 100%;
+        margin: 15px 0;
     }
     .navigation-ul {
         display: flex;
         flex-direction: column;
-        padding: 10px 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
     }
     .navigation-li {
         width: 100%;
@@ -354,5 +440,8 @@ footer h3 {
         border: none;
         background: none;
         color: red;
+    }
+    .user-nav-wrapper .dash-icon {
+        margin-right: 25px;
     }
 }
