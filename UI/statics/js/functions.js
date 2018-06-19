@@ -8,6 +8,10 @@ const collapseToggle = (toggler, collapsible, collapsibleContent) => {
     }
 };
 
-const scrollingNavigation = () => {
-
+const displayToggle = (element) => {
+    if (!element.style.display || element.style.display === 'none') {
+        element.style.display = 'block';
+    } else {
+        element.style.display = 'none';
+    }
 };

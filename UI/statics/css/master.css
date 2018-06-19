@@ -111,12 +111,18 @@ html,body {
     background-color: rgba(235,235,235,.9);
 }
 .dropdown {
+    display: none;
     position: absolute;
     top: 40px;
     right: 0;
     width: 200px;
     padding: 5px;
     border-radius: 5px;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
 }
 .dropdown-ul {
     background-color: rgb(0,30,80);
