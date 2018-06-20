@@ -111,6 +111,9 @@ body {
     padding: 16px;
     font-size: 20px;
 }
+.stat-item p:hover  ~ .stat item p{
+    background-color:
+}
 
 /* ------- Dash section ----------- */
 .dash-section {

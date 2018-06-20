@@ -217,6 +217,38 @@ html,body {
     color: rgb(0,30,80);
 }
 
+/*-------- Create Offer ------- */
+.dash-icon {
+    position: relative;
+}
+.create-ride-offer-form {
+    position: absolute;
+    left: -50%;
+    background-color: rgba(0,30,80,.8);
+    width: 300px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 15px 0 rgba(0,0,0,.8);
+}
+.create-ride-offer-form h3 {
+    margin: 5px auto;
+}
+.create-ride-offer-form input, .create-ride-offer-form button {
+    display: block;
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+.create-ride-offer-form input {
+    padding: 0 10px;
+    margin-bottom: 10px;box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
 
 /* ---------- Banner and background tints ---------- */
 .banner {
