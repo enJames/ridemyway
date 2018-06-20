@@ -6,6 +6,7 @@
         <link rel="shortcut icon" href="statics/img/logormw.png">
         <link rel="stylesheet" href="statics/css/master.css">
         <link rel="stylesheet" href="statics/css/ride-offer-general.css">
+        <link rel="stylesheet" href="statics/css/dashboard.css">
         <link rel="stylesheet" href="statics/css/create.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -76,55 +77,49 @@
                 </div>
             </div>
         </nav>
-        <div class="dash-container">
-            <div class="create-ride-offer-form">
-                <div class="form-header">
-                    <h3>Offer a ride</h3>
-                </div>
+        <div class="form">
+            <div class="form-header">
+                <h2>Offer a ride</h2>
+            </div>
+            <div class="form-section">
                 <div class="form-body">
                     <form method="POST">
-                        <div class="form-section">
-                            <h4>Current location</h4>
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="fromState"></label>
-                                    <input type="text" id="fromState" value="Lagos">
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="fromCity"></label>
-                                    <input type="text" id="fromCity" value="Gbagada">
-                                </div>
+                        <div class="input-group">
+                            <div class="input-wrapper">
+                                <label for="fromState">State</label>
+                                <input type="text" id="fromState" value="Lagos">
                             </div>
-                        </div>
-                        <div class="form-section">
-                            <h4>Destination</h4>
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="toState"></label>
-                                    <input type="text" id="toState">
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="toCity"></label>
-                                    <input type="text" id="toCity">
-                                </div>
+                            <div class="input-wrapper">
+                                <label for="fromCity">City</label>
+                                <input type="text" id="fromCity" value="Gbagada">
                             </div>
-                        </div>
-                        <div class="input-wrapper">
-                            <label for="price"></label>
-                            <input type="text" id="price">
                         </div>
                         <div class="input-group">
                             <div class="input-wrapper">
-                                <label for="departure"></label>
+                                <label for="toState">State</label>
+                                <input type="text" id="toState" placeholder="Destination State">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="toCity">City</label>
+                                <input type="text" id="toCity" placeholder="Destination City">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-wrapper">
+                                <label for="price">Price (₦)</label>
+                                <input type="text" id="price" placeholder="eg 2500">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="departure">Departure Date</label>
                                 <input type="date" id="departureDate">
                             </div>
                             <div class="input-wrapper">
-                                <label for="departure"></label>
+                                <label for="departure">Departure Time</label>
                                 <input type="time" id="departureTime">
                             </div>
                         </div>
                         <div class="input-wrapper">
-                            <label for="pickupLocation"></label>
+                            <label for="pickupLocation">Pick up location</label>
                             <input type="text" id="pickupLocation" value="New Garage">
                         </div>
                         <div class="btn-wrapper">
