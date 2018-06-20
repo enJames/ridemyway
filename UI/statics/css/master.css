@@ -10,7 +10,9 @@ html,body {
     color: rgb(100,10,0);
     font-size: 25px !important;
 }
-
+.nmr {
+    margin-right: 0 !important;
+}
 /* ---------Navigation-----------*/
 .navigation-bar {
     display: flex;
@@ -217,39 +219,6 @@ html,body {
     color: rgb(0,30,80);
 }
 
-/*-------- Create Offer ------- */
-.dash-icon {
-    position: relative;
-}
-.create-ride-offer-form {
-    position: absolute;
-    left: -50%;
-    background-color: rgba(0,30,80,.8);
-    width: 300px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 15px 0 rgba(0,0,0,.8);
-}
-.create-ride-offer-form h3 {
-    margin: 5px auto;
-}
-.create-ride-offer-form input, .create-ride-offer-form button {
-    display: block;
-    width: 100%;
-    height: 30px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-}
-.create-ride-offer-form input {
-    padding: 0 10px;
-    margin-bottom: 10px;box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-}
-
-
 /* ---------- Banner and background tints ---------- */
 .banner {
     background-position: center;
@@ -283,6 +252,14 @@ html,body {
 }
 
 /* ---------------- Form ------------------ */
+.form {
+    width: 70%;
+    margin: auto auto 50px;
+    padding: 30px 0;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,10,.3);
+}
 .form-header, .form-body, .intro {
     border-bottom: 1px solid rgba(180,180,180,.3);
 }
@@ -301,6 +278,16 @@ html,body {
     -o-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
+}
+.input-group {
+    display: flex;
+}
+.input-wrapper {
+    flex: 1;
+    margin-right: 10px;
+}
+.input-wrapper:last-child {
+    margin-right: 0;
 }
 .input-wrapper {
     margin-bottom: 20px;
@@ -475,5 +462,11 @@ footer h3 {
     }
     .user-nav-wrapper .dash-icon {
         margin-right: 25px;
+    }
+    .input-group {
+        flex-direction: column;
+    }
+    .input-wrapper {
+        margin-right: 0;
     }
 }

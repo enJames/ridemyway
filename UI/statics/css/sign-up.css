@@ -9,14 +9,9 @@ html, body {
     background-color: rgba(0,30,80,.6);
     padding-top: 20px;
 }
-.sign-up-wrapper {
+.form {
     background-color: rgba(0,30,80,.3);
-    width: 70%;
-    margin: auto auto 50px;
-    padding: 30px 0;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0,0,10,.3);
+
 }
 .intro {
     text-align: center;
@@ -44,16 +39,7 @@ html, body {
 .form-body {
     border: none;
 }
-.input-group {
-    display: flex;
-}
-.input-wrapper {
-    flex: 1;
-    margin-right: 10px;
-}
-.input-wrapper:last-child {
-    margin-right: 0;
-}
+
 .form-btn {
     width: 200px;
     margin: auto;
@@ -61,19 +47,13 @@ html, body {
 
 
 @media screen and (max-width: 992px) {
-    .sign-up-wrapper {
+    .form {
         width: 90%;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .sign-up-wrapper {
+    .form {
         width: 95%;
-    }
-    .input-group {
-        flex-direction: column;
-    }
-    .input-wrapper {
-        margin-right: 0;
     }
 }
