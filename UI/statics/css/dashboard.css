@@ -54,6 +54,9 @@ body {
     padding: 10px 15px;
     border-bottom: 1px solid rgba(180,180,180,.3);
 }
+.ride-summary .trip:hover {
+    background-color: rgba(220,220,220,.8);
+}
 
 .trip span, .trip i {
     flex: 1;
@@ -102,7 +105,7 @@ body {
     color: white;
     border-radius: 10000px;
 }
-.stat-item a {
+.stat-item a, .user-nav-wrapper a {
     text-decoration: none;
     color: white;
 }
