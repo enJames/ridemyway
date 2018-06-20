@@ -8,6 +8,14 @@ const collapseToggle = (toggler, collapsible, collapsibleContent) => {
     }
 };
 
-const scrollingNavigation = () => {
-
+const displayToggle = (e, element) => {
+    if (e.target.offsetParent.className === 'user-wrapper' || e.target.offsetParent.className === 'dropdown') {
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    } else {
+        element.style.display = 'none';
+    }
 };

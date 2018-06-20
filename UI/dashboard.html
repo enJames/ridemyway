@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" href="statics/img/logormw.png">
+        <link rel="stylesheet" href="statics/css/master.css">
+        <link rel="stylesheet" href="statics/css/ride-offer-general.css">
+        <link rel="stylesheet" href="statics/css/dashboard.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Ride offer — Ride My Way</title>
+    </head>
+    <body>
+        <nav class="navigation-bar">
+            <a class="navigation-brand" href="index.html">
+                <img src="statics/img/logormww.png" alt="">
+            </a>
+            <button type="button" data-toggle="navigation" data-target="#navigationId" aria-controls="navigation" aria-expanded="false" class="navigation-toggler" id="navigationToggler">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="navigation" id="navigationId">
+                <div class="navigation-items-wrapper">
+                    <form class="navigation-form" method="POST">
+                        <input type="search" id="searchInput" placeholder="Search a ride">
+                        <button type="submit" id="submit">Search</button>
+                    </form>
+                    <ul class="navigation-ul">
+                        <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
+                        <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
+                        <li class="navigation-li"><a href="/logout.html">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="user-navigation">
+                <div class="user-nav-wrapper">
+                    <a href="#">
+                        <div class="dash-icon">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="dash-icon">
+                            <i class="fa fa-bell"></i>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="dash-icon">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="dash-icon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="user" id="userNavToggler">
+                    <div class="user-wrapper">
+                        <div class="avatar">
+                            <img src="statics/img/user-avatar.jpg" alt="Avatar">
+                        </div>
+                        <div class="caret">
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown" id="userNav">
+                            <ul class="dropdown-ul">
+                                <li class="dropdown-li"><a href="profile.html">Profile</a></li>
+                                <li class="dropdown-li"><a href="#">Notification</a></li>
+                                <li class="dropdown-li"><a href="#">Messages</a></li>
+                                <li class="dropdown-li"><a href="history.html">Ride history</a></li>
+                                <li class="dropdown-li"><a href="/logout.html">Log out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="dash-container">
+            <div class="indicators">
+                <div class="currently-running">
+                    <div class="header">
+                        <h3>Currently Running</h3>
+                    </div>
+                    <div class="running-offer">
+                        <div class="sub-header">
+                            <h4>Ride Offer</h4>
+                        </div>
+                        <div class="ride-summary">
+                            <a href="ride-offer.html">
+                                <div class="trip">
+                                    <span>Lagos</span>
+                                    <i class="fa fa-long-arrow-right"></i>
+                                    <span>Ogun</span>
+                                </div>
+                                <div class="departure">
+                                    <p>Departure: <span>10:00 am, Jun 29</span></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="running-bookings">
+                        <div class="sub-header">
+                            <h4>Ride Bookings</h4>
+                        </div>
+                        <div class="ride-summary">
+                            <a href="ride-offer.html">
+                                <div class="trip">
+                                    <span>Ogun</span>
+                                    <i class="fa fa-long-arrow-right"></i>
+                                    <span>Lagos</span>
+                                </div>
+                                <div class="departure">
+                                    <p>Departure: <span>10:00 am, Jul 5</span></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+                <div class="history">
+                    <div class="header">
+                        <a href="#ridesHistory"></a>
+                        <h3>Rides Statistics</h3>
+                    </div>
+                    <div class="statistics-group">
+                        <div class="statistics">
+                            <div class="sub-header">
+                                <h4>Rides Offered</h4>
+                            </div>
+                            <div class="fa fa-share"></div>
+                            <div class="stat-item">
+                                <a href="/offered">
+                                    <p>25</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="statistics">
+                            <div class="sub-header">
+                                <h4>Rides Taken</h4>
+                            </div>
+                            <div class="fa fa-reply"></div>
+                            <div class="stat-item">
+                                <a href="/taken">
+                                    <p>19</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dash-section">
+                <h1 id="ridesHistory">Recent Ride History</h1>
+                <div class="section-wrapper">
+                    <div class="ride-offer-wrapper">
+                        <div class="ride-type">
+                            <i class="fa fa-share"></i>
+                        </div>
+                        <div class="ride-offer">
+                            <div class="offer-details">
+                                <div class="from">
+                                    <h3 class="from-state">Lagos</h3>
+                                    <p class="from-city">Gbagada</p>
+                                </div>
+                                <div class="arrow-icon">
+                                    <span class="fa fa-long-arrow-right"></span>
+                                </div>
+                                <div class="to">
+                                    <h3 class="to-state">Oyo</h3>
+                                    <p class="to-city">Bodija</p>
+                                </div>
+                            </div>
+                            <div class="offer-price">
+                                <h3>₦<span>2,500</span></h3>
+                            </div>
+                        </div>
+                        <a href="ride-offer.html">
+                            <div class="view-offer-btn">
+                                <i class="fa fa-caret-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ride-offer-wrapper">
+                        <div class="ride-type">
+                            <i class="fa fa-reply"></i>
+                        </div>
+                        <div class="ride-offer">
+                            <div class="offer-details">
+                                <div class="from">
+                                    <h3 class="from-state">Lagos</h3>
+                                    <p class="from-city">Gbagada</p>
+                                </div>
+                                <div class="arrow-icon">
+                                    <span class="fa fa-long-arrow-right"></span>
+                                </div>
+                                <div class="to">
+                                    <h3 class="to-state">Ondo</h3>
+                                    <p class="to-city">Ore</p>
+                                </div>
+                            </div>
+                            <div class="offer-price">
+                                <h3>₦<span>3,500</span></h3>
+                            </div>
+                        </div>
+                        <a href="ride-offer.html">
+                            <div class="view-offer-btn">
+                                <i class="fa fa-caret-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="btn-container">
+                    <a href="all-offers.html">See all history</a>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <h3>Footer Information</h3>
+            </div>
+        </footer>
+        <script src="statics/js/Functions.js"></script>
+        <script src="statics/js/Nonindex.js"></script>
+    </body>
+</html>
