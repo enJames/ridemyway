@@ -10,20 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const acceptedResponses = document.getElementById('acceptedResponses'); // Collapsible Div
     const acceptedResponsesContainer = document.getElementById('acceptedResponsesContainer'); // Child Div
 
-
     // Toggle collapse
     navigationToggler.addEventListener('click', () => {
-        collapseToggle(navigationToggler, navigationDiv, navigationItemsWrapper)
+        PageFunctions.collapseToggle(navigationToggler, navigationDiv, navigationItemsWrapper)
     }, false);
 
     //Accepted Responses toggler
     view.addEventListener('click', () => {
-        collapseToggle(view, acceptedResponses, acceptedResponsesContainer);
+        PageFunctions.collapseToggle(view, acceptedResponses, acceptedResponsesContainer);
     }, false);
 
     // Toggle User nav display
     document.addEventListener('click', (e) => {
-        displayToggle(e, userNav);
+        PageFunctions.displayToggle(e, userNav);
     }, false);
 
     // Scroll element into view
