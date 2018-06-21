@@ -5,10 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const userNavToggler = document.getElementById('userNavToggler');
     const userNav = document.getElementById('userNav');
 
+    // Elements in responses page
+    const view = document.getElementById('view'); // View button
+    const acceptedResponses = document.getElementById('acceptedResponses'); // Collapsible Div
+    const acceptedResponsesContainer = document.getElementById('acceptedResponsesContainer'); // Child Div
+
 
     // Toggle collapse
     navigationToggler.addEventListener('click', () => {
         collapseToggle(navigationToggler, navigationDiv, navigationItemsWrapper)
+    }, false);
+
+    //Accepted Responses toggler
+    view.addEventListener('click', () => {
+        collapseToggle(view, acceptedResponses, acceptedResponsesContainer);
     }, false);
 
     // Toggle User nav display
