@@ -8,12 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Toggle collapse
     navigationToggler.addEventListener('click', () => {
-        collapseToggle(navigationToggler, navigationDiv, navigationItemsWrapper)
+        PageFunctions
+            .collapseToggle(
+                navigationToggler,
+                navigationDiv,
+                navigationItemsWrapper
+            );
     }, false);
 
     // Toggle User nav display
     document.addEventListener('click', (e) => {
-        displayToggle(e, userNav);
+        PageFunctions.displayToggle(e, userNav);
     }, false);
 
     // Scroll element into view
