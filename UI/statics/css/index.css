@@ -6,6 +6,10 @@ html,body {
     margin: 0;
     font-family: 'Nunito', cursive;
 }
+.navigation-bar, .navigation-ul {
+    background-color: transparent;
+    box-shadow: none;
+}
 
 /* -----------Banner visible Section---------- */
 .banner {
@@ -91,33 +95,9 @@ html,body {
     background-position: left;
     color: white;
 }
-.btn-container {
-    width: 200px;
-    margin: auto auto 50px;
-    padding: 10px;
-    background-color: rgb(14,113,191);
-    border-radius: 5px;
-    text-align: center;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -moz-transition: all .4s ease-in-out;
-    -ms-transition: all .4s ease-in-out;
+.content-wrapper .btn-container {
+    margin: auto auto -50px;
 }
-.btn-container:hover {
-    background-color: rgba(14,113,191,.6);
-}
-.btn-container a {
-    width: 100%;
-    color: white;
-    text-decoration: none;
-}
-
 
 @media screen and (max-width: 992px) {
     .container {
@@ -139,21 +119,16 @@ html,body {
     .navigation-bar {
         font-size: 18px;
     }
-    .navigation-brand {
-        width: 100px;
-    }
-    .navigation-brand img {
-        height: 39px;
-    }
     .navigation {
-        flex-basis: auto;
-        display: flex;
+        display: inline-block;
+        flex-basis: 70%;
         height: auto;
+        text-align: right;
     }
     .navigation-ul {
         display: unset;
-        margin: auto 10px auto auto;
-        padding: 0;
+        width: 150px;
+        margin-right: 20px;
     }
     .navigation-li {
         width: auto;
@@ -204,14 +179,38 @@ html,body {
         width: 100%;
     }
 }
-
+@media screen and (max-width: 485px) {
+    .navigation {
+        flex-basis: 50%;
+    }
+}
 @media screen and (max-width: 455px) {
+    .navigation {
+        flex-basis: 50%;
+    }
     .mantra h1 span {
         display: none;
     }
 }
 
 @media screen and (max-width: 390px) {
+    .navigation-bar {
+        font-size: 18px;
+    }
+    .navigation-brand {
+        margin: auto;
+    }
+    .navigation {
+        height: auto;
+        text-align: center;
+    }
+    .navigation-ul {
+        display: unset;
+        width: 150px;
+    }
+    .navigation-li {
+        width: auto;
+    }
     .content-wrapper .mantra {
         width: 80%;
         margin: auto;
