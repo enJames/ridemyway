@@ -367,6 +367,7 @@ html,body {
     background-color: rgb(14,113,191);
     border-radius: 5px;
     text-align: center;
+    cursor: pointer;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -o-box-sizing: border-box;
