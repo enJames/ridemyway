@@ -18,7 +18,12 @@ body {
     border-bottom: 2px solid rgba(180,180,180,.3);
 }
 .ride-offer {
+    background-color: rgb(0,30,80);
     padding: 10px 80px;
+    color: white;
+}
+.ride-offer .fa {
+    color: white;
 }
 .view-offer-details {
     display: block;
@@ -87,7 +92,7 @@ body {
 }
 /*------------------*/
 .responses-user {
-    flex-basis: 59%;
+    flex-basis: 54%;
     border-right: 2px solid rgb(180,180,180,.4);
 }
 .responses-user-name {
@@ -110,7 +115,7 @@ body {
 }
 /*------------------*/
 .responses-btn {
-    flex-basis: 40%;
+    flex-basis: 45%;
     display:flex;
     align-items: center;
 }
@@ -134,9 +139,34 @@ body {
 }
 
 
+
+
+@media screen and (max-width: 1024px) {
+    .view-offer {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 900px) {
+    .view-offer {
+        width: 95%;
+    }
+}
 @media screen and (max-width: 768px) {
     .ride-offer {
         padding: 10px 30px;
+    }
+    .responses-wrapper {
+        width: 70%;
+    }
+    .responses {
+        flex-direction: column;
+    }
+    .responses-user {
+        border-bottom: 1px solid rgb(180,180,180,.4);
+        border-right: none;
+    }
+    .responses-btn {
+        padding: 20px 0;
     }
 }
 
@@ -156,11 +186,22 @@ body {
         width: 100%;
         text-align: center;
     }
+    .responses-wrapper {
+        width: 97%;
+    }
 }
 
 @media screen and (max-width: 500px) {
     .view-offer {
         width: 90%;
+    }
+    .view-accepted {
+        padding: 0;
+    }
+}
+@media screen and (max-width: 450px) {
+    .responses-user-name .fa {
+        font-size: 14px;
     }
 }
 
