@@ -46,6 +46,13 @@ body {
     text-align: center;
 }
 
+/* -------- Responses page --------- */
+.responses-container {
+    
+}
+
+
+
 @media screen and (max-width: 768px) {
     .ride-offer {
         padding: 10px 30px;
