@@ -10,8 +10,18 @@ html,body {
     color: rgb(100,10,0);
     font-size: 25px !important;
 }
-.nmr {
-    margin-right: 0 !important;
+.universal-btn {
+    background-color: rgb(14,113,191);
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.text-center {
+    text-align: center;
 }
 /* ---------Navigation-----------*/
 .navigation-bar {
@@ -367,6 +377,7 @@ html,body {
     background-color: rgb(14,113,191);
     border-radius: 5px;
     text-align: center;
+    cursor: pointer;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -o-box-sizing: border-box;

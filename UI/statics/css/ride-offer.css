@@ -18,7 +18,12 @@ body {
     border-bottom: 2px solid rgba(180,180,180,.3);
 }
 .ride-offer {
+    background-color: rgb(0,30,80);
     padding: 10px 80px;
+    color: white;
+}
+.ride-offer .fa {
+    color: white;
 }
 .view-offer-details {
     display: block;
@@ -46,9 +51,128 @@ body {
     text-align: center;
 }
 
+/* --------- Ride info responses page -------- */
+.ride-info {
+    display: flex;
+}
+.ride-info-item {
+    flex: 1;
+    text-align: center;
+}
+.ride-info-item h4, .ride-info-item p {
+    margin: 0;
+}
+/* ------------ end ---------- */
+.view-accepted {
+    text-align: center;
+    padding: 15px;
+}
+/* -------- Responses page --------- */
+.accepted-responses {
+    height: 0;
+    overflow: hidden;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+}
+.responses-wrapper {
+    width: 90%;
+    margin: 20px auto;
+    box-shadow: 1px 1px 5px -1px rgba(0,0,0,.3);
+}
+.responses {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto auto 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+ .responses h3, .responses p {
+    margin: 0;
+}
+/*------------------*/
+.responses-user {
+    flex-basis: 54%;
+    border-right: 2px solid rgb(180,180,180,.4);
+}
+.responses-user-name {
+    display: flex;
+    align-items:flex-start;
+}
+.responses-user-name .avatar {
+    width: 110px;
+    margin-right: 20px;
+}
+.responses-user-name img {
+    width: 100%;
+}
+.responses-user-name .rating {
+    color: #daa40d;
+    text-align: center;
+}
+.responses-user-name .user-name {
+    flex-basis: 80%;
+}
+/*------------------*/
+.responses-btn {
+    flex-basis: 45%;
+    display:flex;
+    align-items: center;
+}
+.responses-btn-accept, .responses-btn-reject {
+    flex-basis: 50%;
+    text-align: center;
+}
+.btn-accept, .btn-reject {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+.btn-accept {
+    background-color: rgb(0,100,10);
+}
+.btn-reject {
+    background-color: rgb(100,10,0);
+}
+
+
+
+
+@media screen and (max-width: 1024px) {
+    .view-offer {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 900px) {
+    .view-offer {
+        width: 95%;
+    }
+}
 @media screen and (max-width: 768px) {
     .ride-offer {
         padding: 10px 30px;
+    }
+    .responses-wrapper {
+        width: 70%;
+    }
+    .responses {
+        flex-direction: column;
+    }
+    .responses-user {
+        border-bottom: 1px solid rgb(180,180,180,.4);
+        border-right: none;
+    }
+    .responses-btn {
+        padding: 20px 0;
     }
 }
 
@@ -68,11 +192,22 @@ body {
         width: 100%;
         text-align: center;
     }
+    .responses-wrapper {
+        width: 97%;
+    }
 }
 
 @media screen and (max-width: 500px) {
     .view-offer {
         width: 90%;
+    }
+    .view-accepted {
+        padding: 0;
+    }
+}
+@media screen and (max-width: 450px) {
+    .responses-user-name .fa {
+        font-size: 14px;
     }
 }
 

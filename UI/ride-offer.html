@@ -6,6 +6,7 @@
         <link rel="shortcut icon" href="statics/img/logormw.png">
         <link rel="stylesheet" href="statics/css/master.css">
         <link rel="stylesheet" href="statics/css/ride-offer-general.css">
+        <link rel="stylesheet" href="statics/css/dashboard.css">
         <link rel="stylesheet" href="statics/css/ride-offer.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,34 +17,62 @@
             <a class="navigation-brand" href="index.html">
                 <img src="statics/img/logormww.png" alt="">
             </a>
-            <button type="button" data-toggle="navigation" data-target="#navigationId" aria-controls="navigation" aria-expanded="false" id="navigationToggler">
+            <button type="button" data-toggle="navigation" data-target="#navigationId" aria-controls="navigation" aria-expanded="false" class="navigation-toggler" id="navigationToggler">
                 <i class="fa fa-bars"></i>
             </button>
             <div class="navigation" id="navigationId">
-                <ul class="navigation-ul">
-                    <li class="navigation-li"> <a href="login.html">Dashboard</a></li>
-                    <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
-                    <li class="navigation-li"><a href="/logout.html">Log out</a></li>
-                </ul>
+                <div class="navigation-items-wrapper">
+                    <form class="navigation-form" method="POST">
+                        <input type="search" id="searchInput" placeholder="Search a ride">
+                        <button type="submit" id="submit">Search</button>
+                    </form>
+                    <ul class="navigation-ul">
+                        <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
+                        <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
+                        <li class="navigation-li"><a href="/logout.html">Log out</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="user-navigation">
                 <div class="user-nav-wrapper">
-                    <div class="notification">
-                        <i class="fa fa-bell"></i>
-                    </div>
-                    <div class="notification">
-                        <i class="fa fa-envelope"></i>
-                    </div>
+                    <a href="create.html">
+                        <div class="dash-icon">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="dash-icon">
+                            <i class="fa fa-bell"></i>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="dash-icon">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="dash-icon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </a>
                 </div>
-                <div class="user">
+                <div class="user" id="userNavToggler">
                     <div class="user-wrapper">
-                        <a href="profile.html">
-                            <div class="avatar">
-                                <img src="statics/img/user-avatar.jpg" alt="Avatar">
-                            </div>
-                        </a>
+                        <div class="avatar">
+                            <img src="statics/img/user-avatar.jpg" alt="Avatar">
+                        </div>
                         <div class="caret">
                             <i class="fa fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown" id="userNav">
+                            <ul class="dropdown-ul">
+                                <li class="dropdown-li"><a href="profile.html">Profile</a></li>
+                                <li class="dropdown-li"><a href="#">Notification</a></li>
+                                <li class="dropdown-li"><a href="#">Messages</a></li>
+                                <li class="dropdown-li"><a href="create.html">Offer a ride</a></li>
+                                <li class="dropdown-li"><a href="history.html">Ride history</a></li>
+                                <li class="dropdown-li"><a href="/logout.html">Log out</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

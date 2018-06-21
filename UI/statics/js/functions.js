@@ -1,6 +1,6 @@
 const collapseToggle = (toggler, collapsible, collapsibleContent) => {
     if (collapsible.clientHeight === 0) {
-        collapsible.style.height = collapsibleContent.clientHeight + 'px';
+        collapsible.style.height = collapsibleContent.clientHeight + 20 + 'px';
         toggler.setAttribute('aria-expanded', true);
     } else {
         collapsible.style.height = '0';
