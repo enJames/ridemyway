@@ -114,70 +114,72 @@
                         <p>2</p>
                     </div>
                 </div>
-                <div class="accepted-responses">
-                    <div class="responses-wrapper">
-                        <div class="responses">
-                            <div class="responses-user">
-                                <div class="responses-user-name">
-                                    <div class="avatar">
-                                        <img src="statics/img/user-avatar.jpg" alt="Avatar">
-                                        <div class="rating">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star-half-empty"></span>
+                <div class="accepted-responses" id="acceptedResponses">
+                    <div id="acceptedResponsesContainer">
+                        <div class="responses-wrapper">
+                            <div class="responses">
+                                <div class="responses-user">
+                                    <div class="responses-user-name">
+                                        <div class="avatar">
+                                            <img src="statics/img/user-avatar.jpg" alt="Avatar">
+                                            <div class="rating">
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star-half-empty"></span>
+                                            </div>
+                                        </div>
+                                        <div class="user-name">
+                                            <h3>Manuel AirBnB</h3>
+                                            <p>080345678901</p>
                                         </div>
                                     </div>
-                                    <div class="user-name">
-                                        <h3>Manuel AirBnB</h3>
-                                        <p>080345678901</p>
+                                </div>
+                                <div class="responses-btn">
+                                    <div class="responses-btn-accept">
+                                        <button type="button" class="btn-accept">Accept</button>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="responses-btn">
-                                <div class="responses-btn-accept">
-                                    <button type="button" class="btn-accept">Accept</button>
-                                </div>
-                                <div class="responses-btn-reject">
-                                    <button type="button" class="btn-reject">Reject</button>
+                                    <div class="responses-btn-reject">
+                                        <button type="button" class="btn-reject">Reject</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="responses-wrapper">
-                        <div class="responses">
-                            <div class="responses-user">
-                                <div class="responses-user-name">
-                                    <div class="avatar">
-                                        <img src="statics/img/user-avatar.jpg" alt="Avatar">
-                                        <div class="rating">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star-half-empty"></span>
+                        <div class="responses-wrapper">
+                            <div class="responses">
+                                <div class="responses-user">
+                                    <div class="responses-user-name">
+                                        <div class="avatar">
+                                            <img src="statics/img/user-avatar.jpg" alt="Avatar">
+                                            <div class="rating">
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star-half-empty"></span>
+                                            </div>
+                                        </div>
+                                        <div class="user-name">
+                                            <h3>Joe Eslint</h3>
+                                            <p>080345678901</p>
                                         </div>
                                     </div>
-                                    <div class="user-name">
-                                        <h3>Joe Eslint</h3>
-                                        <p>080345678901</p>
+                                </div>
+                                <div class="responses-btn">
+                                    <div class="responses-btn-accept">
+                                        <button type="button" class="btn-accept">Accept</button>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="responses-btn">
-                                <div class="responses-btn-accept">
-                                    <button type="button" class="btn-accept">Accept</button>
-                                </div>
-                                <div class="responses-btn-reject">
-                                    <button type="button" class="btn-reject">Reject</button>
+                                    <div class="responses-btn-reject">
+                                        <button type="button" class="btn-reject">Reject</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
                 <div class="view-accepted">
-                    <button type="button" class="universal-btn">View Responses</button>
+                    <button type="button" data-toggle="accepted-responses" data-target="#acceptedResponses" aria-controls="accepted-responses" aria-expanded="false" class="universal-btn" id="view">View Responses</button>
                 </div>
             </div>
         </div>

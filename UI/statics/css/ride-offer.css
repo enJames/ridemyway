@@ -68,8 +68,14 @@ body {
     padding: 15px;
 }
 /* -------- Responses page --------- */
-.responses-container {
-
+.accepted-responses {
+    height: 0;
+    overflow: hidden;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
 }
 .responses-wrapper {
     width: 90%;

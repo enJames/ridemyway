@@ -18,6 +18,7 @@ html,body {
     color: white;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 .text-center {
     text-align: center;
