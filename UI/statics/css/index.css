@@ -95,7 +95,7 @@ html,body {
     background-position: left;
     color: white;
 }
-.btn-container {
+.content-wrapper .btn-container {
     margin: auto auto -50px;
 }
 
