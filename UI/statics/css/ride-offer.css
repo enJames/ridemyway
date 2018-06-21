@@ -46,11 +46,92 @@ body {
     text-align: center;
 }
 
+/* --------- Ride info responses page -------- */
+.ride-info {
+    display: flex;
+}
+.ride-info-item {
+    flex: 1;
+    text-align: center;
+}
+.ride-info-item h4, .ride-info-item p {
+    margin: 0;
+}
+/* ------------ end ---------- */
+.view-accepted {
+    text-align: center;
+    padding: 15px;
+}
 /* -------- Responses page --------- */
 .responses-container {
-    
-}
 
+}
+.responses-wrapper {
+    width: 90%;
+    margin: 20px auto;
+    box-shadow: 1px 1px 5px -1px rgba(0,0,0,.3);
+}
+.responses {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto auto 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+ .responses h3, .responses p {
+    margin: 0;
+}
+/*------------------*/
+.responses-user {
+    flex-basis: 59%;
+    border-right: 2px solid rgb(180,180,180,.4);
+}
+.responses-user-name {
+    display: flex;
+    align-items:flex-start;
+}
+.responses-user-name .avatar {
+    width: 110px;
+    margin-right: 20px;
+}
+.responses-user-name img {
+    width: 100%;
+}
+.responses-user-name .rating {
+    color: #daa40d;
+    text-align: center;
+}
+.responses-user-name .user-name {
+    flex-basis: 80%;
+}
+/*------------------*/
+.responses-btn {
+    flex-basis: 40%;
+    display:flex;
+    align-items: center;
+}
+.responses-btn-accept, .responses-btn-reject {
+    flex-basis: 50%;
+    text-align: center;
+}
+.btn-accept, .btn-reject {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+.btn-accept {
+    background-color: rgb(0,100,10);
+}
+.btn-reject {
+    background-color: rgb(100,10,0);
+}
 
 
 @media screen and (max-width: 768px) {
