@@ -14,3 +14,5 @@ app.use(logger('combined')); // Log requests info
 app.use('/api/v1/rides', Routes.Rides);
 
 app.listen(port);
+
+export default app;
