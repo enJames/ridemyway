@@ -13,6 +13,11 @@ app.use(logger('combined')); // Log requests info
 // API routes
 app.use('/api/v1/rides', Routes.Rides);
 
+// Catch all routes
+app.get('*', (req, res) => {
+    res.send('Ride my way application by Enejo James Oche.');
+});
+
 app.listen(port);
 
 export default app;
