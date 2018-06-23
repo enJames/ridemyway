@@ -6,6 +6,7 @@ const rides = express.Router();
 rides.get('/', ridesController.getAllRideOffers);
 rides.get('/:rideId', ridesController.getARideOffer);
 rides.post('/', ridesController.createRideOffer);
+rides.post('/:rideId/requests', ridesController.joinRide);
 
 const routes = { rides };
 

@@ -1,4 +1,5 @@
 import rides from '../models/rides';
+import requests from '../models/requests';
 import sendResponse from '../sendResponse';
 
 const ridesController = {
@@ -52,6 +53,35 @@ const ridesController = {
         rides.push(rideOffer);
 
         return sendResponse(res, 201, 'Ride offer created', rideOffer);
+    },
+    joinRide: (req, res) => {
+        const { rideId } = req.params;
+        const { userId } = req.body;
+
+        // check for user and ride existence
+        if (userId) {
+            let exists;
+
+            for (let i = 0; i < rides.length; i += 1) {
+                if (rides[i].id === parseInt(rideId, 10)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                // If ride does not exist
+                return sendResponse(res, 404, 'Ride offer does not exist');
+            }
+            // If ride exist
+            const joinRequest = {
+                rideId: parseInt(rideId, 10),
+                userId: parseInt(userId, 10)
+            };
+            requests.push(joinRequest);
+            return sendResponse(res, 201, 'Your request has been created', joinRequest);
+        }
+        // If user is not set
+        return sendResponse(res, 401, 'User not recognised');
     }
 };
 

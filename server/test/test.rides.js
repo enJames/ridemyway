@@ -99,4 +99,51 @@ describe('--- Rides route testing ----', () => {
                 });
         });
     });
+
+    describe('/rides/:rideId/requests: POST', () => {
+        it('On error:: request without userId: User not recognised', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides/1/requests')
+                .send({
+                    userId: ''
+                })
+                .end((req, res) => {
+                    res.should.have.status(401);
+                    assert.equal(res.body.message, 'User not recognised');
+                    done();
+                });
+        });
+    });
+    describe('/rides/:rideId/requests: POST', () => {
+        it('On error:: requst without userId: User not recognised', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides/5/requests')
+                .send({
+                    userId: 1
+                })
+                .end((req, res) => {
+                    res.should.have.status(404);
+                    assert.equal(res.body.message, 'Ride offer does not exist');
+                    done();
+                });
+        });
+    });
+    describe('/rides/:rideId/requests: POST', () => {
+        it('On success:: Create a ride offer', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides/1/requests')
+                .send({
+                    userId: 1
+                })
+                .end((req, res) => {
+                    res.should.have.status(201);
+                    assert.equal(res.body.message, 'Your request has been created');
+                    assert.exists(res.body.responseObject);
+                    done();
+                });
+        });
+    });
 });
