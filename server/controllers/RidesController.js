@@ -12,11 +12,17 @@ const RidesController = {
         const { rideId } = req.params;
         let theRide;
 
+        // Search for ride
         Rides.forEach((ride) => {
             if (ride.id === parseInt(rideId, 10)) {
                 theRide = ride;
             }
         });
+
+        // Check that ride exists
+        if (!theRide) {
+            return SendResponse(res, 404, 'Ride not found');
+        }
 
         return SendResponse(res, 200, 'Ride found', theRide);
     }

@@ -15,7 +15,9 @@ app.use('/api/v1/rides', Routes.Rides);
 
 // Catch all routes
 app.get('*', (req, res) => {
-    res.send('Ride my way application by Enejo James Oche.');
+    res.status(200).json({
+        message: 'Ride my way application by Enejo James Oche.'
+    });
 });
 
 app.listen(port);
