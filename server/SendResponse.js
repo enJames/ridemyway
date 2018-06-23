@@ -1,4 +1,4 @@
-const SendResponse = (response, statusCode, message, responseObject) => {
+const sendResponse = (response, statusCode, message, responseObject) => {
     if (!responseObject) {
         return response.status(statusCode).json({
             message
@@ -10,4 +10,4 @@ const SendResponse = (response, statusCode, message, responseObject) => {
     });
 };
 
-export default SendResponse;
+export default sendResponse;
