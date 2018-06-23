@@ -25,6 +25,33 @@ const ridesController = {
         }
 
         return sendResponse(res, 200, 'Ride found', theRide);
+    },
+    createRideOffer: (req, res) => {
+        // retrieve ride offer details from request
+        const {
+            from, to, price, seatsShared, seatsAvailable, driver
+        } = req.body;
+
+        // validate data
+        if (!from || !to || !price || !seatsShared || !seatsAvailable || !driver) {
+            return sendResponse(res, 405, 'Please fill out all fields');
+        }
+
+        // details of ride offer to create
+        const rideOffer = {
+            id: rides.length + 1,
+            from,
+            to,
+            price,
+            seatsShared,
+            seatsAvailable,
+            driver
+        };
+
+        // Create ride offer
+        rides.push(rideOffer);
+
+        return sendResponse(res, 201, 'Ride offer created', rideOffer);
     }
 };
 
