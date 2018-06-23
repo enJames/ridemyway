@@ -26,7 +26,7 @@ const RidesController = {
 
         return SendResponse(res, 200, 'Ride found', theRide);
     },
-    create: (req, res) => {
+    createRideOffer: (req, res) => {
         const {
             from, to, price, seatsShared, seatsAvailable, driver
         } = req.body;

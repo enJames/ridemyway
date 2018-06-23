@@ -5,6 +5,7 @@ const Rides = express.Router();
 
 Rides.get('/', RidesController.getAllRideOffers);
 Rides.get('/:rideId', RidesController.getARideOffer);
+Rides.post('/', RidesController.createRideOffer);
 
 const Routes = { Rides };
 
