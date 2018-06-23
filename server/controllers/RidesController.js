@@ -33,7 +33,6 @@ const ridesController = {
 
         // validate
         if (!from || !to || !price || !seatsShared || !seatsAvailable || !driver) {
-            console.log(`From: ${from}, To: ${to}, Price: ${price}, Seats Shared: ${seatsShared}, Seats Available: ${seatsAvailable}, Driver: ${driver}`);
             return sendResponse(res, 405, 'Please fill out all fields');
         }
 
