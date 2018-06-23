@@ -1,4 +1,4 @@
-const Rides = [
+const rides = [
     {
         id: 1,
         from: 'Lagos',
@@ -19,4 +19,4 @@ const Rides = [
     }
 ];
 
-export default Rides;
+export default rides;
