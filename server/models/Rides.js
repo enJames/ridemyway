@@ -1,6 +1,6 @@
 const Rides = [
     {
-        rideId: 1,
+        id: 1,
         from: 'Lagos',
         to: 'Oyo',
         price: 2000,
@@ -9,7 +9,7 @@ const Rides = [
         driver: 'Emmanuel Mocha'
     },
     {
-        rideId: 2,
+        id: 2,
         from: 'Ogun',
         to: 'Rivers',
         price: 4000,
