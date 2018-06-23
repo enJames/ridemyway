@@ -72,7 +72,7 @@ describe('--- Rides route testing ----', () => {
                     driver: 'Ajaniki Travis-Ci'
                 })
                 .end((req, res) => {
-                    res.should.have.status(201);
+                    res.should.have.status(405);
                     assert.equal(res.body.message, 'Please fill out all fields');
                     done();
                 });
