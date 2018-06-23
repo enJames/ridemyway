@@ -78,10 +78,10 @@ const ridesController = {
                 userId: parseInt(userId, 10)
             };
             requests.push(joinRequest);
-            return sendResponse(res, 201, 'Your request has been recorded', joinRequest);
+            return sendResponse(res, 201, 'Your request has been created', joinRequest);
         }
         // If user is not set
-        return sendResponse(res, 404, 'User not recognised');
+        return sendResponse(res, 401, 'User not recognised');
     }
 };
 
