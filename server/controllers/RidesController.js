@@ -33,7 +33,7 @@ const ridesController = {
 
         // validate
         if (!from || !to || !price || !seatsShared || !seatsAvailable || !driver) {
-            return sendResponse(res, 405, 'Please fillout all fields');
+            return sendResponse(res, 405, 'Please fill out all fields');
         }
 
         // Ride offer to create
