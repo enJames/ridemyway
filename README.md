@@ -1,5 +1,5 @@
 <h1>Ride-My-Way</h1>
-<hr>
+
 [![Build Status](https://www.travis-ci.org/enJames/ridemyway.svg?branch=develop)](https://www.travis-ci.org/enJames/ridemyway)
 [![Coverage Status](https://coveralls.io/repos/github/enJames/ridemyway/badge.svg?branch=develop)](https://coveralls.io/github/enJames/ridemyway?branch=develop)
 
@@ -8,7 +8,6 @@ Ride-My-Way is a carpooling application that connects people who wish to share t
 Ride-My-Way is currently under active development.
 
 <h2>Front-end</h2>
-<hr>
 
 The proposed views for Ride-My-Way is hosted on <a href="https://enjames.github.io/ridemyway/UI">github pages</a>. The pages/views currently being hosted are:
 <li><a href="https://enjames.github.io/ridemyway/UI">Home</a></li>
@@ -23,7 +22,6 @@ The proposed views for Ride-My-Way is hosted on <a href="https://enjames.github.
 <li><a href="https://enjames.github.io/ridemyway/UI/responses.html">Response to offer</a></li>
 
 <h2>Back-end</h2>
-<hr>
 
 The backend implement is currently hosted on heroku on <a href="https://enjames-ridemyway.herokuapp.com">Heroku</a>. The following endpoints have been implemented:
 <li><a href="https://enjames-ridemyway.herokuapp.com/api/v1/rides">Get all ride offers</a> [GET: /api/v1/rides]</li>
@@ -32,7 +30,7 @@ The backend implement is currently hosted on heroku on <a href="https://enjames-
 <li><a href="https://enjames-ridemyway.herokuapp.com/api/v1/rides/1">Request to Join a ride</a>[POST: /api/v1/rides/:rideId/requests]</li>
 
 <h2>Technologies used</h2>
-<hr>
+
 
 The following technologies are currently being used in the development of the application:
 
