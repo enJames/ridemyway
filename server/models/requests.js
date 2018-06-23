@@ -1,11 +1,11 @@
 const requests = [
     {
-        rideFk: 1,
-        userFk: 2,
+        rideId: 1,
+        userId: 2,
     },
     {
-        rideFk: 2,
-        userFk: 1,
+        rideId: 2,
+        userId: 1,
     }
 ];
 
