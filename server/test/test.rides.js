@@ -58,4 +58,45 @@ describe('--- Rides route testing ----', () => {
                 });
         });
     });
+    describe('/rides: POST', () => {
+        it('On error:: Send error feedback: Please fill out all fields', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides')
+                .send({
+                    from: 'Rivers',
+                    to: 'Imo',
+                    price: '',
+                    seatsShared: 3,
+                    seatsAvailable: 1,
+                    driver: 'Ajaniki Travis-Ci'
+                })
+                .end((req, res) => {
+                    res.should.have.status(405);
+                    assert.equal(res.body.message, 'Please fill out all fields');
+                    done();
+                });
+        });
+    });
+    describe('/rides: POST', () => {
+        it('On success:: Create a ride offer', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides')
+                .send({
+                    from: 'Rivers',
+                    to: 'Imo',
+                    price: 1500,
+                    seatsShared: 3,
+                    seatsAvailable: 1,
+                    driver: 'Ajaniki Travis-Ci'
+                })
+                .end((req, res) => {
+                    res.should.have.status(201);
+                    assert.equal(res.body.message, 'Ride offer created');
+                    assert.exists(res.body.responseObject);
+                    done();
+                });
+        });
+    });
 });
