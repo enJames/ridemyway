@@ -63,7 +63,7 @@ const ridesController = {
             let exists;
 
             for (let i = 0; i < rides.length; i += 1) {
-                if (rides[i] === parseInt(rideId, 10)) {
+                if (rides[i].id === parseInt(rideId, 10)) {
                     exists = true;
                     break;
                 }
@@ -73,11 +73,15 @@ const ridesController = {
                 return sendResponse(res, 404, 'Ride offer does not exist');
             }
             // If ride exist
-            const joinRequest = { rideId, userId };
+            const joinRequest = {
+                rideId: parseInt(rideId, 10),
+                userId: parseInt(userId, 10)
+            };
             requests.push(joinRequest);
-            console.log(requests);
             return sendResponse(res, 201, 'Your request has been recorded', joinRequest);
         }
+        // If user is not set
+        return sendResponse(res, 404, 'User not recognised');
     }
 };
 
