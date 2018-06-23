@@ -27,7 +27,7 @@ The backend implement is currently hosted on heroku on <a href="https://enjames-
 <li><a href="https://enjames-ridemyway.herokuapp.com/api/v1/rides">Get all ride offers</a> [GET: /api/v1/rides]</li>
 <li><a href="https://enjames-ridemyway.herokuapp.com/api/v1/rides/1">Get a ride offer</a>[GET: /api/v1/rides/:rideId]</li>
 <li><a href="https://enjames-ridemyway.herokuapp.com/api/v1/rides">Create a ride offer</a> [POST: /api/v1/rides]</li>
-<li><a href="https://enjames-ridemyway.herokuapp.com/api/v1/rides/1">Request to Join a ride</a>[POST: /api/v1/rides/:rideId/requests]</li>
+<li><a href="https://enjames-ridemyway.herokuapp.com/api/v1/rides/1/requests">Request to Join a ride</a>[POST: /api/v1/rides/:rideId/requests]</li>
 
 <h2>Technologies used</h2>
 
