@@ -3,7 +3,7 @@ import RidesController from '../controllers/RidesController';
 
 const Rides = express.Router();
 
-Rides.get('/', RidesController.getAllRides);
+Rides.get('/', RidesController.getAllRideOffers);
 
 const Routes = { Rides };
 

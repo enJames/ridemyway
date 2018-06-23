@@ -2,7 +2,7 @@ import Rides from '../models/Rides';
 import SendResponse from '../SendResponse';
 
 const RidesController = {
-    getAllRides: (req, res) => SendResponse(
+    getAllRideOffers: (req, res) => SendResponse(
         res,
         200,
         `Found ${Rides.length} ride offers`,
