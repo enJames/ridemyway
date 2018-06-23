@@ -1,12 +1,12 @@
 import express from 'express';
-import RidesController from '../controllers/RidesController';
+import ridesController from '../controllers/ridesController';
 
-const Rides = express.Router();
+const rides = express.Router();
 
-Rides.get('/', RidesController.getAllRideOffers);
-Rides.get('/:rideId', RidesController.getARideOffer);
-Rides.post('/', RidesController.createRideOffer);
+rides.get('/', ridesController.getAllRideOffers);
+rides.get('/:rideId', ridesController.getARideOffer);
+rides.post('/', ridesController.createRideOffer);
 
-const Routes = { Rides };
+const routes = { rides };
 
-export default Routes;
+export default routes;

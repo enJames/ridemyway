@@ -1,30 +1,30 @@
-import Rides from '../models/Rides';
-import SendResponse from '../SendResponse';
+import rides from '../models/Rides';
+import sendResponse from '../sendResponse';
 
-const RidesController = {
-    getAllRideOffers: (req, res) => SendResponse(
+const ridesController = {
+    getAllRideOffers: (req, res) => sendResponse(
         res,
         200,
-        `Found ${Rides.length} ride offers`,
-        Rides
+        `Found ${rides.length} ride offers`,
+        rides
     ),
     getARideOffer: (req, res) => {
         const { rideId } = req.params;
         let theRide;
 
         // Search for ride
-        Rides.forEach((ride) => {
-            if (ride.id === parseInt(rideId, 10)) {
-                theRide = ride;
+        rides.forEach((eachRide) => {
+            if (eachRide.id === parseInt(rideId, 10)) {
+                theRide = eachRide;
             }
         });
 
         // Check that ride exists
         if (!theRide) {
-            return SendResponse(res, 404, 'Ride not found');
+            return sendResponse(res, 404, 'Ride not found');
         }
 
-        return SendResponse(res, 200, 'Ride found', theRide);
+        return sendResponse(res, 200, 'Ride found', theRide);
     },
     createRideOffer: (req, res) => {
         const {
@@ -33,12 +33,12 @@ const RidesController = {
 
         // validate
         if (!from || !to || !price || !seatsShared || !seatsAvailable || !driver) {
-            return SendResponse(res, 405, 'Please fillout all fields');
+            return sendResponse(res, 405, 'Please fillout all fields');
         }
 
         // Ride offer to create
         const rideOffer = {
-            id: Rides.length + 1,
+            id: rides.length + 1,
             from,
             to,
             price,
@@ -48,10 +48,10 @@ const RidesController = {
         };
 
         // Create ride offer
-        Rides.push(rideOffer);
+        rides.push(rideOffer);
 
-        return SendResponse(res, 201, 'Ride offer created', rideOffer);
+        return sendResponse(res, 201, 'Ride offer created', rideOffer);
     }
 };
 
-export default RidesController;
+export default ridesController;
