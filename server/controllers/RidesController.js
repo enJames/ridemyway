@@ -9,11 +9,11 @@ const RidesController = {
         Rides
     ),
     getARideOffer: (req, res) => {
-        const rideId = parseInt(req.params.id, 10);
+        const { rideId } = req.params;
         let theRide;
 
         Rides.forEach((ride) => {
-            if (ride.id === rideId) {
+            if (ride.id === parseInt(rideId, 10)) {
                 theRide = ride;
             }
         });
