@@ -5,9 +5,11 @@ import routes from './routes/routes';
 
 const app = express();
 const urlencoded = bodyParser.urlencoded({ extended: false });
+const json = bodyParser.json({ extended: false });
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 app.use(urlencoded); // parse form data
+app.use(json); // parse json data
 app.use(logger('combined')); // Log requests info
 
 // API routes
