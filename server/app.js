@@ -14,6 +14,7 @@ app.use(logger('combined')); // Log requests info
 
 // API routes
 app.use('/api/v1/rides', routes.rides);
+app.use('/api/v1/auth', routes.users);
 
 // Catch all routes
 app.get('*', (req, res) => {
