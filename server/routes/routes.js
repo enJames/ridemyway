@@ -8,6 +8,7 @@ const usersRoute = express.Router();
 // Rides routes
 ridesRoute.get('/', ridesController.getAllRideOffers);
 ridesRoute.get('/:rideId', ridesController.getARideOffer);
+ridesRoute.get('/:rideId/requests', ridesController.getRequests);
 ridesRoute.post('/', ridesController.createRideOffer);
 ridesRoute.post('/:rideId/requests', ridesController.joinRide);
 

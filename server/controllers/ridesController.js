@@ -27,6 +27,41 @@ const ridesController = {
 
         return sendResponse(res, 200, 'Ride found', theRide);
     },
+    getRequests: (req, res) => {
+        const { rideId } = req.params;
+        const allRequests = [];
+        let theRide;
+        /*
+        Authenticate user
+        */
+
+        // check ride exists
+        for (let i = 0; i < rides.length; i += 1) {
+            if (rides[i].id === parseInt(rideId, 10)) {
+                theRide = rides[i];
+                break;
+            }
+        }
+        if (!theRide) {
+            return sendResponse(res, 404, 'Ride offer does not exist');
+        }
+
+        // Get join ride requests
+        requests.forEach((eachRequest) => {
+            if (eachRequest.rideId === theRide.id) {
+                allRequests.push(eachRequest);
+            }
+        });
+        if (allRequests.length === 0) {
+            return sendResponse(res, 404, 'No join requests for this ride yet');
+        }
+        return sendResponse(
+            res,
+            200,
+            `Found ${allRequests.length} join requests for this ride offer`,
+            { theRide, allRequests }
+        );
+    },
     createRideOffer: (req, res) => {
         // retrieve ride offer details from request
         const {

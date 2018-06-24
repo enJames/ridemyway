@@ -22,19 +22,19 @@ describe('--- Catch all routes ----', () => {
 });
 
 describe('--- Rides route testing ----', () => {
-    describe('/rides: Get all ride offers', () => {
-        it('On success:: return all rides', (done) => {
+    describe('/rides: GET', () => {
+        it('On success:: Get all ride offers', (done) => {
             chai
                 .request(app)
                 .get('/api/v1/rides')
                 .end((req, res) => {
                     res.should.have.status(200);
-                    assert.equal(res.body.message, 'Found 2 ride offers');
+                    assert.equal(res.body.message, 'Found 3 ride offers');
                     done();
                 });
         });
     });
-    describe('/rides/<rideId>: Get a specific ride offer', () => {
+    describe('/rides/<rideId>: GET', () => {
         it('On success:: return a ride', (done) => {
             chai
                 .request(app)
@@ -54,6 +54,39 @@ describe('--- Rides route testing ----', () => {
                     res.should.have.status(404);
                     assert.equal(res.body.message, 'Ride not found');
                     assert.notExists(res.body.responseObject);
+                    done();
+                });
+        });
+    });
+    describe('/rides/<rideId>/requests: GET', () => {
+        it('On error:: incorrect ride offer ID: Ride offer does not exist', (done) => {
+            chai
+                .request(app)
+                .get('/api/v1/rides/10/requests')
+                .end((req, res) => {
+                    res.should.have.status(404);
+                    assert.equal(res.body.message, 'Ride offer does not exist');
+                    done();
+                });
+        });
+        it('On error:: No join requests for ride offer', (done) => {
+            chai
+                .request(app)
+                .get('/api/v1/rides/3/requests')
+                .end((req, res) => {
+                    res.should.have.status(404);
+                    assert.equal(res.body.message, 'No join requests for this ride yet');
+                    done();
+                });
+        });
+        it('On success:: Get all join requests for a ride offer', (done) => {
+            chai
+                .request(app)
+                .get('/api/v1/rides/1/requests')
+                .end((req, res) => {
+                    res.should.have.status(200);
+                    assert.equal(res.body.message, 'Found 2 join requests for this ride offer');
+                    assert.exists(res.body.responseObject);
                     done();
                 });
         });

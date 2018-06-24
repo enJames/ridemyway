@@ -1,6 +1,4 @@
 import users from '../models/users';
-import rides from '../models/rides';
-import requests from '../models/requests';
 import sendResponse from '../sendResponse';
 
 const usersController = {
