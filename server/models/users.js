@@ -14,6 +14,14 @@ const users = [
         email: 'john@dumelo.com',
         password: 'word',
         state: 'Rivers'
+    },
+    {
+        id: 3,
+        firstname: 'Arnold',
+        lastname: 'Oauth',
+        email: 'arnold@oauth.com',
+        password: 'auth',
+        state: 'Taraba'
     }
 ];
 
