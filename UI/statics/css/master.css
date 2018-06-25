@@ -282,7 +282,7 @@ html,body {
     height: 50px;
 }
 .form-body, .form-footer {
-    padding: 15px 25px;
+    padding: 15px 50px;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -294,7 +294,7 @@ html,body {
 }
 .input-wrapper {
     flex: 1;
-    margin-right: 10px;
+    margin-right: 50px;
 }
 .input-wrapper:last-child {
     margin-right: 0;
@@ -477,5 +477,17 @@ footer h3 {
     }
     .input-wrapper {
         margin-right: 0;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .form-body, .form-footer {
+        padding: 15px 20px;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
     }
 }
