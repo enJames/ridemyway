@@ -5,9 +5,10 @@ import usersController from '../controllers/usersController';
 const routes = express.Router();
 
 // Rides routes
-routes.get('/rides/', ridesController.getAllRideOffers);
+routes.get('/rides', ridesController.getAllRideOffers);
 routes.get('/rides/:rideId', ridesController.getARideOffer);
-routes.post('/rides/', ridesController.createRideOffer);
+routes.get('/rides/:rideId/requests', ridesController.getRequests);
+routes.post('/rides', ridesController.createRideOffer);
 routes.post('/rides/:rideId/requests', ridesController.joinRide);
 
 // User routes
