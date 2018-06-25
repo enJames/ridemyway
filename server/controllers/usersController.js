@@ -1,5 +1,7 @@
 import users from '../models/users';
-import sendResponse from '../sendResponse';
+import reusables from '../reusables';
+
+const { sendResponse } = reusables;
 
 const usersController = {
     createUser: (req, res) => {

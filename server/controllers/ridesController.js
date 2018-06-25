@@ -1,6 +1,8 @@
 import rides from '../models/rides';
 import requests from '../models/requests';
-import sendResponse from '../sendResponse';
+import reusables from '../reusables';
+
+const { sendResponse } = reusables;
 
 const ridesController = {
     getAllRideOffers: (req, res) => sendResponse(
