@@ -44,11 +44,16 @@ body {
 }
 .offer-item {
     flex-basis: 38%;
+    display: flex;
+    align-items: center;
+    text-align: center;
     font-weight: bold;
+    opacity: .6
 }
 .item-details {
     flex-basis: 62%;
     text-align: center;
+    font-weight: bold;
 }
 
 /* --------- Ride info responses page -------- */
@@ -127,7 +132,7 @@ body {
 .responses-user-name img {
     width: 100%;
 }
-.responses-user-name .rating {
+.rating {
     color: #daa40d;
     text-align: center;
 }
