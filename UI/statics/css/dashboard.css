@@ -2,10 +2,11 @@ body {
     background-color: rgb(240,240,240)
 }
 .dash-container {
+    width: 60%;
+    margin: auto;
     padding: 0 20px;
 }
 .indicators {
-    display: flex;
     padding-top: 30px;
 }
 .indicators a {
@@ -17,10 +18,8 @@ body {
 }
 
 .currently-running {
-    flex: 1;
-    width: 400px;
-    margin: 0 auto 0 0;
-    padding: 0 10px;
+    width: 100%;
+    margin: auto auto 50px;
     text-align: center;
 }
 .running-offer, .running-bookings {
@@ -77,9 +76,7 @@ body {
 }
 
 .history {
-    flex: 1;
-    width: 300px;
-    margin: 0 0 0 auto;
+    width: 100%;
     text-align: center;
 }
 .statistics-group {
@@ -126,16 +123,15 @@ body {
     text-align: center;
 }
 .section-wrapper {
-    width: 90%;
-    margin: auto;
+    width: 100%;
 }
 .ride-offer-wrapper {
     width: 100%;
 }
 
 @media screen and (max-width: 768px) {
-    .indicators {
-        flex-direction: column;
+    .dash-container {
+        width: 80%;
     }
     .currently-running, .history {
         margin: auto auto 30px;
