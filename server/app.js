@@ -13,8 +13,7 @@ app.use(json); // parse json data
 app.use(logger('combined')); // Log requests info
 
 // API routes
-app.use('/api/v1/rides', routes.ridesRoute);
-app.use('/api/v1/auth', routes.usersRoute);
+app.use('/api/v1/', routes);
 
 // Catch all routes
 app.get('*', (req, res) => {

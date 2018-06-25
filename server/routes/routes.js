@@ -2,19 +2,16 @@ import express from 'express';
 import ridesController from '../controllers/ridesController';
 import usersController from '../controllers/usersController';
 
-const ridesRoute = express.Router();
-const usersRoute = express.Router();
+const routes = express.Router();
 
 // Rides routes
-ridesRoute.get('/', ridesController.getAllRideOffers);
-ridesRoute.get('/:rideId', ridesController.getARideOffer);
-ridesRoute.post('/', ridesController.createRideOffer);
-ridesRoute.post('/:rideId/requests', ridesController.joinRide);
+routes.get('rides/', ridesController.getAllRideOffers);
+routes.get('rides/:rideId', ridesController.getARideOffer);
+routes.post('rides/', ridesController.createRideOffer);
+routes.post('rides/:rideId/requests', ridesController.joinRide);
 
 // User routes
-usersRoute.post('/signup', usersController.createUser);
-usersRoute.post('/login', usersController.login);
-
-const routes = { ridesRoute, usersRoute };
+routes.post('/auth/signup', usersController.createUser);
+routes.post('/auth/login', usersController.login);
 
 export default routes;
