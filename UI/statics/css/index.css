@@ -99,6 +99,10 @@ html,body {
     margin: auto auto -50px;
 }
 
+.ride-offer-wrapper {
+    width: 500px;
+}
+
 @media screen and (max-width: 992px) {
     .container {
         padding: 0 3%;
@@ -177,6 +181,9 @@ html,body {
     }
     .ride-offer-wrapper {
         width: 100%;
+    }
+    .ride-offer {
+        flex-wrap: nowrap;
     }
 }
 @media screen and (max-width: 485px) {
