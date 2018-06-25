@@ -8,6 +8,11 @@ const requests = [
         rideId: 2,
         userId: 1,
         accepted: true
+    },
+    {
+        rideId: 1,
+        userId: 3,
+        accepted: true
     }
 ];
 
