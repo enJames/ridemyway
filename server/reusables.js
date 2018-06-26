@@ -9,6 +9,14 @@ const reusables = {
             message,
             responseObject
         });
+    },
+    sendErrors: (collatedErrors, response, next) => {
+        if (collatedErrors) {
+            const errors = collatedErrors.map(eachError => eachError.msg);
+            return response.status(401).json({ errors });
+        }
+
+        return next();
     }
 };
 
