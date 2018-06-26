@@ -1,4 +1,4 @@
-import reusables from './reusables';
+import Reusables from './Reusables';
 
 const Validate = {
     signup: (req, res, next) => {
@@ -35,7 +35,7 @@ const Validate = {
             .withMessage('Enter your City');
 
         // Send errors if they exist
-        return reusables.sendErrors(req.validationErrors(), res, next);
+        return Reusables.sendErrors(req.validationErrors(), res, next);
     },
     login: (req, res, next) => {
         req.check('email')
@@ -48,7 +48,7 @@ const Validate = {
             .withMessage('Enter password');
 
         // Send errors if they exist
-        return reusables.sendErrors(req.validationErrors(), res, next);
+        return Reusables.sendErrors(req.validationErrors(), res, next);
     },
     createOffer: (req, res, next) => {
         req.check('from-state')
@@ -79,7 +79,7 @@ const Validate = {
             .withMessage('Enter departure time');
 
         // Send errors if they exist
-        return reusables.sendErrors(req.validationErrors(), res, next);
+        return Reusables.sendErrors(req.validationErrors(), res, next);
     },
     profileUpdate: (req, res, next) => {
         req.check('firstname')
@@ -101,7 +101,7 @@ const Validate = {
             .withMessage('Enter your City');
 
         // Send errors if they exist
-        return reusables.sendErrors(req.validationErrors(), res, next);
+        return Reusables.sendErrors(req.validationErrors(), res, next);
     },
     checkParams: (req, res, next) => {
         const { userId, rideId, requestId } = req.params;
@@ -109,17 +109,17 @@ const Validate = {
 
         if (userId) {
             if (!numberRegex.test(userId)) {
-                return reusables.sendResponse(res, 401, 'Invalid user ID', { error: true });
+                return Reusables.sendResponse(res, 401, 'Invalid user ID', { error: true });
             }
         }
         if (rideId) {
             if (!numberRegex.test(rideId)) {
-                return reusables.sendResponse(res, 401, 'Invalid ride ID', { error: true });
+                return Reusables.sendResponse(res, 401, 'Invalid ride ID', { error: true });
             }
         }
         if (requestId) {
             if (!numberRegex.test(requestId)) {
-                return reusables.sendResponse(res, 401, 'Invalid request ID', { error: true });
+                return Reusables.sendResponse(res, 401, 'Invalid request ID', { error: true });
             }
         }
 
