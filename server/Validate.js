@@ -1,7 +1,10 @@
 import Reusables from './Reusables';
 
+const { sendResponse, sendErrors } = Reusables;
+
 const Validate = {
     signup: (req, res, next) => {
+        /*
         req.check('firstname')
             .notEmpty()
             .withMessage('Enter your first name');
@@ -15,27 +18,27 @@ const Validate = {
             .isEmail()
             .withMessage('Enter a valid email address')
             .notEmpty()
-            .withMessage('Enter a valid email address');
+            .withMessage('Enter a valid email address'); */
         req.check('password')
-            .isLength({ min: 5 })
-            .withMessage('Password must be at least 5 characters long');
+            .isLength({ min: 6 })
+            .withMessage('Password must be at least 6 characters long');
         req.check('repassword')
             .equals(req.body.password)
             .withMessage('Passwords do not match');
-        req.check('phone')
+        /* req.check('phone')
             .notEmpty()
             .withMessage('Enter your phone number')
-            .isLength()
+            .isLength({ min: 11, max: 11 })
             .withMessage('Phone number is incorrect');
         req.check('city')
             .notEmpty()
             .withMessage('Enter your phone number');
         req.check('state')
             .notEmpty()
-            .withMessage('Enter your City');
+            .withMessage('Enter your City'); */
 
         // Send errors if they exist
-        return Reusables.sendErrors(req.validationErrors(), res, next);
+        return sendErrors(req.validationErrors(), res, next);
     },
     login: (req, res, next) => {
         req.check('email')
@@ -48,40 +51,47 @@ const Validate = {
             .withMessage('Enter password');
 
         // Send errors if they exist
-        return Reusables.sendErrors(req.validationErrors(), res, next);
+        return sendErrors(req.validationErrors(), res, next);
     },
     createOffer: (req, res, next) => {
-        req.check('from-state')
+        /*
+        req.check('fromState')
             .notEmpty()
             .withMessage('Enter your current State');
-        req.check('from-city')
+        req.check('fromCity')
             .notEmpty()
-            .withMessage('Enter your current City');
-        req.check('to-state')
+            .withMessage('Enter your current City'); */
+        req.check('toState')
             .notEmpty()
             .withMessage('Enter destination State');
-        req.check('to-city')
+        /* req.check('toCity')
             .notEmpty()
             .withMessage('Enter destination City');
         req.check('price')
             .notEmpty()
             .withMessage('Enter price for the ride')
-            .isNumber()
-            .withMessage('Price must be numeric');
-        req.check('pickup-location')
+            .matches(/^[0-9]+$/)
+            .withMessage('Price must be a number');
+        req.check('seats')
+            .notEmpty()
+            .withMessage('Seats cannot be empty')
+            .matches(/^[0-9]+$/)
+            .withMessage('Seats must be a number');
+        req.check('pickupLocation')
             .notEmpty()
             .withMessage('Enter a pickup location');
-        req.check('departure-date')
+        req.check('departureDate')
             .notEmpty()
             .withMessage('Enter departure date');
-        req.check('departure-time')
+        req.check('departureTime')
             .notEmpty()
-            .withMessage('Enter departure time');
+            .withMessage('Enter departure time'); */
 
         // Send errors if they exist
-        return Reusables.sendErrors(req.validationErrors(), res, next);
+        return sendErrors(req.validationErrors(), res, next);
     },
     profileUpdate: (req, res, next) => {
+        /*
         req.check('firstname')
             .notEmpty()
             .withMessage('Enter your first name');
@@ -91,37 +101,35 @@ const Validate = {
         req.check('phone')
             .notEmpty()
             .withMessage('Enter your phone number')
-            .isLength()
+            .isNumeric()
+            .withMessage('Phone number can only contain numbers')
+            .isLength({ min: 11, max: 11 })
             .withMessage('Phone number is incorrect');
         req.check('city')
             .notEmpty()
-            .withMessage('Enter your phone number');
+            .withMessage('Enter your city of residence');
         req.check('state')
             .notEmpty()
-            .withMessage('Enter your City');
+            .withMessage('Enter your state of residence');
 
         // Send errors if they exist
-        return Reusables.sendErrors(req.validationErrors(), res, next);
+        return sendErrors(req.validationErrors(), res, next); */
     },
     checkParams: (req, res, next) => {
-        const { userId, rideId, requestId } = req.params;
+        const { rideId, requestId } = req.params;
         const numberRegex = /^[0-9]+$/;
 
-        if (userId) {
-            if (!numberRegex.test(userId)) {
-                return Reusables.sendResponse(res, 401, 'Invalid user ID', { error: true });
-            }
-        }
         if (rideId) {
             if (!numberRegex.test(rideId)) {
-                return Reusables.sendResponse(res, 401, 'Invalid ride ID', { error: true });
+                return sendResponse(res, 401, 'Invalid ride ID', { error: true });
             }
         }
+        /*
         if (requestId) {
             if (!numberRegex.test(requestId)) {
-                return Reusables.sendResponse(res, 401, 'Invalid request ID', { error: true });
+                return sendResponse(res, 401, 'Invalid request ID', { error: true });
             }
-        }
+        } */
 
         return next();
     }

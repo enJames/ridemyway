@@ -8,20 +8,24 @@ should();
 
 describe('--- Users route testing ----', () => {
     describe('/auth/signup: POST: Sign up a user', () => {
-        it('On error:: fields not set: Please fill out all fields', (done) => {
+        it('On error:: fields not set', (done) => {
             chai
                 .request(app)
                 .post('/api/v1/auth/signup')
                 .send({
                     firstname: 'Babara',
                     lastname: 'Chai',
+                    gender: 'Male',
                     email: 'babara@chai.com',
                     password: 'pass',
+                    repassword: 'pass',
+                    phone: '08034036001',
+                    city: '',
                     state: 'Lagos'
                 })
                 .end((req, res) => {
-                    res.should.have.status(400);
-                    assert.equal(res.body.message, 'Please fill out all fields');
+                    res.should.have.status(405);
+                    assert.exists(res.body.errors);
                     done();
                 });
         });
@@ -32,14 +36,38 @@ describe('--- Users route testing ----', () => {
                 .send({
                     firstname: 'Babara',
                     lastname: 'Chai',
+                    gender: 'Male',
                     email: 'babara@chai.com',
                     password: 'pass',
                     repassword: 'passes',
+                    phone: '08034036001',
+                    city: 'Gbagada',
                     state: 'Lagos'
                 })
                 .end((req, res) => {
-                    res.should.have.status(400);
-                    assert.equal(res.body.message, 'Passwords do not match');
+                    res.should.have.status(405);
+                    assert.exists(res.body.errors);
+                    done();
+                });
+        });
+        it('On success:: All good: Password less than 6 characters', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/auth/signup')
+                .send({
+                    firstname: 'Babara',
+                    lastname: 'Chai',
+                    gender: 'Male',
+                    email: 'babara@chai.com',
+                    password: 'pass',
+                    repassword: 'pass',
+                    phone: '08034036001',
+                    city: 'Gbagada',
+                    state: 'Lagos'
+                })
+                .end((req, res) => {
+                    res.should.have.status(405);
+                    assert.exists(res.body.errors);
                     done();
                 });
         });
@@ -50,9 +78,12 @@ describe('--- Users route testing ----', () => {
                 .send({
                     firstname: 'Babara',
                     lastname: 'Chai',
+                    gender: 'Male',
                     email: 'babara@chai.com',
-                    password: 'pass',
-                    repassword: 'pass',
+                    password: 'passes',
+                    repassword: 'passes',
+                    phone: '08034036001',
+                    city: 'Gbagada',
                     state: 'Lagos'
                 })
                 .end((req, res) => {
@@ -73,8 +104,8 @@ describe('--- Users route testing ----', () => {
                     password: ''
                 })
                 .end((req, res) => {
-                    res.should.have.status(400);
-                    assert.equal(res.body.message, 'Please fill out all fields');
+                    res.should.have.status(405);
+                    assert.exists(res.body.errors);
                     done();
                 });
         });

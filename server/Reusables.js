@@ -13,7 +13,7 @@ const Reusables = {
     sendErrors: (collatedErrors, response, next) => {
         if (collatedErrors) {
             const errors = collatedErrors.map(eachError => eachError.msg);
-            return response.status(401).json({ errors });
+            return response.status(405).json({ errors });
         }
 
         return next();

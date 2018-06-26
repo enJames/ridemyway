@@ -1,37 +1,14 @@
 import users from '../models/users';
-import reusables from '../reusables';
+import Reusables from '../Reusables';
 
-const { sendResponse } = reusables;
+const { sendResponse } = Reusables;
 
 const usersController = {
     createUser: (req, res) => {
-        const {
-            firstname,
-            lastname,
-            email,
-            password,
-            repassword,
-            state
-        } = req.body;
-
-        // validation
-        if (!firstname || !lastname || !email || !password || !repassword || !state) {
-            return sendResponse(res, 400, 'Please fill out all fields');
-        }
-
-        // check that password and retyped password match
-        if (password !== repassword) {
-            return sendResponse(res, 400, 'Passwords do not match');
-        }
-
         // user to create
         const user = {
             id: users.length + 1,
-            firstname,
-            lastname,
-            email,
-            password,
-            state
+            ...req.body
         };
 
         // create user
@@ -42,11 +19,6 @@ const usersController = {
     login: (req, res) => {
         const { email, password } = req.body;
         let exists;
-
-        // validation
-        if (!email || !password) {
-            return sendResponse(res, 400, 'Please fill out all fields');
-        }
 
         for (let i = 0; i < users.length; i += 1) {
             if (users[i].email === email && users[i].password === password) {

@@ -1,8 +1,8 @@
 import rides from '../models/rides';
 import requests from '../models/requests';
-import reusables from '../reusables';
+import Reusables from '../Reusables';
 
-const { sendResponse } = reusables;
+const { sendResponse } = Reusables;
 
 const ridesController = {
     getAllRideOffers: (req, res) => sendResponse(
@@ -65,25 +65,10 @@ const ridesController = {
         );
     },
     createRideOffer: (req, res) => {
-        // retrieve ride offer details from request
-        const {
-            from, to, price, seatsShared, seatsAvailable, driver
-        } = req.body;
-
-        // validate data
-        if (!from || !to || !price || !seatsShared || !seatsAvailable || !driver) {
-            return sendResponse(res, 405, 'Please fill out all fields');
-        }
-
         // details of ride offer to create
         const rideOffer = {
             id: rides.length + 1,
-            from,
-            to,
-            price,
-            seatsShared,
-            seatsAvailable,
-            driver
+            ...req.body
         };
 
         // Create ride offer

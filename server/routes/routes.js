@@ -7,10 +7,10 @@ const routes = express.Router();
 
 // Rides routes
 routes.get('/rides', ridesController.getAllRideOffers);
-routes.get('/rides/:rideId', ridesController.getARideOffer);
-routes.get('/rides/:rideId/requests', ridesController.getRequests);
+routes.get('/rides/:rideId', Validate.checkParams, ridesController.getARideOffer);
+routes.get('/rides/:rideId/requests', Validate.checkParams, ridesController.getRequests);
 routes.post('/rides', Validate.createOffer, ridesController.createRideOffer);
-routes.post('/rides/:rideId/requests', ridesController.joinRide);
+routes.post('/rides/:rideId/requests', Validate.checkParams, ridesController.joinRide);
 
 // User routes
 routes.post('/auth/signup', Validate.signup, usersController.createUser);
