@@ -1,4 +1,4 @@
-const reusables = {
+const Reusables = {
     sendResponse: (response, statusCode, message, responseObject) => {
         if (!responseObject) {
             return response.status(statusCode).json({
@@ -20,4 +20,4 @@ const reusables = {
     }
 };
 
-export default reusables;
+export default Reusables;
