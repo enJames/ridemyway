@@ -1,4 +1,3 @@
-import users from '../models/users';
 import Reusables from '../Reusables';
 
 const { sendResponse } = Reusables;

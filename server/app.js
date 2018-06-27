@@ -3,6 +3,7 @@ import express from 'express';
 import expressValidator from 'express-validator';
 import logger from 'morgan';
 import routes from './routes/routes';
+import connectionPool from './databaseModels/connectionPool';
 
 const app = express();
 const urlencoded = bodyParser.urlencoded({ extended: false });
@@ -18,9 +19,16 @@ app.use(expressValidator());
 app.use('/api/v1/', routes);
 
 // Catch all routes
-app.get('*', (req, res) => {
-    res.status(200).json({
-        message: 'Ride my way application by Enejo James Oche.'
+app.get('/see', (req, res) => {
+    connectionPool.query('SELECT * FROM "Users"', (err, result) => {
+        if (err) {
+            return err;
+        }
+        console.log(result);
+
+        res.status(200).json({
+            message: 'Ride my way application by Enejo James Oche.'
+        });
     });
 });
 

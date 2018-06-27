@@ -1,5 +1,3 @@
-import rides from '../models/rides';
-import requests from '../models/requests';
 import Reusables from '../Reusables';
 
 const { sendResponse } = Reusables;
