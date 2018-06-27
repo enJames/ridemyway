@@ -57,6 +57,17 @@ describe('--- Rides route testing ----', () => {
                     done();
                 });
         });
+        it('On error:: incorrect id', (done) => {
+            chai
+                .request(app)
+                .get('/api/v1/rides/hey')
+                .end((req, res) => {
+                    res.should.have.status(401);
+                    assert.equal(res.body.message, 'Invalid ride ID');
+                    assert.exists(res.body.responseObject);
+                    done();
+                });
+        });
     });
     describe('/rides/<rideId>/requests: GET', () => {
         it('On error:: incorrect ride offer ID: Ride offer does not exist', (done) => {
@@ -97,16 +108,20 @@ describe('--- Rides route testing ----', () => {
                 .request(app)
                 .post('/api/v1/rides')
                 .send({
-                    from: 'Rivers',
-                    to: 'Imo',
-                    price: '',
-                    seatsShared: 3,
-                    seatsAvailable: 1,
-                    driver: 'Ajaniki Travis-Ci'
+                    fromCity: 'Rivers',
+                    fromState: 'Rivers',
+                    toCity: 'Imo',
+                    toState: '',
+                    price: 1500,
+                    seats: 3,
+                    userId: '1',
+                    departureDate: '26/5/2018',
+                    departureTime: '10:00am',
+                    pickupLocation: 'Gbagada'
                 })
                 .end((req, res) => {
                     res.should.have.status(405);
-                    assert.equal(res.body.message, 'Please fill out all fields');
+                    assert.exists(res.body.errors);
                     done();
                 });
         });
@@ -117,12 +132,16 @@ describe('--- Rides route testing ----', () => {
                 .request(app)
                 .post('/api/v1/rides')
                 .send({
-                    from: 'Rivers',
-                    to: 'Imo',
+                    fromCity: 'Rivers',
+                    fromState: 'Rivers',
+                    toCity: 'Imo',
+                    toState: 'Rivers',
                     price: 1500,
-                    seatsShared: 3,
-                    seatsAvailable: 1,
-                    driver: 'Ajaniki Travis-Ci'
+                    seats: 3,
+                    userId: '1',
+                    departureDate: '26/5/2018',
+                    departureTime: '10:00am',
+                    pickupLocation: 'Gbagada'
                 })
                 .end((req, res) => {
                     res.should.have.status(201);
@@ -132,7 +151,6 @@ describe('--- Rides route testing ----', () => {
                 });
         });
     });
-
     describe('/rides/:rideId/requests: POST', () => {
         it('On error:: request without userId: User not recognised', (done) => {
             chai
@@ -147,9 +165,7 @@ describe('--- Rides route testing ----', () => {
                     done();
                 });
         });
-    });
-    describe('/rides/:rideId/requests: POST', () => {
-        it('On error:: requst without userId: User not recognised', (done) => {
+        it('On error:: requst without userId: Ride offer does not exist', (done) => {
             chai
                 .request(app)
                 .post('/api/v1/rides/5/requests')
@@ -162,9 +178,7 @@ describe('--- Rides route testing ----', () => {
                     done();
                 });
         });
-    });
-    describe('/rides/:rideId/requests: POST', () => {
-        it('On success:: Create a ride offer', (done) => {
+        it('On success:: Create a join request', (done) => {
             chai
                 .request(app)
                 .post('/api/v1/rides/1/requests')
@@ -174,6 +188,20 @@ describe('--- Rides route testing ----', () => {
                 .end((req, res) => {
                     res.should.have.status(201);
                     assert.equal(res.body.message, 'Your request has been created');
+                    assert.exists(res.body.responseObject);
+                    done();
+                });
+        });
+        it('On success:: Create a join request', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides/hey/requests')
+                .send({
+                    userId: 1
+                })
+                .end((req, res) => {
+                    res.should.have.status(401);
+                    assert.equal(res.body.message, 'Invalid ride ID');
                     assert.exists(res.body.responseObject);
                     done();
                 });

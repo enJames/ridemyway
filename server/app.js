@@ -1,5 +1,6 @@
-import express from 'express';
 import bodyParser from 'body-parser';
+import express from 'express';
+import expressValidator from 'express-validator';
 import logger from 'morgan';
 import routes from './routes/routes';
 
@@ -11,6 +12,7 @@ const port = parseInt(process.env.PORT, 10) || 8000;
 app.use(urlencoded); // parse form data
 app.use(json); // parse json data
 app.use(logger('combined')); // Log requests info
+app.use(expressValidator());
 
 // API routes
 app.use('/api/v1/', routes);
