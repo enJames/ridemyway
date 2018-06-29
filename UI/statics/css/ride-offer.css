@@ -48,7 +48,7 @@ body {
     align-items: center;
     text-align: center;
     font-weight: bold;
-    opacity: .6
+    opacity: .5
 }
 .item-details {
     flex-basis: 62%;

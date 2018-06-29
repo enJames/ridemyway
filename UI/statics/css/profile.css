@@ -33,11 +33,12 @@
 }
 .profile-item {
     flex-basis: 45%;
-    font-weight: bold;
+    opacity: .5;
 }
 .item-details {
     flex-basis: 55%;
     text-align: left;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 600px) {
