@@ -1,9 +1,11 @@
+import jwt from 'jsonwebtoken';
 import Reusables from './Reusables';
+import connectionPool from './models/connectionPool';
 
 const { sendResponse, sendErrors } = Reusables;
 
 const Validate = {
-    signup: (req, res, next) => {
+    signupData: (req, res, next) => {
         /*
         req.check('firstname')
             .notEmpty()
@@ -38,9 +40,9 @@ const Validate = {
             .withMessage('Enter your City'); */
 
         // Send errors if they exist
-        return sendErrors(req.validationErrors(), res, next);
+        return sendErrors(res, req.validationErrors(), 'fail', next);
     },
-    login: (req, res, next) => {
+    loginData: (req, res, next) => {
         req.check('email')
             .isEmail()
             .withMessage('Enter a valid email address')
@@ -51,9 +53,9 @@ const Validate = {
             .withMessage('Enter password');
 
         // Send errors if they exist
-        return sendErrors(req.validationErrors(), res, next);
+        return sendErrors(res, req.validationErrors(), 'fail', next);
     },
-    createOffer: (req, res, next) => {
+    createOfferData: (req, res, next) => {
         /*
         req.check('fromState')
             .notEmpty()
@@ -88,10 +90,10 @@ const Validate = {
             .withMessage('Enter departure time'); */
 
         // Send errors if they exist
-        return sendErrors(req.validationErrors(), res, next);
+        return sendErrors(res, req.validationErrors(), 'fail', next);
     },
+    /*
     profileUpdate: (req, res, next) => {
-        /*
         req.check('firstname')
             .notEmpty()
             .withMessage('Enter your first name');
@@ -113,25 +115,59 @@ const Validate = {
             .withMessage('Enter your state of residence');
 
         // Send errors if they exist
-        return sendErrors(req.validationErrors(), res, next); */
-    },
+        return sendErrors(req.validationErrors(), res, next);
+    }, */
     checkParams: (req, res, next) => {
         const { rideId, requestId } = req.params;
         const numberRegex = /^[0-9]+$/;
 
+        // check rideId
         if (rideId) {
             if (!numberRegex.test(rideId)) {
-                return sendResponse(res, 401, 'Invalid ride ID', { error: true });
+                return sendResponse(res, 400, 'fail', null);
             }
         }
-        /*
+
+        // check requestId
         if (requestId) {
             if (!numberRegex.test(requestId)) {
-                return sendResponse(res, 401, 'Invalid request ID', { error: true });
+                return sendResponse(res, 400, 'fail', null);
             }
-        } */
-
+        }
         return next();
+    },
+    verify: (req, res, next) => {
+        try {
+            req.authData = jwt.verify(req.cookies.token, process.env.secret);
+            next();
+        } catch (error) {
+            return sendResponse(res, 401, 'fail', 'Not authenticated');
+        }
+    },
+    authorizeAction: (req, res, next) => {
+        const { rideId } = req.params;
+        const { userId } = req.authData;
+
+        // Check if logged in user created the ride
+        connectionPool.query(
+            `SELECT "userId" FROM "RideOffers"
+            WHERE "id" = '${rideId}'`
+        )
+            .then((rideData) => {
+                // Check that ride exists
+                if (!rideData.rows[0]) {
+                    return sendResponse(res, 401, 'failed', 'resource non-existent');
+                }
+
+                // Check that logged in user created the ride
+                if (!(rideData.rows[0].userId === userId)) {
+                    return sendResponse(res, 405, 'failed', 'Not authorized');
+                }
+
+                // Grant access to user
+                next();
+            })
+            .catch(error => sendResponse(res, 500, 'error', error));
     }
 };
 
