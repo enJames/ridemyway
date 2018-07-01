@@ -8,7 +8,6 @@ const Reusables = {
     sendErrors: (response, collatedErrors, status, next) => {
         if (collatedErrors) {
             const errors = collatedErrors.map(eachError => eachError.msg);
-            console.log(errors);
             return response.status(400).json({
                 status: 'fail',
                 errors

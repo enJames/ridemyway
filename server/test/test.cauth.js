@@ -27,7 +27,7 @@ describe('--- auth route testing ----', () => {
                 .end((req, res) => {
                     res.should.have.status(201);
                     assert.equal(res.body.status, 'success');
-                    assert.isArray(res.body.data);
+                    assert.equal(res.body.data, null);
                     done();
                 });
         });
