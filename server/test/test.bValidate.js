@@ -31,28 +31,4 @@ describe('Validation tests', () => {
                 });
         });
     });
-    describe('authorizeAction check', () => {
-        it('On error:: fields not set', (done) => {
-            chai
-                .request(app)
-                .post('/api/v1/auth/signup')
-                .send({
-                    firstname: '',
-                    lastname: '',
-                    gender: '',
-                    email: '',
-                    password: '',
-                    repassword: '',
-                    phone: '',
-                    city: '',
-                    state: ''
-                })
-                .end((req, res) => {
-                    res.should.have.status(400);
-                    expect(res.body.status).to.equal('fail');
-                    assert.exists(res.body.errors);
-                    done();
-                });
-        });
-    });
 });

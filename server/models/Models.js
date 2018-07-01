@@ -64,7 +64,7 @@ const Models = () => {
                                         "rideId" INTEGER REFERENCES "RideOffers" (id) ON DELETE CASCADE,
                                         "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
                                         status VARCHAR NOT NULL,
-                                        "createdAt" timestamptz NOT NULL DEFAULT, CURRENT_TIMESTAMP,
+                                        "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
                                         .then(() => joinRide());
                                 });

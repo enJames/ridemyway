@@ -20,7 +20,7 @@ describe('--- auth route testing ----', () => {
                     email: 'sob@mart.com',
                     password: 'notess',
                     repassword: 'notess',
-                    phone: '7522223000',
+                    phone: '75222230001',
                     city: 'Iklinaku',
                     state: 'Cross River'
                 })
