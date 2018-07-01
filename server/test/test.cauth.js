@@ -14,29 +14,6 @@ describe('--- auth route testing ----', () => {
                 .post('/api/v1/auth/signup')
                 .set('Accept', 'application/json')
                 .send({
-                    firstname: 'Babara',
-                    lastname: 'Chai',
-                    gender: 'Male',
-                    email: 'baa@chai.com',
-                    password: 'notess',
-                    repassword: 'notess',
-                    phone: '7564123578',
-                    city: 'Anthony',
-                    state: 'Lagos'
-                })
-                .end((req, res) => {
-                    res.should.have.status(201);
-                    assert.equal(res.body.status, 'success');
-                    assert.isArray(res.body.data);
-                    done();
-                });
-        });
-        it('On success:: All good: Sign up successful', (done) => {
-            chai
-                .request(app)
-                .post('/api/v1/auth/signup')
-                .set('Accept', 'application/json')
-                .send({
                     firstname: 'Sobanjo',
                     lastname: 'Martin',
                     gender: 'Male',
