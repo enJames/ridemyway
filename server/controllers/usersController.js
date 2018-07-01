@@ -43,10 +43,8 @@ const usersController = {
             '${pickupLocation}',
             '${userId}'
         )`)
-            .then((data) => {
-                const rideData = data.rows[0];
-                return sendResponse(res, 201, 'success', rideData);
-            });
+            .then(() => sendResponse(res, 201, 'success', null))
+            .catch(error => sendResponse(res, 500, 'error', error));
     },
     getAllJoinRequests: (req, res) => {
         const { rideId } = req.params;
@@ -100,19 +98,16 @@ const usersController = {
                             SET "status" = 'accepted'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}')`
                         )
-                            .then(() => sendResponse(res, 200, 'success', null))
-                            .catch(error => sendResponse(res, 500, 'error', error));
+                            .then(() => sendResponse(res, 200, 'success', null));
                     }
                     connectionPool.query(
                         `UPDATE "JoinRide" SET "status" = 'declined'
                         WHERE "id" = '${requestId}' AND "rideId" = '${rideId}')`
                     )
-                        .then(() => sendResponse(res, 200, 'success', null))
-                        .catch(error => sendResponse(res, 500, 'error', error));
+                        .then(() => sendResponse(res, 200, 'success', null));
                 }
                 return sendResponse(res, 404, 'fail', 'request not understood');
-            })
-            .catch(error => sendResponse(res, 500, 'error', error));
+            });
     },
     updateRideOffer: (req, res) => {
         const { rideId } = req.params;
@@ -152,8 +147,7 @@ const usersController = {
             `DELETE FROM "RideOffers" WHERE "id" = '${rideId}'
             AND "userId" = '${userId}'`
         )
-            .then(() => sendResponse(res, 200, 'success', 'updated'))
-            .catch(error => sendResponse(res, 500, 'error', error));
+            .then(() => sendResponse(res, 200, 'success', 'resource deleted'));
     },
     createUser: (req, res) => {
         // If logged in, redirect to dashboard
@@ -194,17 +188,13 @@ const usersController = {
                     '${city}',
                     '${state}'
                 )`)
-                    .then((data) => {
-                        const userData = data.rows[0];
-                        return sendResponse(res, 201, 'Sign up success', userData);
-                    })
-                    .catch(error => sendResponse(res, 500, 'error', error));
+                    .then(() => sendResponse(res, 201, 'success', null));
             });
     },
     loginUser: (req, res) => {
         // If logged in, redirect to dashboard
         if (req.cookies.token) {
-            return sendResponse(res, 200, 'success', null);
+            return sendResponse(res, 200, 'success', 'already logged in');
         }
         const { email, password } = req.body;
 
@@ -214,42 +204,37 @@ const usersController = {
         )
             .then((userData) => {
                 const user = userData.rows[0];
-                if (user.email === email) {
-                    // Compare hashed password
-                    bcrypt.compare(password, user.password)
-                        .then((result) => {
-                            if (result) {
-                                // Info to store in token
-                                const authData = {
-                                    userId: user.id
-                                };
 
-                                // Create token
-                                const token = jwt.sign(
-                                    authData,
-                                    process.env.secret,
-                                    { expiresIn: 240 }
-                                );
-
-                                // Save token in the cookie
-                                res.cookie('token', token, {
-                                    httpOnly: true,
-                                    maxAge: (1000 * 60 * 5)
-                                });
-                                return sendResponse(res, 401, 'success', null);
-                            }
-                        })
-                        .catch(error => sendResponse(res, 500, 'errorlgn', error));
+                if (!user) {
+                    return sendResponse(res, 401, 'fail', 'access denied');
                 }
-            })
-            .catch(error => sendResponse(res, 500, 'errorQlgn', error));
+                // Compare hashed password
+                bcrypt.compare(password, user.password)
+                    .then((result) => {
+                        if (result) {
+                            // Info to store in token
+                            const authData = {
+                                userId: user.id
+                            };
+
+                            // Create token
+                            const token = jwt.sign(
+                                authData,
+                                process.env.secret,
+                                { expiresIn: '2h' }
+                            );
+
+                            // Save token in the cookie
+                            res.cookie('token', token, {
+                                httpOnly: true,
+                                maxAge: (1000 * 60 * 60 * 2)
+                            });
+                            return sendResponse(res, 200, 'success', null);
+                        }
+                    });
+            });
     },
     logOutUser: (req, res) => {
-        // If logged in, redirect to dashboard
-        if (!req.cookies.token) {
-            return sendResponse(res, 200, 'success', 'already logged out');
-        }
-
         // Save token in the cookie
         res.cookie('token', null, {
             httpOnly: true,

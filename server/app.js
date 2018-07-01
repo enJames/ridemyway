@@ -24,7 +24,7 @@ Models();
 app.use('/api/v1/', routes);
 
 // Catch all routes
-app.get('/see', (req, res) => {
+app.get('*', (req, res) => {
     res.status(200).json({
         message: 'Ride my way application by Enejo James Oche.'
     });

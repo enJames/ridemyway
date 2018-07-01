@@ -1,6 +1,9 @@
+import dotenv from 'dotenv';
 import { Pool } from 'pg';
 
-const connectionString = 'postgresql://king:pass@localhost:5432/ridemyway';
+dotenv.config();
+
+const connectionString = process.env.DATABASE_URL;
 const connectionPool = new Pool({ connectionString });
 
 export default connectionPool;

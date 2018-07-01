@@ -66,8 +66,8 @@ routes.delete(
 routes.get(
     '/users/rides/:rideId/requests',
     verify,
-    authorizeAction,
     checkParams,
+    authorizeAction,
     getAllJoinRequests
 );
 
@@ -75,8 +75,8 @@ routes.get(
 routes.put(
     '/users/rides/:rideId/requests/:requestId',
     verify,
-    authorizeAction,
     checkParams,
+    authorizeAction,
     acceptRejectRideRequest
 );
 

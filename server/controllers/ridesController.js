@@ -5,13 +5,7 @@ const { sendResponse } = Reusables;
 
 const ridesController = {
     getAllRideOffers: (req, res) => connectionPool.query('SELECT * FROM "RideOffers"')
-        .then((rideData) => {
-            if (rideData.rows.length === 0) {
-                return sendResponse(res, 404, 'fail', 'No rides yet');
-            }
-            return sendResponse(res, 200, 'success', rideData.rows);
-        })
-        .catch(error => sendResponse(res, 500, 'error', error)),
+        .then(rideData => sendResponse(res, 200, 'success', rideData.rows)),
     getARideOffer: (req, res) => {
         const { rideId } = req.params;
         // Search for the ride
@@ -65,14 +59,10 @@ const ridesController = {
                                     .then(() => {
                                         const response = `Your join request has been processed and its pending ${firstname}'s response`;
                                         return sendResponse(res, 201, 'success', response);
-                                    })
-                                    .catch(error => sendResponse(res, 500, 'error', error));
-                            })
-                            .catch(error => sendResponse(res, 500, 'error', error));
-                    })
-                    .catch(error => sendResponse(res, 500, 'error', error));
-            })
-            .catch(error => sendResponse(res, 500, 'error', error));
+                                    });
+                            });
+                    });
+            });
     }
 };
 

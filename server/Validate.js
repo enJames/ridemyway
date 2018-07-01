@@ -6,7 +6,6 @@ const { sendResponse, sendErrors } = Reusables;
 
 const Validate = {
     signupData: (req, res, next) => {
-        /*
         req.check('firstname')
             .notEmpty()
             .withMessage('Enter your first name');
@@ -20,14 +19,14 @@ const Validate = {
             .isEmail()
             .withMessage('Enter a valid email address')
             .notEmpty()
-            .withMessage('Enter a valid email address'); */
+            .withMessage('Enter a valid email address');
         req.check('password')
             .isLength({ min: 6 })
             .withMessage('Password must be at least 6 characters long');
         req.check('repassword')
             .equals(req.body.password)
             .withMessage('Passwords do not match');
-        /* req.check('phone')
+        req.check('phone')
             .notEmpty()
             .withMessage('Enter your phone number')
             .isLength({ min: 11, max: 11 })
@@ -37,7 +36,7 @@ const Validate = {
             .withMessage('Enter your phone number');
         req.check('state')
             .notEmpty()
-            .withMessage('Enter your City'); */
+            .withMessage('Enter your City');
 
         // Send errors if they exist
         return sendErrors(res, req.validationErrors(), 'fail', next);
@@ -56,17 +55,16 @@ const Validate = {
         return sendErrors(res, req.validationErrors(), 'fail', next);
     },
     createOfferData: (req, res, next) => {
-        /*
         req.check('fromState')
             .notEmpty()
             .withMessage('Enter your current State');
         req.check('fromCity')
             .notEmpty()
-            .withMessage('Enter your current City'); */
+            .withMessage('Enter your current City');
         req.check('toState')
             .notEmpty()
             .withMessage('Enter destination State');
-        /* req.check('toCity')
+        req.check('toCity')
             .notEmpty()
             .withMessage('Enter destination City');
         req.check('price')
@@ -87,7 +85,7 @@ const Validate = {
             .withMessage('Enter departure date');
         req.check('departureTime')
             .notEmpty()
-            .withMessage('Enter departure time'); */
+            .withMessage('Enter departure time');
 
         // Send errors if they exist
         return sendErrors(res, req.validationErrors(), 'fail', next);
@@ -138,8 +136,14 @@ const Validate = {
     },
     verify: (req, res, next) => {
         try {
+            // Extract token from stringified cookie
+            const clientToken = req.headers.cookies.split('=')[1].split(';')[0];
+            if (clientToken) {
+                req.authData = jwt.verify(clientToken, process.env.secret);
+                return next();
+            }
             req.authData = jwt.verify(req.cookies.token, process.env.secret);
-            next();
+            return next();
         } catch (error) {
             return sendResponse(res, 401, 'fail', 'Not authenticated');
         }
@@ -156,12 +160,12 @@ const Validate = {
             .then((rideData) => {
                 // Check that ride exists
                 if (!rideData.rows[0]) {
-                    return sendResponse(res, 401, 'failed', 'resource non-existent');
+                    return sendResponse(res, 404, 'fail', 'resource non-existent');
                 }
 
                 // Check that logged in user created the ride
                 if (!(rideData.rows[0].userId === userId)) {
-                    return sendResponse(res, 405, 'failed', 'Not authorized');
+                    return sendResponse(res, 405, 'fail', 'Not authorized');
                 }
 
                 // Grant access to user
