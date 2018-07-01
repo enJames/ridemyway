@@ -7,7 +7,6 @@ const { assert, should } = chai;
 should();
 
 describe('--- auth route testing ----', () => {
-    /*
     describe('/auth/signup: POST: Sign up a user', () => {
         it('On success:: All good: Sign up successful', (done) => {
             chai
@@ -55,7 +54,7 @@ describe('--- auth route testing ----', () => {
                     done();
                 });
         });
-    }); */
+    });
     describe('/auth/login: POST: User Login', () => {
         it('On error:: deny access', (done) => {
             chai
