@@ -5,9 +5,15 @@ install:
   - npm install
 script:
   - npm test
+services:
+- postgresql
+env:
+- NODE_ENV=test DB_USERNAME=enjames DB_PASSWORD=pass DB_NAME=ridemywaytest DATABASE_URL='postgresql://enjames:pass@localhost:5432/ridemywaytest'
+before_script:
+- psql -c 'create database ridemywaytest;' -U postgres
+- psql -c "CREATE USER enjames WITH PASSWORD 'pass';" -U postgres
 cache:
   directories:
     - "node_modules"
-addons:
 after_success :
     - npm run coverage

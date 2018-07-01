@@ -1,21 +1,18 @@
 const Reusables = {
-    sendResponse: (response, statusCode, message, responseObject) => {
-        if (!responseObject) {
-            return response.status(statusCode).json({
-                message
-            });
-        }
-        return response.status(statusCode).json({
-            message,
-            responseObject
+    sendResponse: (response, statusCode, status, data) => {
+        response.status(statusCode).json({
+            status,
+            data
         });
     },
-    sendErrors: (collatedErrors, response, next) => {
+    sendErrors: (response, collatedErrors, status, next) => {
         if (collatedErrors) {
             const errors = collatedErrors.map(eachError => eachError.msg);
-            return response.status(405).json({ errors });
+            return response.status(400).json({
+                status: 'fail',
+                errors
+            });
         }
-
         return next();
     }
 };
