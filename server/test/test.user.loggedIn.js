@@ -24,6 +24,28 @@ describe('Logged in category', () => {
                     assert.equal(res.body.status, 'success');
                     done();
 
+                    it('On success:: create ride', () => {
+                        chai
+                            .request(app)
+                            .post('/api/v1/users/rides/')
+                            .set('cookies', theCookie)
+                            .send({
+                                fromState: 'Benue',
+                                fromCity: 'Ugbokolo',
+                                toState: 'Enugu',
+                                toCity: 'Obolafor',
+                                price: 800,
+                                seats: 4,
+                                departureDate: '2018-07-02',
+                                departureTime: '10:00am',
+                                pickupLocation: 'Ugbokolo Market'
+                            })
+                            .end((req, res) => {
+                                expect(res).to.have.status(201);
+                                assert.equal(res.body.status, 'success');
+                                done();
+                            });
+                    });
                     it('On error:: Ride not exist', () => {
                         chai
                             .request(app)
@@ -55,7 +77,7 @@ describe('Logged in category', () => {
                             .end((req, res) => {
                                 expect(res).to.have.status(201);
                                 assert.equal(res.body.status, 'success');
-                                assert.equal(res.body.data, 'Your join request has been processed and its pending Marcelo\'s response');
+                                assert.equal(res.body.data, 'Your join request has been processed and its pending King\'s response');
                                 done();
                             });
                     });

@@ -7,7 +7,8 @@ const { assert, should } = chai;
 should();
 
 describe('--- auth route testing ----', () => {
-    /* describe('/auth/signup: POST: Sign up a user', () => {
+    /*
+    describe('/auth/signup: POST: Sign up a user', () => {
         it('On success:: All good: Sign up successful', (done) => {
             chai
                 .request(app)
@@ -31,6 +32,29 @@ describe('--- auth route testing ----', () => {
                     done();
                 });
         });
+        it('On success:: All good: Sign up successful', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/auth/signup')
+                .set('Accept', 'application/json')
+                .send({
+                    firstname: 'Sobanjo',
+                    lastname: 'Martin',
+                    gender: 'Male',
+                    email: 'sob@mart.com',
+                    password: 'notess',
+                    repassword: 'notess',
+                    phone: '7522223000',
+                    city: 'Iklinaku',
+                    state: 'Cross River'
+                })
+                .end((req, res) => {
+                    res.should.have.status(201);
+                    assert.equal(res.body.status, 'success');
+                    assert.isArray(res.body.data);
+                    done();
+                });
+        });
     }); */
     describe('/auth/login: POST: User Login', () => {
         it('On error:: deny access', (done) => {
@@ -38,7 +62,7 @@ describe('--- auth route testing ----', () => {
                 .request(app)
                 .post('/api/v1/auth/login')
                 .send({
-                    email: 'ang@anla.com',
+                    email: 'king@enjo.com',
                     password: 'notess'
                 })
                 .end((req, res) => {
@@ -53,7 +77,7 @@ describe('--- auth route testing ----', () => {
                 .request(app)
                 .post('/api/v1/auth/login')
                 .send({
-                    email: 'ang@andela.com',
+                    email: 'king@enejo.com',
                     password: 'notess'
                 })
                 .end((req, res) => {
@@ -62,7 +86,7 @@ describe('--- auth route testing ----', () => {
                     assert.equal(res.body.status, 'success');
                     done();
 
-                    it('On error:: Ride not exist', () => {
+                    it('Attempting logging while logged in', () => {
                         chai
                             .request(app)
                             .get('/api/v1/auth/login')
@@ -74,18 +98,19 @@ describe('--- auth route testing ----', () => {
                                 done();
                             });
                     });
-                });
-        });
-        it('On success:: Logout user', (done) => {
-            chai
-                .request(app)
-                .post('/api/v1/auth/logout')
-                .send({})
-                .end((req, res) => {
-                    res.should.have.status(200);
-                    assert.equal(res.body.status, 'success');
-                    assert.equal(res.body.data, 'logged out');
-                    done();
+                    it('On success:: Logout user', () => {
+                        chai
+                            .request(app)
+                            .post('/api/v1/auth/logout')
+                            .set('cookies', theCookie)
+                            .send({})
+                            .end((req, res) => {
+                                res.should.have.status(200);
+                                assert.equal(res.body.status, 'success');
+                                assert.equal(res.body.data, 'logged out');
+                                done();
+                            });
+                    });
                 });
         });
     });

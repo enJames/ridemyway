@@ -1,10 +1,12 @@
 import connectionPool from './connectionPool';
-import Reusables from '../Reusables';
+import seedData from './seedData';
 
-const { sendResponse } = Reusables;
-const onErrorMessage = 'Unable to communicate to the database';
+const {
+    user, rideOffer, friends, joinRide
+} = seedData;
 
-const Models = (req, res) => {
+
+const Models = () => {
     // Create Users Table
     connectionPool.query(`CREATE TABLE IF NOT EXISTS "Users" (
         "id" SERIAL PRIMARY KEY,
@@ -21,6 +23,7 @@ const Models = (req, res) => {
         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
         .then(() => {
+            user();
             // Create Ratings table
             connectionPool.query(`CREATE TABLE IF NOT EXISTS "Ratings" (
                 id SERIAL PRIMARY KEY,
@@ -38,6 +41,7 @@ const Models = (req, res) => {
                         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
                         .then(() => {
+                            friends();
                             // Create RideOffers Table
                             connectionPool.query(`CREATE TABLE IF NOT EXISTS "RideOffers" (
                                 "id" SERIAL PRIMARY KEY,
@@ -53,6 +57,7 @@ const Models = (req, res) => {
                                 "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                 "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
                                 .then(() => {
+                                    rideOffer();
                                     // Create JoinRide Table
                                     connectionPool.query(`CREATE TABLE IF NOT EXISTS "JoinRide" (
                                         id SERIAL PRIMARY KEY,
@@ -61,10 +66,11 @@ const Models = (req, res) => {
                                         status VARCHAR NOT NULL,
                                         "createdAt" timestamptz NOT NULL DEFAULT, CURRENT_TIMESTAMP,
                                         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
+                                        .then(() => joinRide());
                                 });
                         });
                 });
-        })
+        });
 };
 
 export default Models;
