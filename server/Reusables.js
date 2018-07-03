@@ -1,7 +1,8 @@
 const Reusables = {
-    sendResponse: (response, statusCode, status, data) => {
+    sendResponse: (response, statusCode, status, message, data=null) => {
         response.status(statusCode).json({
             status,
+            message,
             data
         });
     },

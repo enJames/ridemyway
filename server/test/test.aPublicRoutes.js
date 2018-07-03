@@ -4,6 +4,8 @@ import app from '../app';
 import connectionPool from '../models/connectionPool';
 import seedData from '../models/seedData';
 
+process.env.NODE_ENV = 'test';
+
 const { rideOffer } = seedData;
 
 chai.use(chaiHttp);
@@ -77,7 +79,8 @@ describe('--- Rides route testing ----', () => {
                 .end((req, res) => {
                     res.should.have.status(404);
                     assert.equal(res.body.status, 'fail');
-                    assert.equal(res.body.data, 'resource non-existent');
+                    assert.equal(res.body.message, 'resource non-existent');
+                    assert.equal(res.body.data, null);
                     done();
                 });
         });

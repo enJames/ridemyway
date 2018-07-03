@@ -3,6 +3,8 @@ import chaiHttp from 'chai-http';
 import cookieParser from 'cookie-parser';
 import app from '../app';
 
+process.env.NODE_ENV = 'test';
+
 chai.use(chaiHttp);
 chai.use(cookieParser);
 const { assert, should, expect } = chai;

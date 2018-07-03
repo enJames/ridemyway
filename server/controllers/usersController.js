@@ -43,8 +43,8 @@ const usersController = {
             '${pickupLocation}',
             '${userId}'
         )`)
-            .then(() => sendResponse(res, 201, 'success', null))
-            .catch(error => sendResponse(res, 500, 'error', error));
+            .then(() => sendResponse(res, 201, 'success', 'ride offer created'))
+            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
     },
     getAllJoinRequests: (req, res) => {
         const { rideId } = req.params;
@@ -73,11 +73,11 @@ const usersController = {
                             rideOffer,
                             requestedUsers
                         };
-                        return sendResponse(res, 200, 'success', result);
+                        return sendResponse(res, 200, 'success', `found ${requestedUsers.length} requests`, result);
                     })
-                    .catch(error => sendResponse(res, 500, 'error', error));
+                    .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
             })
-            .catch(error => sendResponse(res, 500, 'error', error));
+            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
     },
     acceptRejectRideRequest: (req, res) => {
         const { rideId, requestId } = req.params;
@@ -98,13 +98,13 @@ const usersController = {
                             SET "status" = 'accepted'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}')`
                         )
-                            .then(() => sendResponse(res, 200, 'success', null));
+                            .then(() => sendResponse(res, 200, 'success', 'accepted ride request'));
                     }
                     connectionPool.query(
                         `UPDATE "JoinRide" SET "status" = 'declined'
                         WHERE "id" = '${requestId}' AND "rideId" = '${rideId}')`
                     )
-                        .then(() => sendResponse(res, 200, 'success', null));
+                        .then(() => sendResponse(res, 200, 'success', 'declined ride request'));
                 }
                 return sendResponse(res, 404, 'fail', 'request not understood');
             });
@@ -136,8 +136,8 @@ const usersController = {
                 "pickupLocation"='${pickupLocation}'
             WHERE "id" = '${rideId}' AND "userId" = '${userId}'`
         )
-            .then(() => sendResponse(res, 200, 'success', 'updated'))
-            .catch(error => sendResponse(res, 500, 'error', error));
+            .then(() => sendResponse(res, 200, 'success', 'ride offer updated'))
+            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
     },
     deleteRideOffer: (req, res) => {
         const { rideId } = req.params;
@@ -147,12 +147,12 @@ const usersController = {
             `DELETE FROM "RideOffers" WHERE "id" = '${rideId}'
             AND "userId" = '${userId}'`
         )
-            .then(() => sendResponse(res, 200, 'success', 'resource deleted'));
+            .then(() => sendResponse(res, 200, 'success', 'ride offer deleted'));
     },
     createUser: (req, res) => {
         // If logged in, redirect to dashboard
         if (req.cookies.token) {
-            return sendResponse(res, 204, null, 'Already logged');
+            return sendResponse(res, 204, 'failed', 'a user is already logged in');
         }
         const {
             firstname,
@@ -168,7 +168,8 @@ const usersController = {
         // Hash the password
         bcrypt
             .hash(password, 10)
-            .then(hash => connectionPool.query(`INSERT INTO "Users" (
+            .then(hash => connectionPool.query(
+                `INSERT INTO "Users" (
                     "firstname",
                     "lastname",
                     "email",
@@ -176,18 +177,32 @@ const usersController = {
                     "gender",
                     "phone",
                     "city",
-                    "state") VALUES (
-                    '${firstname}',
-                    '${lastname}',
-                    '${email}',
-                    '${hash}',
-                    '${gender}',
-                    '${phone}',
-                    '${city}',
-                    '${state}'
-                )`)
-                .then(() => sendResponse(res, 201, 'success', null)))
-            .catch(error => sendResponse(res, 500, 'error', error));
+                    "state")
+                    VALUES (
+                        '${firstname}','${lastname}','${email}', '${hash}', '${gender}', '${phone}', '${city}','${state}') RETURNING *`)
+                .then((userData) => {
+                    const user = userData.rows[0];
+
+                    // Info to store in token
+                    const authData = {
+                        userId: user.id
+                    };
+
+                    // Create token
+                    const token = jwt.sign(
+                        authData,
+                        process.env.secret,
+                        { expiresIn: '2h' }
+                    );
+
+                    // Save token in the cookie
+                    res.cookie('token', token, {
+                        httpOnly: true,
+                        maxAge: (1000 * 60 * 60 * 2)
+                    });
+                    return sendResponse(res, 201, 'success', 'signup successful')
+                }))
+            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
     },
     loginUser: (req, res) => {
         // If logged in, redirect to dashboard
@@ -201,7 +216,7 @@ const usersController = {
                 const user = userData.rows[0];
 
                 if (!user) {
-                    return sendResponse(res, 401, 'fail', 'access denied');
+                    return sendResponse(res, 401, 'fail', 'Email or password incorrect');
                 }
                 // Compare hashed password
                 bcrypt.compare(password, user.password)
@@ -224,7 +239,7 @@ const usersController = {
                                 httpOnly: true,
                                 maxAge: (1000 * 60 * 60 * 2)
                             });
-                            return sendResponse(res, 200, 'success', null);
+                            return sendResponse(res, 200, 'success', 'login successful');
                         }
                     });
             });
@@ -236,7 +251,7 @@ const usersController = {
             maxAge: (-1000)
         });
 
-        return sendResponse(res, 200, 'success', 'logged out');
+        return sendResponse(res, 200, 'success', 'logout successful');
     }
 };
 

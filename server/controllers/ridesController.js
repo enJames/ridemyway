@@ -5,7 +5,7 @@ const { sendResponse } = Reusables;
 
 const ridesController = {
     getAllRideOffers: (req, res) => connectionPool.query('SELECT * FROM "RideOffers"')
-        .then(rideData => sendResponse(res, 200, 'success', rideData.rows)),
+        .then(rideData => sendResponse(res, 200, 'success', 'all ride offers', rideData.rows)),
     getARideOffer: (req, res) => {
         const { rideId } = req.params;
         // Search for the ride
@@ -14,7 +14,7 @@ const ridesController = {
                 if (!rideData.rows[0]) {
                     return sendResponse(res, 404, 'fail', 'resource non-existent');
                 }
-                return sendResponse(res, 200, 'success', rideData.rows[0]);
+                return sendResponse(res, 200, 'success', 'Ride found', rideData.rows[0]);
             });
     },
     joinRide: (req, res) => {
