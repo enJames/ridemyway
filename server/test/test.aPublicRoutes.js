@@ -45,7 +45,7 @@ describe('--- Rides route testing ----', () => {
                     rideOffer();
                     done();
                 });
-        })
+        });
         it('On success:: Get all ride offers', (done) => {
             chai
                 .request(app)
@@ -73,7 +73,7 @@ describe('--- Rides route testing ----', () => {
         it('On error:: incorrect id', (done) => {
             chai
                 .request(app)
-                .get('/api/v1/rides/5')
+                .get('/api/v1/rides/205')
                 .end((req, res) => {
                     res.should.have.status(404);
                     assert.equal(res.body.status, 'fail');

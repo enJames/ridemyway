@@ -136,12 +136,6 @@ const Validate = {
     },
     verify: (req, res, next) => {
         try {
-            // Extract token from stringified cookie
-            const clientToken = req.headers.cookies.split('=')[1].split(';')[0];
-            if (clientToken) {
-                req.authData = jwt.verify(clientToken, process.env.secret);
-                return next();
-            }
             req.authData = jwt.verify(req.cookies.token, process.env.secret);
             return next();
         } catch (error) {

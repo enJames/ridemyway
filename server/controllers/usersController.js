@@ -152,7 +152,7 @@ const usersController = {
     createUser: (req, res) => {
         // If logged in, redirect to dashboard
         if (req.cookies.token) {
-            return sendResponse(res, 500, 'fail', 'Already logged');
+            return sendResponse(res, 204, null, 'Already logged');
         }
         const {
             firstname,
@@ -168,9 +168,7 @@ const usersController = {
         // Hash the password
         bcrypt
             .hash(password, 10)
-            .then((hash) => {
-                // Persist users data to database
-                connectionPool.query(`INSERT INTO "Users" (
+            .then(hash => connectionPool.query(`INSERT INTO "Users" (
                     "firstname",
                     "lastname",
                     "email",
@@ -188,14 +186,11 @@ const usersController = {
                     '${city}',
                     '${state}'
                 )`)
-                    .then(() => sendResponse(res, 201, 'success', null));
-            });
+                .then(() => sendResponse(res, 201, 'success', null)))
+            .catch(error => sendResponse(res, 500, 'error', error));
     },
     loginUser: (req, res) => {
         // If logged in, redirect to dashboard
-        if (req.cookies.token) {
-            return sendResponse(res, 200, 'success', 'already logged in');
-        }
         const { email, password } = req.body;
 
         connectionPool.query(
