@@ -23,6 +23,13 @@ html,body {
 .text-center {
     text-align: center;
 }
+.payment-information {
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(100,10,0,.8);
+    padding: 10px;
+    text-align: center;
+}
 /* ---------Navigation-----------*/
 .navigation-bar {
     display: flex;
