@@ -28,7 +28,7 @@ describe('Validation tests', () => {
                 .end((req, res) => {
                     res.should.have.status(400);
                     expect(res.body.status).to.equal('fail');
-                    assert.exists(res.body.errors);
+                    assert.exists(res.body.message);
                     done();
                 });
         });

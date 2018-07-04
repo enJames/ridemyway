@@ -12,6 +12,6 @@ if (process.env.NODE_ENV === 'test') {
     connectionString = process.env.DATABASE_URL;
 }
 
-const connectionPool = new Pool({ connectionString });
+const connectionPool = new Pool({ connectionString, ssl: true });
 
 export default connectionPool;

@@ -2,7 +2,7 @@ import connectionPool from './connectionPool';
 import seedData from './seedData';
 
 const {
-    user, rideOffer, friends, joinRide
+    user, rideOffer, joinRide
 } = seedData;
 
 
@@ -24,51 +24,31 @@ const Models = () => {
         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
         .then(() => {
             user();
-            // Create Ratings table
-            connectionPool.query(`CREATE TABLE IF NOT EXISTS "Ratings" (
-                id SERIAL PRIMARY KEY,
-                "userId" INTEGER NOT NULL,
-                rating NUMERIC NOT NULL,
+            connectionPool.query(`CREATE TABLE IF NOT EXISTS "RideOffers" (
+                "id" SERIAL PRIMARY KEY,
+                "fromState" VARCHAR NOT NULL,
+                "fromCity" VARCHAR NOT NULL,
+                "toState" VARCHAR NOT NULL,
+                "toCity" VARCHAR NOT NULL,
+                "price" VARCHAR NOT NULL,
+                "seats" INTEGER NOT NULL,
+                "departureDate" date NOT NULL,
+                "departureTime" TIME NOT NULL,
+                "pickupLocation" VARCHAR NOT NULL,
+                "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
                 "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
                 .then(() => {
-                    // Create Friends table
-                    connectionPool.query(`CREATE TABLE IF NOT EXISTS "Friends" (
-                        "id" SERIAL PRIMARY KEY,
+                    rideOffer();
+                    // Create JoinRide Table
+                    connectionPool.query(`CREATE TABLE IF NOT EXISTS "JoinRide" (
+                        id SERIAL PRIMARY KEY,
+                        "rideId" INTEGER REFERENCES "RideOffers" (id) ON DELETE CASCADE,
                         "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
-                        "friendId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
-                        "status" VARCHAR NOT NULL,
+                        status VARCHAR NOT NULL,
                         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
-                        .then(() => {
-                            friends();
-                            // Create RideOffers Table
-                            connectionPool.query(`CREATE TABLE IF NOT EXISTS "RideOffers" (
-                                "id" SERIAL PRIMARY KEY,
-                                "fromState" VARCHAR NOT NULL,
-                                "fromCity" VARCHAR NOT NULL,
-                                "toState" VARCHAR NOT NULL,
-                                "toCity" VARCHAR NOT NULL,
-                                "price" VARCHAR NOT NULL,
-                                "departureDate" date NOT NULL,
-                                "departureTime" TIME NOT NULL,
-                                "pickupLocation" VARCHAR NOT NULL,
-                                "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
-                                "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
-                                .then(() => {
-                                    rideOffer();
-                                    // Create JoinRide Table
-                                    connectionPool.query(`CREATE TABLE IF NOT EXISTS "JoinRide" (
-                                        id SERIAL PRIMARY KEY,
-                                        "rideId" INTEGER REFERENCES "RideOffers" (id) ON DELETE CASCADE,
-                                        "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
-                                        status VARCHAR NOT NULL,
-                                        "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                        "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
-                                        .then(() => joinRide());
-                                });
-                        });
+                        .then(() => joinRide());
                 });
         });
 };

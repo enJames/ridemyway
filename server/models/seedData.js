@@ -13,18 +13,14 @@ const seedData = {
     },
     rideOffer: () => {
         connectionPool.query(`INSERT INTO "RideOffers" (
-                "fromState", "fromCity", "toState", "toCity", "price", "departureDate", "departureTime", "pickupLocation", "userId")
+                "fromState", "fromCity", "toState", "toCity", "price", "seats", "departureDate", "departureTime", "pickupLocation", "userId")
             VALUES
-                ('Benue', 'Ugbokolo', 'Enugu', 'Obolafor', 800, '2018-07-02', '10:00am', 'Ugbokolo Market', 1),
-                ('Oyo', 'Ibadan', 'Osun', 'Oshogbo', 2800, '2018-07-03', '9:00am', 'Challenge', 2)`);
-    },
-    friends: () => {
-        connectionPool.query(`INSERT INTO "Friends" ("userId", "friendId", "status")
-            VALUES (1, 2, 'friends'), (1, 3, 'friends')`);
+                ('Benue', 'Ugbokolo', 'Enugu', 'Obolafor', 800, 4, '2018-07-02', '10:00am', 'Ugbokolo Market', 1),
+                ('Oyo', 'Ibadan', 'Osun', 'Oshogbo', 2800, 4, '2018-07-03', '9:00am', 'Challenge', 2)`);
     },
     joinRide: () => {
         connectionPool.query(`INSERT INTO "JoinRide" ("rideId", "userId", "status")
-            VALUES (1, 2, 'accepted')`);
+            VALUES (2, 3, 'accepted')`);
     }
 };
 

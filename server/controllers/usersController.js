@@ -16,6 +16,7 @@ const usersController = {
             toState,
             toCity,
             price,
+            seats,
             departureDate,
             departureTime,
             pickupLocation
@@ -28,6 +29,7 @@ const usersController = {
             "toState",
             "toCity",
             "price",
+            "seats",
             "departureDate",
             "departureTime",
             "pickupLocation",
@@ -38,6 +40,7 @@ const usersController = {
             '${toState}',
             '${toCity}',
             '${price}',
+            '${seats}',
             '${departureDate}',
             '${departureTime}',
             '${pickupLocation}',
@@ -65,7 +68,7 @@ const usersController = {
                         const requestedUsers = usersData.rows;
 
                         if (requestedUsers.length === 0) {
-                            return sendResponse(res, 404, 'fail', 'No requests yet');
+                            return sendResponse(res, 404, 'fail', 'No requests for this ride yet');
                         }
 
                         // Ride offer and requested users
@@ -179,7 +182,8 @@ const usersController = {
                     "city",
                     "state")
                     VALUES (
-                        '${firstname}','${lastname}','${email}', '${hash}', '${gender}', '${phone}', '${city}','${state}') RETURNING *`)
+                        '${firstname}','${lastname}','${email}', '${hash}', '${gender}', '${phone}', '${city}','${state}') RETURNING *`
+            )
                 .then((userData) => {
                     const user = userData.rows[0];
 
@@ -200,7 +204,8 @@ const usersController = {
                         httpOnly: true,
                         maxAge: (1000 * 60 * 60 * 2)
                     });
-                    return sendResponse(res, 201, 'success', 'signup successful')
+
+                    return sendResponse(res, 201, 'success', 'signup successful');
                 }))
             .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
     },

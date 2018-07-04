@@ -12,7 +12,9 @@ should();
 
 describe('Logged in category', () => {
     describe('View all requests', () => {
-        it('Log user in', (done) => {
+        let theCookie;
+
+        before((done) => {
             chai
                 .request(app)
                 .post('/api/v1/auth/login')
@@ -21,108 +23,105 @@ describe('Logged in category', () => {
                     password: 'notess'
                 })
                 .end((req, res) => {
-                    const theCookie = res.header['set-cookie'];
-                    expect(res).to.have.status(200);
+                    theCookie = res.header['set-cookie'];
+                    res.should.have.status(200);
                     assert.equal(res.body.status, 'success');
                     done();
-
-                    it('On success:: create ride', () => {
-                        chai
-                            .request(app)
-                            .post('/api/v1/users/rides/')
-                            .set('cookies', theCookie)
-                            .send({
-                                fromState: 'Benue',
-                                fromCity: 'Ugbokolo',
-                                toState: 'Enugu',
-                                toCity: 'Obolafor',
-                                price: 800,
-                                seats: 4,
-                                departureDate: '2018-07-02',
-                                departureTime: '10:00am',
-                                pickupLocation: 'Ugbokolo Market'
-                            })
-                            .end((req, res) => {
-                                expect(res).to.have.status(201);
-                                assert.equal(res.body.status, 'success');
-                                done();
-                            });
-                    });
-                    it('On error:: Ride not exist', () => {
-                        chai
-                            .request(app)
-                            .get('/api/v1/users/rides/10/requests')
-                            .set('cookies', theCookie)
-                            .end((req, res) => {
-                                expect(res).to.have.status(404);
-                                assert.equal(res.body.status, 'fail');
-                                done();
-                            });
-                    });
-                    it('On success:: Ride exists, requests exist', () => {
-                        chai
-                            .request(app)
-                            .get('/api/v1/users/rides/1/requests')
-                            .set('cookies', theCookie)
-                            .end((req, res) => {
-                                expect(res).to.have.status(200);
-                                assert.equal(res.body.status, 'success');
-                                done();
-                            });
-                    });
-                    it('On success:: Make a join ride request: friends', () => {
-                        chai
-                            .request(app)
-                            .post('/api/v1//rides/:rideId/requests')
-                            .send({})
-                            .set('cookies', theCookie)
-                            .end((req, res) => {
-                                expect(res).to.have.status(201);
-                                assert.equal(res.body.status, 'success');
-                                assert.equal(res.body.data, 'Your join request has been processed and its pending King\'s response');
-                                done();
-                            });
-                    });
                 });
         });
-    });
-    describe('View all requests: No requests yet', () => {
-        it('Log user in', (done) => {
+        it('On success:: create ride: users/rides', (done) => {
             chai
                 .request(app)
-                .post('/api/v1/auth/login')
+                .post('/api/v1/users/rides')
+                .set('cookies', theCookie)
+                .type('form')
                 .send({
-                    email: 'king@enejo.com',
-                    password: 'notess'
+                    fromState: 'Benue',
+                    fromCity: 'Ugbokolo',
+                    toState: 'Enugu',
+                    toCity: 'Obolafor',
+                    price: 800,
+                    seats: 4,
+                    departureDate: '2018-07-02',
+                    departureTime: '10:00am',
+                    pickupLocation: 'Ugbokolo Market'
                 })
                 .end((req, res) => {
-                    const theCookie = res.header['set-cookie'];
-                    expect(res).to.have.status(200);
+                    expect(res).to.have.status(201);
                     assert.equal(res.body.status, 'success');
                     done();
-
-                    it('On error:: Ride exist, no request', () => {
-                        chai
-                            .request(app)
-                            .get('/api/v1/users/rides/10/requests')
-                            .set('cookies', theCookie)
-                            .end((req, res) => {
-                                expect(res).to.have.status(404);
-                                assert.equal(res.body.status, 'fail');
-                                done();
-                            });
-                    });
-                    it('On success:: Ride exists, requests exist', () => {
-                        chai
-                            .request(app)
-                            .get('/api/v1/users/rides/1/requests')
-                            .set('cookies', theCookie)
-                            .end((req, res) => {
-                                expect(res).to.have.status(200);
-                                assert.equal(res.body.status, 'success');
-                                done();
-                            });
-                    });
+                });
+        });
+        it('On error:: Ride not exist: users/rides/110/requests', (done) => {
+            chai
+                .request(app)
+                .get('/api/v1/users/rides/110/requests')
+                .set('cookies', theCookie)
+                .end((req, res) => {
+                    expect(res).to.have.status(404);
+                    assert.equal(res.body.status, 'fail');
+                    done();
+                });
+        });
+        it('On success:: users/rides/1/requests: accessing a ride you do not own should fail', (done) => {
+            chai
+                .request(app)
+                .get('/api/v1/users/rides/2/requests')
+                .set('cookies', theCookie)
+                .end((req, res) => {
+                    expect(res).to.have.status(405);
+                    assert.equal(res.body.status, 'fail');
+                    done();
+                });
+        });
+        it('On success:: Make a join ride request with wrong ride id should fail', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides/wrongId/requests')
+                .send({})
+                .set('cookies', theCookie)
+                .end((req, res) => {
+                    expect(res).to.have.status(400);
+                    assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'ride id not recognised');
+                    done();
+                });
+        });
+        it('On success:: Make a join ride request: already joined', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides/2/requests')
+                .send({})
+                .set('cookies', theCookie)
+                .end((req, res) => {
+                    expect(res).to.have.status(405);
+                    assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'You already joined this ride');
+                    done();
+                });
+        });
+        it('On error:: users/rides/3/requests: Ride exists, no requests', (done) => {
+            chai
+                .request(app)
+                .get('/api/v1/users/rides/3/requests')
+                .set('cookies', theCookie)
+                .end((req, res) => {
+                    expect(res).to.have.status(404);
+                    assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'No requests for this ride yet');
+                    done();
+                });
+        });
+        it('On error:: rides/1/requests: cannot join own ride', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides/1/requests')
+                .set('cookies', theCookie)
+                .end((req, res) => {
+                    expect(res).to.have.status(405);
+                    assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'You cannot join your own ride');
+                    done();
                 });
         });
     });

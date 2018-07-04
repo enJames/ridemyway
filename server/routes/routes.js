@@ -1,12 +1,19 @@
 import express from 'express';
 import ridesController from '../controllers/ridesController';
 import usersController from '../controllers/usersController';
-import Validate from '../Validate';
+import FormValidation from '../middleware/FormValidation';
+import Protect from '../middleware/Protect';
 
 const routes = express.Router();
+
+// Middlewares
 const {
-    createOfferData, checkParams, signupData, loginData, verify, authorizeAction,
-} = Validate;
+    checkParams, verifyUser, authorizeAction,
+} = Protect;
+
+const {
+    validateSignupForm, ValidateLoginForm, ValidateCreateOfferForm
+} = FormValidation;
 
 const {
     createRideOffer,
@@ -33,22 +40,22 @@ routes.get('/rides', getAllRideOffers);
 routes.get('/rides/:rideId', checkParams, getARideOffer);
 
 // Make a join ride request | auth
-routes.post('/rides/:rideId/requests', verify, checkParams, joinRide);
+routes.post('/rides/:rideId/requests', checkParams, verifyUser, joinRide);
 
 // User routes
 // Create ride offer
 routes.post(
     '/users/rides',
-    verify,
-    createOfferData,
+    verifyUser,
+    ValidateCreateOfferForm,
     createRideOffer
 );
 
 // Update ride offer | optional
 routes.put(
     '/users/rides/:rideId/update',
-    verify,
     checkParams,
+    verifyUser,
     authorizeAction,
     updateRideOffer
 );
@@ -56,8 +63,8 @@ routes.put(
 // Delete ride offer | optional
 routes.delete(
     '/users/rides/:rideId',
-    verify,
     checkParams,
+    verifyUser,
     authorizeAction,
     deleteRideOffer
 );
@@ -65,8 +72,8 @@ routes.delete(
 // Get all join request to ride offer
 routes.get(
     '/users/rides/:rideId/requests',
-    verify,
     checkParams,
+    verifyUser,
     authorizeAction,
     getAllJoinRequests
 );
@@ -74,15 +81,15 @@ routes.get(
 // Accept or reject ride offers
 routes.put(
     '/users/rides/:rideId/requests/:requestId',
-    verify,
     checkParams,
+    verifyUser,
     authorizeAction,
     acceptRejectRideRequest
 );
 
 
-routes.post('/auth/signup', signupData, createUser);
-routes.post('/auth/login', loginData, loginUser);
+routes.post('/auth/signup', validateSignupForm, createUser);
+routes.post('/auth/login', ValidateLoginForm, loginUser);
 routes.post('/auth/logout', logOutUser);
 
 
