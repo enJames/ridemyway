@@ -15,7 +15,7 @@ describe('--- Catch all routes ----', () => {
                 .end((req, res) => {
                     res.should.have.status(404);
                     assert.equal(res.body.status, 'fail');
-                    assert.equal(res.body.message, 'Sorry, this page does not exist');
+                    assert.equal(res.body.message, 'Sorry, the page you seek does not exist');
                     done();
                 });
         });

@@ -2,8 +2,11 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import logger from 'morgan';
+import { serve, setup } from 'swagger-ui-express';
+
 import routes from './routes/routes';
 import Models from './models/Models';
+import swaggerDocument from './swaggerDocument';
 
 const app = express();
 const urlencoded = bodyParser.urlencoded({ extended: false });
@@ -20,12 +23,13 @@ Models();
 
 // API routes
 app.use('/api/v1/', routes);
+app.use('/doc', serve, setup(swaggerDocument));
 
 // Catch all routes
 app.get('*', (req, res) => {
     res.status(404).json({
         status: 'fail',
-        message: 'Sorry, this page does not exist'
+        message: 'Sorry, the page you seek does not exist'
     });
 });
 
