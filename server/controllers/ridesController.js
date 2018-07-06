@@ -6,7 +6,7 @@ const { sendResponse } = Reusables;
 const ridesController = {
     getAllRideOffers: (req, res) => connectionPool.query('SELECT * FROM "RideOffers"')
         .then(rideData => sendResponse(res, 200, 'success', 'all ride offers', rideData.rows))
-        .catch(error => sendResponse(res, 500, 'error', 'connection error[Get]', error)),
+        .catch(error => sendResponse(res, 500, 'error', 'connection error while fetching rides', error)),
     getARideOffer: (req, res) => {
         const { rideId } = req.params;
         // Search for the ride
@@ -16,7 +16,8 @@ const ridesController = {
                     return sendResponse(res, 404, 'fail', 'ride does not exist');
                 }
                 return sendResponse(res, 200, 'success', 'Ride found', rideData.rows[0]);
-            });
+            })
+            .catch(error => sendResponse(res, 500, 'error', 'connection error while fetching ride', error));
     },
     joinRide: (req, res) => {
         const { rideId } = req.params;

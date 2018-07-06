@@ -26,17 +26,22 @@ const Protect = {
         return next();
     },
     verifyUser: (req, res, next) => {
-        try {
-            if (req.headers.cookies) {
-                const token = req.headers.cookies.split('=')[1].split(';')[0];
-                req.authData = jwt.verify(token, process.env.secret);
-                return next();
-            }
-            req.authData = jwt.verify(req.cookies.token, process.env.secret);
+        if (req.cookies.token) {
+            const decoded = jwt.verify(req.cookies.token, process.env.secret);
+            req.authData = decoded;
+
             return next();
-        } catch (error) {
-            return sendResponse(res, 401, 'fail', 'Not authenticated', error);
         }
+
+        if (req.headers.cookies) {
+            const token = req.headers.cookies.split('=')[1].split(';')[0];
+            const decoded = jwt.verify(token, process.env.secret);
+            req.authData = decoded;
+
+            return next();
+        }
+
+        return sendResponse(res, 401, 'fail', 'Not authenticated');
     },
     authorizeAction: (req, res, next) => {
         const { rideId } = req.params;
@@ -44,8 +49,7 @@ const Protect = {
 
         // Check if logged in user created the ride
         connectionPool.query(
-            `SELECT "userId" FROM "RideOffers"
-            WHERE "id" = '${rideId}'`
+            `SELECT "userId" FROM "RideOffers" WHERE "id" = '${rideId}'`
         )
             .then((rideData) => {
                 // Check that ride exists

@@ -19,7 +19,6 @@ const Models = () => {
         "city" VARCHAR NOT NULL,
         "state" VARCHAR NOT NULL,
         "imgUrl" VARCHAR,
-        "rating" NUMERIC,
         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
         .then(() => {

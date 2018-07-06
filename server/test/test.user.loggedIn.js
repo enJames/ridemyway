@@ -100,10 +100,10 @@ describe('Logged in category', () => {
                     done();
                 });
         });
-        it('On error:: users/rides/3/requests: Ride exists, no requests', (done) => {
+        it('On error:: users/rides/1/requests: Ride exists, no requests', (done) => {
             chai
                 .request(app)
-                .get('/api/v1/users/rides/3/requests')
+                .get('/api/v1/users/rides/1/requests')
                 .set('cookies', theCookie)
                 .end((req, res) => {
                     expect(res).to.have.status(404);
@@ -121,6 +121,17 @@ describe('Logged in category', () => {
                     expect(res).to.have.status(405);
                     assert.equal(res.body.status, 'fail');
                     assert.equal(res.body.message, 'You cannot join your own ride');
+                    done();
+                });
+        });
+        it('On error:: auth/logout: logout user', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/auth/logout')
+                .end((req, res) => {
+                    expect(res).to.have.status(403);
+                    assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'No logged in account');
                     done();
                 });
         });

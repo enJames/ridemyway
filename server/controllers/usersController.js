@@ -47,7 +47,7 @@ const usersController = {
             '${userId}'
         )`)
             .then(() => sendResponse(res, 201, 'success', 'ride offer created'))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
+            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to sign you up', error));
     },
     getAllJoinRequests: (req, res) => {
         const { rideId } = req.params;
@@ -58,7 +58,7 @@ const usersController = {
 
                 // Search for the Users that requested to join the ride
                 connectionPool.query(
-                    `SELECT "firstname", "lastname", "phone", "imgUrl", "rating"
+                    `SELECT "firstname", "lastname", "phone", "imgUrl"
                         FROM "JoinRide"
                         JOIN "RideOffers" ON "JoinRide"."rideId" = "RideOffers"."id"
                         JOIN "Users" ON "JoinRide"."userId" = "Users"."id"
@@ -86,30 +86,65 @@ const usersController = {
         const { rideId, requestId } = req.params;
         const { action } = req.body;
 
+        if (action !== 'accept' && action !== 'decline') {
+            return sendResponse(res, 400, 'fail', 'action must be explicitly stated as either "accept" or "decline"');
+        }
+
         connectionPool.query(
-            `SELECT * FROM "JoinRide" WHERE "id" = '${requestId}'`
+            `SELECT * FROM "JoinRide" WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
         )
             .then((requestData) => {
                 const request = requestData.rows[0];
                 if (!request) {
-                    return sendResponse(res, 404, 'fail', 'resource non-existent');
+                    return sendResponse(res, 404, 'fail', 'request does not exist');
                 }
+
                 if (request.status === 'pending') {
                     if (action === 'accept') {
                         connectionPool.query(
                             `UPDATE "JoinRide"
                             SET "status" = 'accepted'
-                            WHERE "id" = '${requestId}' AND "rideId" = '${rideId}')`
+                            WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
-                            .then(() => sendResponse(res, 200, 'success', 'accepted ride request'));
+                            .then(() => sendResponse(res, 200, 'success', 'accepted ride request successfully'));
                     }
-                    connectionPool.query(
-                        `UPDATE "JoinRide" SET "status" = 'declined'
-                        WHERE "id" = '${requestId}' AND "rideId" = '${rideId}')`
-                    )
-                        .then(() => sendResponse(res, 200, 'success', 'declined ride request'));
+                    if (action === 'decline') {
+                        connectionPool.query(
+                            `UPDATE "JoinRide" SET "status" = 'declined'
+                            WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
+                        )
+                            .then(() => sendResponse(res, 200, 'success', 'declined ride request successfully'));
+                    }
+
+                    return sendResponse(res, 404, 'fail', 'request not understood');
                 }
-                return sendResponse(res, 404, 'fail', 'request not understood');
+
+                if (request.status === 'accept') {
+                    if (action === 'accept') {
+                        return sendResponse(res, 400, 'fail', 'You already accepted this request');
+                    }
+                    if (action === 'decline') {
+                        connectionPool.query(
+                            `UPDATE "JoinRide" SET "status" = 'declined'
+                            WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
+                        )
+                            .then(() => sendResponse(res, 200, 'success', 'declined ride request successfully'));
+                    }
+                    return sendResponse(res, 400, 'fail', 'request not understood');
+                }
+
+                // if request.status is decline
+                if (action === 'accept') {
+                    connectionPool.query(
+                        `UPDATE "JoinRide"
+                        SET "status" = 'accepted'
+                        WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
+                    )
+                        .then(() => sendResponse(res, 200, 'success', 'accepted ride request successfully'));
+                }
+                if (action === 'decline') {
+                    return sendResponse(res, 400, 'fail', 'you already declined request');
+                }
             });
     },
     updateRideOffer: (req, res) => {
@@ -137,10 +172,10 @@ const usersController = {
                 "departureDate"='${departureDate}',
                 "departureTime"='${departureTime}',
                 "pickupLocation"='${pickupLocation}'
-            WHERE "id" = '${rideId}' AND "userId" = '${userId}'`
+            WHERE "id" = '${rideId}' AND "userId" = '${userId}' RETURNING *`
         )
             .then(() => sendResponse(res, 200, 'success', 'ride offer updated'))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
+            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to update ride offer', error));
     },
     deleteRideOffer: (req, res) => {
         const { rideId } = req.params;
@@ -150,12 +185,13 @@ const usersController = {
             `DELETE FROM "RideOffers" WHERE "id" = '${rideId}'
             AND "userId" = '${userId}'`
         )
-            .then(() => sendResponse(res, 200, 'success', 'ride offer deleted'));
+            .then(() => sendResponse(res, 200, 'success', 'ride offer deleted'))
+            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to delete ride offer', error));
     },
     createUser: (req, res) => {
         // If logged in, redirect to dashboard
         if (req.cookies.token) {
-            return sendResponse(res, 204, 'failed', 'a user is already logged in');
+            return sendResponse(res, 403, 'fail', 'an account is logged in');
         }
         const {
             firstname,
@@ -189,7 +225,8 @@ const usersController = {
 
                     // Info to store in token
                     const authData = {
-                        userId: user.id
+                        userId: user.id,
+                        email: user.email
                     };
 
                     // Create token
@@ -205,12 +242,16 @@ const usersController = {
                         maxAge: (1000 * 60 * 60 * 2)
                     });
 
-                    return sendResponse(res, 201, 'success', 'signup successful');
+                    return sendResponse(res, 201, 'success', 'your account has been created');
                 }))
             .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
     },
     loginUser: (req, res) => {
         // If logged in, redirect to dashboard
+        if (req.cookies.token) {
+            return sendResponse(res, 403, 'fail', 'an account is logged in');
+        }
+
         const { email, password } = req.body;
 
         connectionPool.query(
@@ -226,37 +267,51 @@ const usersController = {
                 // Compare hashed password
                 bcrypt.compare(password, user.password)
                     .then((result) => {
-                        if (result) {
-                            // Info to store in token
-                            const authData = {
-                                userId: user.id
-                            };
-
-                            // Create token
-                            const token = jwt.sign(
-                                authData,
-                                process.env.secret,
-                                { expiresIn: '2h' }
-                            );
-
-                            // Save token in the cookie
-                            res.cookie('token', token, {
-                                httpOnly: true,
-                                maxAge: (1000 * 60 * 60 * 2)
-                            });
-                            return sendResponse(res, 200, 'success', 'login successful');
+                        if (!result) {
+                            return sendResponse(res, 500, 'error', 'cannot sign you in at the moment');
                         }
+
+                        // Info to store in token
+                        const authData = {
+                            userId: user.id,
+                            email: user.email
+                        };
+
+                        // Create token
+                        const token = jwt.sign(
+                            authData,
+                            process.env.secret,
+                            { expiresIn: '2h' }
+                        );
+
+                        // Save token in the cookie
+                        res.cookie('token', token, {
+                            httpOnly: true,
+                            maxAge: (1000 * 60 * 60 * 2)
+                        });
+
+                        return sendResponse(res, 200, 'success', 'account logged in');
                     });
             });
     },
     logOutUser: (req, res) => {
-        // Save token in the cookie
+        // If logged in, redirect to dashboard
+        if (!req.cookies.token) {
+            return sendResponse(res, 403, 'fail', 'No logged in account');
+        }
+
+        const decoded = jwt.verify(req.cookies.token, process.env.secret);
+
+        if (!decoded.userId) {
+            return sendResponse(res, 403, 'fail', 'An unusual event occurred');
+        }
+        // Make token expire
         res.cookie('token', null, {
             httpOnly: true,
             maxAge: (-1000)
         });
 
-        return sendResponse(res, 200, 'success', 'logout successful');
+        return sendResponse(res, 200, 'success', 'account logged out');
     }
 };
 
