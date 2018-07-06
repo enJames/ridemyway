@@ -6,7 +6,8 @@
       "description": "A carpooling application that connects people will to offers rides with people looking to join a ride"
    },
    "schemes": [
-      "https"
+      "https",
+      "http"
    ],
    "host": "enjames-ridemyway.herokuapp.com",
    "basePath": "/api/v1",
