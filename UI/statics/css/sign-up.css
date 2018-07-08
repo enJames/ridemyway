@@ -16,6 +16,7 @@ html, body {
     text-align: center;
 }
 .form {
+    position: relative;
     width: 400px;
     margin: 50px auto auto;
     padding: 10px;
@@ -66,7 +67,20 @@ html, body {
 .intro:last-child {
     margin-top: 20px;
 }
-
+.btn-wrapper button {
+    position: relative;
+}
+#spinner {
+    position: absolute;
+    right: 15px;
+    font-size: 22px;
+    opacity: 0;
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+}
 
 
 @media screen and (max-width: 768px) {
@@ -86,10 +100,25 @@ html, body {
     .form-btn {
         font-size: 18px;
     }
+    .message {
+        top: -10px;
+    }
 }
 
 @media screen and (max-width: 450px) {
     .form {
         width: 95%;
+    }
+}
+@media screen and (max-width: 350px) {
+    .message {
+        width: 200px;
+        top: 0;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .form {
+        margin: 10px auto auto;
     }
 }

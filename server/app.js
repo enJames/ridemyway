@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express from 'express';
 import logger from 'morgan';
 import { serve, setup } from 'swagger-ui-express';
@@ -13,10 +14,12 @@ const urlencoded = bodyParser.urlencoded({ extended: false });
 const json = bodyParser.json({ extended: false });
 const port = parseInt(process.env.PORT, 10) || 8000;
 
+app.use(cors()); // allow CORS requests
+app.options('*', cors()); // enable pre-flight requests
 app.use(urlencoded); // parse form data
 app.use(json); // parse json data
 app.use(logger('combined')); // Log requests info
-app.use(cookieParser());
+app.use(cookieParser()); // parse cookie in headers
 
 // Create Tables
 Models();

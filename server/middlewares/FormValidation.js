@@ -10,7 +10,7 @@ const FormValidation = {
         if (!req.body.password || !req.body.password.trim()) {
             return sendResponse(res, 400, 'fail', 'password is required');
         }
-        if (req.body.password !== req.body.repassword) {
+        if (req.body.password !== req.body.confirmPassword) {
             return sendResponse(res, 400, 'fail', 'passwords do not match');
         }
         if (!req.body.email || !req.body.email.trim()) {
