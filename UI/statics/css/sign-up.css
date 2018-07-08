@@ -1,23 +1,34 @@
 html, body {
-    height: auto;
+    width: 100%;
+    height: 100%;
 }
 .banner {
     background-image: url('../img/sign-up.jpg');
+    height: 100%;
+    margin: 0;
 }
 .tint {
-    position: relative;
-    background-color: rgba(0,30,80,.6);
-    padding-top: 20px;
+    background-color: rgba(0,30,80,.8);
+    height: 100%;
+}
+.navigation-bar {
+    display: block;
+    text-align: center;
 }
 .form {
-    background-color: rgba(0,30,80,.3);
-
+    width: 400px;
+    margin: 50px auto auto;
+    padding: 10px;
+    box-shadow: none;
 }
 .intro {
     text-align: center;
 }
+.intro h2 {
+    margin: 0;
+}
 .intro p {
-    margin: 0 20px 20px;
+    margin: 0 20px 5px;
 }
 .intro a {
     text-decoration: none;
@@ -36,23 +47,48 @@ html, body {
     background-color: rgba(0,0,0,.1);
     color: rgba(255,255,255,.7);
 }
-.form-body {
+.form-body, .intro {
     border: none;
 }
 
 .form-btn {
-    width: 200px;
     margin: auto;
+}
+.input-wrapper {
+    margin: 0 0 20px !important;
+}
+.input-wrapper input {
+    margin: 0 !important;
+}
+.input-wrapper input::placeholder {
+    font-style: normal;
+}
+.intro:last-child {
+    margin-top: 20px;
 }
 
 
-@media screen and (max-width: 992px) {
+
+@media screen and (max-width: 768px) {
     .form {
-        width: 90%;
+        margin: 20px auto auto;
+    }
+    .input-wrapper:first-child {
+        margin-right: 0 !important;
+    }
+    .input-wrapper input {
+        height: 35px;
+    }
+    .input-wrapper input::placeholder {
+        font-style: normal;
+        font-size: 14px;
+    }
+    .form-btn {
+        font-size: 18px;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 450px) {
     .form {
         width: 95%;
     }
