@@ -13,72 +13,36 @@
     <body>
         <div class="banner">
             <div class="tint">
+                <nav class="navigation-bar">
+                    <a class="navigation-brand" href="index.html">
+                        <img src="statics/img/logormww.png" alt="">
+                    </a>
+                </nav>
                 <div class="form">
-                    <div class="form-header">
-                        <div class="logo">
-                            <a href="index.html">
-                                <img src="statics/img/logormww.png" alt="logo">
-                            </a>
-                        </div>
-                    </div>
                     <div class="intro">
                         <h2>Sign Up</h2>
-                        <p>Travel more, spend less. Join the raving carpooling community and start exploring. Already a user? <a href="login.html">Log in</a> instead.</p>
                     </div>
                     <div class="form-body">
                         <form method="POST">
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="firstname">First Name</label>
-                                    <input type="text" id="firstname" placeholder="e.g John">
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="lastname">Last Name</label>
-                                    <input type="text" id="lastname" placeholder="e.g Adejare">
-                                </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="firstname" placeholder="First Name">
                             </div>
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="gender">Gender</label>
-                                    <select>
-                                        <option value="" hidden selected>--Select--</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Male">Male</option>
-                                    </select>
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="email">Email address</label>
-                                    <input type="email" id="email" placeholder="e.g email@example.com">
-                                </div>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" placeholder="Email address">
                             </div>
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="password">Password</label>
-                                    <input type="password" id="password" placeholder="Password">
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="repassword">Retype Password</label>
-                                    <input type="password" id="repassword" placeholder="Type your password again">
-                                </div>
+                            <div class="input-wrapper">
+                                <input type="password" id="password" placeholder="Password">
                             </div>
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="phone">Mobile Number</label>
-                                    <input type="tel" id="phone" placeholder="Phone number">
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="city">City</label>
-                                    <input type="text" id="city" placeholder="Where do you live?">
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="state">State</label>
-                                    <input type="text" id="state" placeholder="Where do you live?">
-                                </div>
+                            <div class="input-wrapper">
+                                <input type="password" id="confirmPassword" placeholder="Type password again">
                             </div>
                             <div class="btn-wrapper">
                                 <button type="submit" class="form-btn" id="submit">Sign Up</button>
                             </div>
                         </form>
+                    </div>
+                    <div class="intro">
+                        <p>Already a user? <a href="login.html">Log in</a> instead.</p>
                     </div>
                 </div>
             </div>
