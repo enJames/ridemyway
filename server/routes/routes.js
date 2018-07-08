@@ -1,8 +1,8 @@
 import express from 'express';
 import ridesController from '../controllers/ridesController';
 import usersController from '../controllers/usersController';
-import FormValidation from '../middleware/FormValidation';
-import Protect from '../middleware/Protect';
+import FormValidation from '../middlewares/FormValidation';
+import Protect from '../middlewares/Protect';
 
 const routes = express.Router();
 
