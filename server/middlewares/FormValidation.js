@@ -22,24 +22,6 @@ const FormValidation = {
         if (!req.body.firstname || !req.body.firstname.trim()) {
             return sendResponse(res, 400, 'fail', 'firstname is required');
         }
-        if (!req.body.lastname || !req.body.lastname.trim()) {
-            return sendResponse(res, 400, 'fail', 'lastname is required');
-        }
-        if (!req.body.gender || !req.body.gender.trim()) {
-            return sendResponse(res, 400, 'fail', 'gender is required');
-        }
-        if (!req.body.phone || !req.body.phone.trim()) {
-            return sendResponse(res, 400, 'fail', 'phone number is required');
-        }
-        if (!numberRegex.test(req.body.phone)) {
-            return sendResponse(res, 400, 'fail', 'phone number must contain only numbers');
-        }
-        if (!req.body.city || !req.body.city.trim()) {
-            return sendResponse(res, 400, 'fail', 'city is required');
-        }
-        if (!req.body.state || !req.body.state.trim()) {
-            return sendResponse(res, 400, 'fail', 'state is required');
-        }
 
         return next();
     },
