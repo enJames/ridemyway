@@ -18,5 +18,25 @@ const PageFunctions = {
         } else {
             element.style.display = 'none';
         }
+    },
+    showMessage: (elementMessage, elementSpinner, messageType, message) => {
+        elementMessage.innerHTML = message;
+
+        if (messageType === 'success') {
+            elementMessage.style.backgroundColor = 'rgba(80,220,80,.6)';
+        }
+        if (messageType === 'fail') {
+            elementMessage.style.backgroundColor = 'rgba(220,80,80,.6)';
+        }
+        if (messageType === 'error') {
+            elementMessage.style.backgroundColor = 'rgba(240,240,0,.6)';
+        }
+
+        elementMessage.style.opacity = '1'; // reveals message
+        elementSpinner.style.opacity = '0'; // stops spinner once a response is displayed
+
+        setTimeout(() => {
+            elementMessage.style.opacity = '0'; // hides message again
+        },3000);
     }
 };

@@ -11,13 +11,13 @@ const Models = () => {
     connectionPool.query(`CREATE TABLE IF NOT EXISTS "Users" (
         "id" SERIAL PRIMARY KEY,
         "firstname" VARCHAR NOT NULL,
-        "lastname" VARCHAR NOT NULL,
+        "lastname" VARCHAR,
         "email" VARCHAR NOT NULL UNIQUE,
         "password" VARCHAR NOT NULL,
-        "gender" VARCHAR NOT NULL,
-        "phone" VARCHAR NOT NULL UNIQUE,
-        "city" VARCHAR NOT NULL,
-        "state" VARCHAR NOT NULL,
+        "gender" VARCHAR,
+        "phone" VARCHAR UNIQUE,
+        "city" VARCHAR,
+        "state" VARCHAR,
         "imgUrl" VARCHAR,
         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
