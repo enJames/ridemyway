@@ -22,22 +22,23 @@
                     <div class="intro">
                         <h2>Sign Up</h2>
                     </div>
+                    <p id="message"></p>
                     <div class="form-body">
                         <form method="POST">
                             <div class="input-wrapper">
-                                <input type="text" id="firstname" placeholder="First Name">
+                                <input type="text" id="firstname" placeholder="First Name" required>
                             </div>
                             <div class="input-wrapper">
-                                <input type="email" id="email" placeholder="Email address">
+                                <input type="email" id="email" placeholder="Email address" required>
                             </div>
                             <div class="input-wrapper">
-                                <input type="password" id="password" placeholder="Password">
+                                <input type="password" id="password" placeholder="Password" required>
                             </div>
                             <div class="input-wrapper">
-                                <input type="password" id="confirmPassword" placeholder="Type password again">
+                                <input type="password" id="confirmPassword" placeholder="Type password again" required>
                             </div>
                             <div class="btn-wrapper">
-                                <button type="submit" class="form-btn" id="submit">Sign Up</button>
+                                <button type="submit" class="form-btn" id="submit">Sign Up <i class="fa fa-spinner fa-spin" id="spinner"></i> </button>
                             </div>
                         </form>
                     </div>
@@ -47,6 +48,7 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="statics/js/PageFunctions.js"></script>
         <script type="text/javascript" src="statics/js/signup.js"></script>
     </body>
 </html>
