@@ -20,20 +20,20 @@ app.use((req, res, next) => {
 
     if (allowedOrigins.indexOf(origin) > -1) {
         res.setHeader('Access-Control-Allow-Origin', origin);
+        res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.header('Access-Control-Allow-Credentials', true);
     }
 
-    res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', true);
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
 
     return next();
 });
 
-app.use(cors()); // allow CORS requests
-app.options('/api/v1/auth/signup', cors()); // enable pre-flight requests
-app.options('/api/v1/users/rides/:rideId', cors()); // enable pre-flight requests
-app.options('/api/v1/users/rides/:rideId/update', cors()); // enable pre-flight requests
-app.options('/api/v1/users/rides/:rideId/requests/:requestId', cors()); // enable pre-flight requests
+app.use(cors({ credentials: true })); // allow CORS requests
+app.options('*', cors()); // enable pre-flight requests
 app.use(urlencoded); // parse form data
 app.use(json); // parse json data
 app.use(logger('combined')); // Log requests info
