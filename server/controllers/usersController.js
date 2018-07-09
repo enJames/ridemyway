@@ -193,32 +193,14 @@ const usersController = {
         if (req.cookies.token) {
             return sendResponse(res, 403, 'fail', 'an account is logged in');
         }
-        const {
-            firstname,
-            lastname,
-            email,
-            password,
-            gender,
-            phone,
-            city,
-            state
-        } = req.body;
+        const { firstname, email, password } = req.body;
 
         // Hash the password
         bcrypt
             .hash(password, 10)
             .then(hash => connectionPool.query(
-                `INSERT INTO "Users" (
-                    "firstname",
-                    "lastname",
-                    "email",
-                    "password",
-                    "gender",
-                    "phone",
-                    "city",
-                    "state")
-                    VALUES (
-                        '${firstname}','${lastname}','${email}', '${hash}', '${gender}', '${phone}', '${city}','${state}') RETURNING *`
+                `INSERT INTO "Users" ("firstname", "email", "password")
+                VALUES ('${firstname}',${email}', '${hash}') RETURNING *`
             )
                 .then((userData) => {
                     const user = userData.rows[0];
