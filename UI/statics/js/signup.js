@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include'
         }
 
         fetch(url, fetchDataObject)
@@ -39,7 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .then((res) => {
                 console.log(res);
                 if (res.status === 'success') {
-                    return PageFunctions.showMessage(messageDiv, spinner, 'sucess', 'Sign up success!');
+                    PageFunctions.showMessage(messageDiv, spinner, 'success', 'Sign up success!');
+                    return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html')
                 }
                 if (res.status === 'fail') {
                     return PageFunctions.showMessage(messageDiv, spinner, 'fail', res.message);
