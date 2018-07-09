@@ -200,7 +200,7 @@ const usersController = {
             .hash(password, 10)
             .then(hash => connectionPool.query(
                 `INSERT INTO "Users" ("firstname", "email", "password")
-                VALUES ('${firstname}',${email}', '${hash}') RETURNING *`
+                VALUES ('${firstname}','${email}', '${hash}') RETURNING *`
             )
                 .then((userData) => {
                     const user = userData.rows[0];
