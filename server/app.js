@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors()); // allow CORS requests
+app.options('/api/v1/auth/signup', cors()); // enable pre-flight requests
 app.options('/api/v1/users/rides/:rideId', cors()); // enable pre-flight requests
 app.options('/api/v1/users/rides/:rideId/update', cors()); // enable pre-flight requests
 app.options('/api/v1/users/rides/:rideId/requests/:requestId', cors()); // enable pre-flight requests
