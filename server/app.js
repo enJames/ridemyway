@@ -15,8 +15,11 @@ const json = bodyParser.json({ extended: false });
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 app.use((req, res, next) => {
-    const allowedOrigins = ['http://localhost:8000', 'https://enjames.github.io'];
+    const allowedOrigins = ['http://localhost:8000', 'https://enjames.github.io', null];
     const { origin } = req.headers;
+
+    console.log(req);
+    console.log(origin);
 
     if (allowedOrigins.indexOf(origin) > -1) {
         res.setHeader('Access-Control-Allow-Origin', origin);
