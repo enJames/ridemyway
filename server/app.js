@@ -14,7 +14,28 @@ const urlencoded = bodyParser.urlencoded({ extended: false });
 const json = bodyParser.json({ extended: false });
 const port = parseInt(process.env.PORT, 10) || 8000;
 
-app.use(cors()); // allow CORS requests
+app.use((req, res, next) => {
+    const allowedOrigins = ['http://localhost:8000', 'https://enjames.github.io', null];
+    const { origin } = req.headers;
+
+    console.log(req);
+    console.log(origin);
+
+    if (allowedOrigins.indexOf(origin) > -1) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.header('Access-Control-Allow-Credentials', true);
+    }
+
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
+    return next();
+});
+
+app.use(cors({ credentials: true })); // allow CORS requests
 app.options('*', cors()); // enable pre-flight requests
 app.use(urlencoded); // parse form data
 app.use(json); // parse json data

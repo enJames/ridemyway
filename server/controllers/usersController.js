@@ -189,10 +189,6 @@ const usersController = {
             .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to delete ride offer', error));
     },
     createUser: (req, res) => {
-        // If logged in, redirect to dashboard
-        if (req.cookies.token) {
-            return sendResponse(res, 403, 'fail', 'an account is logged in');
-        }
         const { firstname, email, password } = req.body;
 
         // Hash the password
@@ -200,7 +196,7 @@ const usersController = {
             .hash(password, 10)
             .then(hash => connectionPool.query(
                 `INSERT INTO "Users" ("firstname", "email", "password")
-                VALUES ('${firstname}',${email}', '${hash}') RETURNING *`
+                VALUES ('${firstname}','${email}', '${hash}') RETURNING *`
             )
                 .then((userData) => {
                     const user = userData.rows[0];
@@ -229,11 +225,6 @@ const usersController = {
             .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
     },
     loginUser: (req, res) => {
-        // If logged in, redirect to dashboard
-        if (req.cookies.token) {
-            return sendResponse(res, 403, 'fail', 'an account is logged in');
-        }
-
         const { email, password } = req.body;
 
         connectionPool.query(
@@ -287,11 +278,8 @@ const usersController = {
         if (!decoded.userId) {
             return sendResponse(res, 403, 'fail', 'An unusual event occurred');
         }
-        // Make token expire
-        res.cookie('token', null, {
-            httpOnly: true,
-            maxAge: (-1000)
-        });
+        // Clear cookie
+        res.clearCookie('token');
 
         return sendResponse(res, 200, 'success', 'account logged out');
     }

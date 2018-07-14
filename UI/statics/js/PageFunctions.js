@@ -19,24 +19,29 @@ const PageFunctions = {
             element.style.display = 'none';
         }
     },
-    showMessage: (elementMessage, elementSpinner, messageType, message) => {
-        elementMessage.innerHTML = message;
+    showMessage: (status, message) => {
+        // message and spinner
+        const message = document.getElementById('message');
+        const spinner = document.getElementById('spinner');
 
-        if (messageType === 'success') {
-            elementMessage.style.backgroundColor = 'rgba(80,220,80,.6)';
+        message.innerHTML = message;
+
+        if (status === 'success') {
+            message.style.backgroundColor = 'rgb(80,220,80)';
+            return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
         }
-        if (messageType === 'fail') {
-            elementMessage.style.backgroundColor = 'rgba(220,80,80,.6)';
+        if (status === 'fail') {
+            message.style.backgroundColor = 'rgb(220,80,80)';
         }
-        if (messageType === 'error') {
-            elementMessage.style.backgroundColor = 'rgba(240,240,0,.6)';
+        if (status === 'error') {
+            message.style.backgroundColor = 'rgb(240,240,0)';
         }
 
-        elementMessage.style.opacity = '1'; // reveals message
-        elementSpinner.style.opacity = '0'; // stops spinner once a response is displayed
+        message.style.opacity = '1'; // reveals message
+        spinner.style.opacity = '0'; // stops spinner once a response is displayed
 
         setTimeout(() => {
-            elementMessage.style.opacity = '0'; // hides message again
-        },3000);
+            message.style.opacity = '0'; // hides message again
+        },4000);
     }
 };
