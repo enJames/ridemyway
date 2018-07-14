@@ -21,13 +21,13 @@ app.use((req, res, next) => {
     console.log(req);
     console.log(origin);
 
-    if (allowedOrigins.indexOf(origin) > -1) {
-        res.header('Access-Control-Allow-Origin', origin);
+    // if (allowedOrigins.indexOf(origin) > -1) {
+        res.header('Access-Control-Allow-Origin', 'https://enjames.github.io');
         res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
         res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         res.header('Access-Control-Allow-Credentials', true);
         res.header('Access-Control-Expose-Headers', 'ETag');
-    }
+    // }
 
     console.log(res);
     return next();
