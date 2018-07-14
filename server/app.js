@@ -22,14 +22,11 @@ app.use((req, res, next) => {
     console.log(origin);
 
     if (allowedOrigins.indexOf(origin) > -1) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        res.setHeader('Access-Control-Allow-Credentials', true);
-    }
-
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
+        res.header('Access-Control-Allow-Origin', origin);
+        res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header('Access-Control-Expose-Headers', 'ETag');
     }
 
     return next();
