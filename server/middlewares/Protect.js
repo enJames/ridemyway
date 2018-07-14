@@ -25,6 +25,14 @@ const Protect = {
 
         return next();
     },
+    checkUserIsLoggedIn: (req, res, next) => {
+        // If logged in, redirect to dashboard
+        if (req.cookies.token) {
+            return sendResponse(res, 403, 'fail', 'an account is logged in');
+        }
+
+        return next();
+    },
     verifyUser: (req, res, next) => {
         if (req.cookies.token) {
             const decoded = jwt.verify(req.cookies.token, process.env.secret);
