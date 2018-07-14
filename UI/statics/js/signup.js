@@ -55,5 +55,5 @@ document.addEventListener('DOMContentLoaded', () => {
                     .catch(error => PageFunctions.showMessage(res.status, res.message));
             }, false);
         })
-        .catch((err) => console.error('There was a problem', error));
+        .catch((err) => console.error('There was a problem', err));
 }, false);
