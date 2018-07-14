@@ -29,6 +29,7 @@ app.use((req, res, next) => {
         res.header('Access-Control-Expose-Headers', 'ETag');
     }
 
+    console.log(res);
     return next();
 });
 
