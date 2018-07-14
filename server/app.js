@@ -18,9 +18,6 @@ app.use((req, res, next) => {
     const allowedOrigins = ['http://localhost:8000', 'https://enjames.github.io'];
     const { origin } = req.headers;
 
-    console.log(req);
-    console.log(origin);
-
     // if (allowedOrigins.indexOf(origin) > -1) {
         res.header('Access-Control-Allow-Origin', 'https://enjames.github.io');
         res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
@@ -29,12 +26,10 @@ app.use((req, res, next) => {
         res.header('Access-Control-Expose-Headers', 'ETag');
     // }
 
-    console.log(res);
     return next();
 });
 
 app.use(cors({ credentials: true })); // allow CORS requests
-app.options('*', cors()); // enable pre-flight requests
 app.use(urlencoded); // parse form data
 app.use(json); // parse json data
 app.use(logger('combined')); // Log requests info
