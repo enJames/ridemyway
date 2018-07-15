@@ -241,7 +241,7 @@ const usersController = {
                 bcrypt.compare(password, user.password)
                     .then((result) => {
                         if (!result) {
-                            return sendResponse(res, 500, 'error', 'cannot sign you in at the moment');
+                            return sendResponse(res, 401, 'fail', 'Email or password incorrect');
                         }
 
                         // Info to store in token
