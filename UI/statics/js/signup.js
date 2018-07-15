@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then((res) => {
             // if user is logged in
-            if (res.status === 'fail') {
+            if (res.status === 'success') {
                 return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
             }
 
@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(url, fetchDataObject)
                     .then(res => res.json())
                     .then((res) => {
-                        console.log(res);
+                        if (res.status === 'success') {
+                            PageFunctions.showMessage(res.status, res.message);
+                            return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
+                        }
                         return PageFunctions.showMessage(res.status, res.message);
                     })
                     .catch(error => PageFunctions.showMessage(res.status, res.message));
