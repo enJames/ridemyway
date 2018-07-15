@@ -29,7 +29,6 @@ const PageFunctions = {
 
         if (status === 'success') {
             messageEl.style.backgroundColor = 'rgb(80,220,80)';
-            return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
         }
         if (status === 'fail') {
             messageEl.style.backgroundColor = 'rgb(220,80,80)';
