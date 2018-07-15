@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const submit = document.getElementById('submit');
 
                 // message and spinner
-                const messageDiv = document.getElementById('message');
+                const messageEl = document.getElementById('message');
                 const spinner = document.getElementById('spinner');
 
                 // Display spinner while systems sends request

@@ -21,27 +21,27 @@ const PageFunctions = {
     },
     showMessage: (status, message) => {
         // message and spinner
-        const message = document.getElementById('message');
+        const messageEl = document.getElementById('message');
         const spinner = document.getElementById('spinner');
 
-        message.innerHTML = message;
+        messageEl.innerHTML = message;
 
         if (status === 'success') {
-            message.style.backgroundColor = 'rgb(80,220,80)';
+            messageEl.style.backgroundColor = 'rgb(80,220,80)';
             return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
         }
         if (status === 'fail') {
-            message.style.backgroundColor = 'rgb(220,80,80)';
+            messageEl.style.backgroundColor = 'rgb(220,80,80)';
         }
         if (status === 'error') {
-            message.style.backgroundColor = 'rgb(240,240,0)';
+            messageEl.style.backgroundColor = 'rgb(240,240,0)';
         }
 
-        message.style.opacity = '1'; // reveals message
+        messageEl.style.opacity = '1'; // reveals message
         spinner.style.opacity = '0'; // stops spinner once a response is displayed
 
         setTimeout(() => {
-            message.style.opacity = '0'; // hides message again
+            messageEl.style.opacity = '0'; // hides message again
         },4000);
     }
 };
