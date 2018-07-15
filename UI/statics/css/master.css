@@ -48,6 +48,17 @@ html,body {
     -ms-transition: .5s ease-in-out;
     -moz-transition: .5s ease-in-out;
 }
+#spinner {
+    position: absolute;
+    right: 15px;
+    font-size: 22px;
+    opacity: 0;
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+}
 /* ---------Navigation-----------*/
 .navigation-bar {
     display: flex;
