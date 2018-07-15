@@ -25,6 +25,7 @@ const PageFunctions = {
         const spinner = document.getElementById('spinner');
 
         messageEl.innerHTML = message;
+        messageEl.style.opacity = '1'; // reveals message
 
         if (status === 'success') {
             messageEl.style.backgroundColor = 'rgb(80,220,80)';
@@ -37,8 +38,8 @@ const PageFunctions = {
             messageEl.style.backgroundColor = 'rgb(240,240,0)';
         }
 
-        messageEl.style.opacity = '1'; // reveals message
-        spinner.style.opacity = '0'; // stops spinner once a response is displayed
+        // stops spinner once a response is displayed
+        spinner.style.opacity = '0';
 
         setTimeout(() => {
             messageEl.style.opacity = '0'; // hides message again
