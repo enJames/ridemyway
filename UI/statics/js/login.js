@@ -44,10 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 fetch(url, fetchDataObject)
                     .then(res => res.json())
-                    .then((res) => {
-                        console.log(res);
-                        return PageFunctions.showMessage(res.status, res.message);
-                    })
+                    .then(res => PageFunctions.showMessage(res.status, res.message))
                     .catch(error => PageFunctions.showMessage(res.status, res.message));
             }, false);
         })
