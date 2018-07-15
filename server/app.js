@@ -1,6 +1,6 @@
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
+import cors from 'express-cors';
 import express from 'express';
 import logger from 'morgan';
 import { serve, setup } from 'swagger-ui-express';
@@ -14,25 +14,31 @@ const urlencoded = bodyParser.urlencoded({ extended: false });
 const json = bodyParser.json({ extended: false });
 const port = parseInt(process.env.PORT, 10) || 8000;
 
-app.use((req, res, next) => {
-    const allowedOrigins = ['http://localhost:8000', 'https://enjames.github.io'];
-    const { origin } = req.headers;
-
-    console.log(req.method);
-
-    if (req.method === 'OPTIONS' && allowedOrigins.indexOf(origin) > -1) {
-        res.header('Access-Control-Allow-Origin', origin);
-        res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
-        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header('Access-Control-Expose-Headers', 'ETag');
-    }
-
-    return next();
-});
-
-app.use(cors({ credentials: true })); // allow CORS requests
-app.options('*', cors()); // enable pre-flight requests
+// app.use((req, res, next) => {
+//     const allowedOrigins = ['http://localhost:8000', 'https://enjames.github.io'];
+//     const { origin } = req.headers;
+//
+//     console.log(req.method);
+//
+//
+//     if (req.method === 'OPTIONS' && allowedOrigins.indexOf(origin) > -1) {
+//         res.header('Access-Control-Allow-Origin', origin);
+//         res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
+//         res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//         res.header('Access-Control-Allow-Credentials', true);
+//         res.header('Access-Control-Expose-Headers', 'ETag');
+//     }
+//
+//     return next();
+// });
+//
+// app.use(cors({ credentials: true })); // allow CORS requests
+// app.options('*', cors()); // enable pre-flight requests
+app.use(cors({
+    allowedOrigins: [
+        'http://localhost:8000', 'https://enjames.github.io'
+    ]
+}));
 app.use(urlencoded); // parse form data
 app.use(json); // parse json data
 app.use(logger('combined')); // Log requests info
