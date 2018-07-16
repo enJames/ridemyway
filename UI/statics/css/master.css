@@ -167,17 +167,22 @@ html,body {
     text-align: center;
 }
 
-.navigation-li a {
+.navigation-li a, #logout {
     text-decoration: none;
     padding: 5px 10px;
     color: white;
     border-radius: 5px;
     border: 1px solid transparent;
 }
+#logout {
+    cursor: pointer;
+}
 .navigation-li a:hover {
     border: 1px solid white;
 }
-
+#logout:hover {
+    border: 1px solid white;
+}
 .user-navigation {
     display: flex;
     align-items: center;
