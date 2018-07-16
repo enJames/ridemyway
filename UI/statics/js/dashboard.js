@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then((res) => {
             // if user is logged in
+            console.log(res);
             if (res.status === 'fail') {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
