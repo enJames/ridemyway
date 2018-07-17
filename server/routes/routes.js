@@ -1,5 +1,4 @@
 import express from 'express';
-import Reusables from '../Reusables';
 import ridesController from '../controllers/ridesController';
 import usersController from '../controllers/usersController';
 import FormValidation from '../middlewares/FormValidation';
@@ -11,8 +10,6 @@ const routes = express.Router();
 const {
     checkParams, verifyUser, authorizeAction, checkUserIsLoggedIn
 } = Protect;
-
-const { sendResponse } = Reusables;
 
 const {
     validateSignupForm, ValidateLoginForm, ValidateCreateOfferForm
@@ -90,11 +87,7 @@ routes.put(
     acceptRejectRideRequest
 );
 
-routes.get(
-    '/auth/check',
-    checkUserIsLoggedIn,
-    (req, res) => sendResponse(res, 200, 'success', 'allow signup')
-);
+routes.get('/auth/check', checkUserIsLoggedIn);
 
 routes.post('/auth/signup', validateSignupForm, createUser);
 routes.post('/auth/login', ValidateLoginForm, loginUser);

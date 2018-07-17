@@ -25,10 +25,10 @@ const Protect = {
 
         return next();
     },
-    checkUserIsLoggedIn: (req, res, next) => {
-        // If logged in, redirect to dashboard
+    checkUserIsLoggedIn: (req, res) => {
+        // if a user is not logged in
         if (!req.cookies.token) {
-            return next();
+            return sendResponse(res, 401, 'fail', 'Not authenticated');
         }
         // for tests
         // if (req.headers.cookies) {
@@ -38,14 +38,14 @@ const Protect = {
         //
         //     return next();
         // }
-        //
+
         const decoded = jwt.verify(req.cookies.token, process.env.secret);
         // if token is not valid, allow signup
         if (!decoded) {
-            return next();
+            return sendResponse(res, 401, 'fail', 'Not authenticated');
         }
 
-        return sendResponse(res, 405, 'fail', 'a user is logged in');
+        return sendResponse(res, 200, 'success', 'Authenticated');
     },
     verifyUser: (req, res, next) => {
         if (req.cookies.token) {
