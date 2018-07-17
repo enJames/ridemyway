@@ -96,8 +96,8 @@ routes.get(
     (req, res) => sendResponse(res, 200, 'success', 'allow signup')
 );
 
-routes.post('/auth/signup', checkUserIsLoggedIn, validateSignupForm, createUser);
-routes.post('/auth/login', checkUserIsLoggedIn, ValidateLoginForm, loginUser);
+routes.post('/auth/signup', validateSignupForm, createUser);
+routes.post('/auth/login', ValidateLoginForm, loginUser);
 routes.post('/auth/logout', logOutUser);
 
 

@@ -28,18 +28,8 @@ const Protect = {
     checkUserIsLoggedIn: (req, res, next) => {
         // If logged in, redirect to dashboard
         if (!req.cookies.token) {
-            return sendResponse(res, 401, 'fail', 'Not authenticated');
+            return next();
         }
-
-        if (req.cookies.token) {
-            const decoded = jwt.verify(req.cookies.token, process.env.secret);
-            if (!decoded) {
-                return sendResponse(res, 401, 'fail', 'Not authenticated');
-            }
-
-            return sendResponse(res, 200, 'success', 'user is logged in');
-        }
-
         // for tests
         // if (req.headers.cookies) {
         //     const token = req.headers.cookies.split('=')[1].split(';')[0];
@@ -49,7 +39,13 @@ const Protect = {
         //     return next();
         // }
         //
-        return sendResponse(res, 401, 'fail', 'Not authenticated');
+        const decoded = jwt.verify(req.cookies.token, process.env.secret);
+        // if token is not valid, allow signup
+        if (!decoded) {
+            return next();
+        }
+
+        return sendResponse(res, 405, 'fail', 'a user is logged in');
     },
     verifyUser: (req, res, next) => {
         if (req.cookies.token) {
