@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (res.status === 'success') {
                 PageFunctions.enableLogout();
-                displayUserNavigation();
+                PageFunctions.displayUserNavigation();
             }
         })
         .catch((err) => console.error('There was a problem', err));
