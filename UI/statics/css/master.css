@@ -59,6 +59,15 @@ html,body {
     -ms-transition: .5s ease-in-out;
     -moz-transition: .5s ease-in-out;
 }
+.loading {
+    position: relative;
+    width: 100%;
+    padding: 30vh 0;
+    text-align: center;
+}
+.loading .fa {
+    font-size: 100px;
+}
 /* ---------Navigation-----------*/
 .navigation-bar {
     display: flex;
