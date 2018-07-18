@@ -6,7 +6,7 @@ const PageFunctions = {
             if (currentPage === 'index') {
                 return navigationId.innerHTML = `<ul class="navigation-ul">
                     <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
-                    <li class="navigation-li"><a href="/logout.html">Log out</a></li>
+                    <li class="navigation-li" id="logout">Log out</li>
                 </ul>`;
 
             }
@@ -19,7 +19,7 @@ const PageFunctions = {
                     <ul class="navigation-ul">
                         <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
                         <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
-                        <li class="navigation-li"><a href="/logout.html">Log out</a></li>
+                        <li class="navigation-li" id="logout">Log out</li>
                     </ul>
                 </div>`;
             }
@@ -27,7 +27,7 @@ const PageFunctions = {
                 <ul class="navigation-ul">
                     <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
                     <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
-                    <li class="navigation-li"><a href="/logout.html">Log out</a></li>
+                    <li class="navigation-li" id="logout">Log out</li>
                 </ul>
             </div>`;
         }
