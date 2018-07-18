@@ -60,9 +60,9 @@ html,body {
     -moz-transition: .5s ease-in-out;
 }
 .loading {
-    position: relative;
     width: 100%;
     padding: 30vh 0;
+    color: rgb(0,30,80);
     text-align: center;
 }
 .loading .fa {
