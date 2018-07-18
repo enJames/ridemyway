@@ -1,6 +1,9 @@
 body {
     background-color: rgb(240,240,240)
 }
+.user-navigation {
+    display: none;
+}
 
 .view-offer {
     background-color: white;
