@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     let ridesHTML = '<h1>All ride offers</h1>';
                     res.data.forEach((ride) => {
-                        ridesHTML += `<a class="ride-offer-wrapper" href="#">
+                        ridesHTML += `<a class="ride-offer-wrapper" href="ride-offer.html?rideId=${ride.id}">
                             <div class="ride-offer">
                                 <div class="offer-details">
                                     <div class="from">
