@@ -7,6 +7,9 @@
     color: rgb(0,30,80);
     text-decoration: none;
 }
+.view-offer a:hover {
+    background-color: rgba(180,180,180,.01);
+}
 .view-offer h1 {
     text-align: center;
     margin-bottom: 30px;
