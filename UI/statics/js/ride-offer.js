@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             PageFunctions.changeNavigation(res.status, 'ride-offer');
 
             if (res.status === 'success') {
-                enableLogout();
+                PageFunctions.enableLogout();
             }
         })
         .catch((err) => console.error('There was a problem', err));
