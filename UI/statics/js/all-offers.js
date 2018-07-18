@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     let ridesHTML = '<h1>All ride offers</h1>';
                     res.data.forEach((ride) => {
-                        ridesHTML += `<div class="ride-offer-wrapper">
+                        ridesHTML += `<a class="ride-offer-wrapper" href="#">
                             <div class="ride-offer">
                                 <div class="offer-details">
                                     <div class="from">
@@ -39,12 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <h3>₦<span>${ride.price.toLocaleString()}</span></h3>
                                 </div>
                             </div>
-                            <a href="ride-offer.html">
-                                <div class="view-offer-btn">
-                                    <i class="fa fa-caret-right"></i>
-                                </div>
-                            </a>
-                        </div>`
+                        </a>`
                     });
 
                     // Append rides to div for viewing
