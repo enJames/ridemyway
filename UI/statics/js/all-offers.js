@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     res.data.forEach((ride) => {
+                        const { price } = ride;
+                        let thePrice = parseInt(price, 10).toLocaleString();
                         ridesHTML += `<a class="ride-offer-wrapper" href="ride-offer.html?rideId=${ride.id}">
                             <div class="ride-offer">
                                 <div class="offer-details">
@@ -44,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </div>
                                 </div>
                                 <div class="offer-price">
-                                    <h3>₦<span>${ride.price.toLocaleString()}</span></h3>
+                                    <h3>₦<span>${thePrice}</span></h3>
                                 </div>
                             </div>
                         </a>`
