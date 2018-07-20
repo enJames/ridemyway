@@ -83,53 +83,54 @@
                 <h2>Offer a ride</h2>
             </div>
             <div class="form-section">
+                <p id="message"></p>
                 <div class="form-body">
                     <form method="POST">
                         <div class="input-group">
                             <div class="input-wrapper">
                                 <label for="fromState">State</label>
-                                <input type="text" id="fromState" value="Lagos">
+                                <input type="text" id="fromState" value="Lagos" required>
                             </div>
                             <div class="input-wrapper">
                                 <label for="fromCity">City</label>
-                                <input type="text" id="fromCity" value="Gbagada">
+                                <input type="text" id="fromCity" value="Gbagada" required>
                             </div>
                         </div>
                         <div class="input-group">
                             <div class="input-wrapper">
                                 <label for="toState">State</label>
-                                <input type="text" id="toState" placeholder="Destination State">
+                                <input type="text" id="toState" placeholder="Destination State" required>
                             </div>
                             <div class="input-wrapper">
                                 <label for="toCity">City</label>
-                                <input type="text" id="toCity" placeholder="Destination City">
+                                <input type="text" id="toCity" placeholder="Destination City" required>
                             </div>
                         </div>
                         <div class="input-group">
                             <div class="input-wrapper">
                                 <label for="price">Price (₦)</label>
-                                <input type="number" id="price" placeholder="eg 2500" min="0">
+                                <input type="number" id="price" placeholder="eg 2500" min="0" required>
                             </div>
                             <div class="input-wrapper">
                                 <label for="pickupLocation">Pick up location</label>
-                                <input type="text" id="pickupLocation" value="New Garage">
+                                <input type="text" id="pickupLocation" value="New Garage" required>
                             </div>
                         </div>
                         <div class="input-group">
                             <div class="input-wrapper">
                                 <label for="departure">Departure Date</label>
-                                <input type="date" id="departureDate">
+                                <input type="date" id="departureDate" required>
                             </div>
                             <div class="input-wrapper">
                                 <label for="departure">Departure Time</label>
-                                <input type="time" id="departureTime">
+                                <input type="time" id="departureTime" required>
                             </div>
                         </div>
                         <div class="payment-information">
                             <p>Please note that RideMyWay does not handle payments for rides.</p>
                         </div>
                         <div class="btn-wrapper">
-                            <button type="submit" class="form-btn" id="submit">Create ride offer</button>
+                            <button type="submit" class="form-btn" id="submit">Create ride offer <i class="fa fa-spinner fa-spin" id="spinner"></i> </button>
                         </div>
                     </form>
                 </div>
@@ -142,5 +143,6 @@
         </footer>
         <script src="statics/js/PageFunctions.js"></script>
         <script src="statics/js/otherPages.js"></script>
+        <script src="statics/js/create.js"></script>
     </body>
 </html>
