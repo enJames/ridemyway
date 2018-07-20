@@ -17,8 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(res => res.json())
                 .then((res) => {
                     const allRidesHook = document.getElementById('allRidesHook');
-
                     let ridesHTML = '<h1>All ride offers</h1>';
+
+                    if (res.data.length === 0) {
+                        ridesHTML += '<p>No ride offers yet</p>';
+
+                        // Append rides to div for viewing
+                        allRidesHook.innerHTML = ridesHTML;
+                        return allRidesHook.innerHTML;
+                    }
+
                     res.data.forEach((ride) => {
                         ridesHTML += `<a class="ride-offer-wrapper" href="ride-offer.html?rideId=${ride.id}">
                             <div class="ride-offer">
