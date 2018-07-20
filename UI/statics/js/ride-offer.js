@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(res => res.json())
                 .then((res) => {
                     const viewRideHook = document.getElementById('viewRideHook');
-                    const { rideDetails } = res.data;
+                    const { rideDetails, driver } = res.data;
 
                     const ridesHTML = `<div class="ride-offer-wrapper">
                         <div class="ride-offer">
@@ -50,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <span>Driver</span>
                                 </div>
                                 <div class="item-details">
-                                    <span>${res.data.driver}</span>
+                                    <a href="profile.html?driver=${driver.id}"
+                                        <span>${driver.firstname} ${driver.firstname}</span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="offer-item-wrapper">
