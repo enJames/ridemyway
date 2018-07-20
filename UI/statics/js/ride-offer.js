@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const rideId = window.location.search.substr(1).split('=')[1];
             const getRideUrl = `https://enjames-ridemyway.herokuapp.com/api/v1/rides/${rideId}`;
 
-            fetch(getRideUrl);
+            fetch(getRideUrl)
                 .then(res => res.json())
                 .then((res) => {
                     const viewRideHook = document.getElementById('viewRideHook');
