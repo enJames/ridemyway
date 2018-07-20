@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // if user is not logged in
             const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/users/rides';
 
+            // Submit button
+            const submit = document.getElementById('submit');
+
             submit.addEventListener('click', (e) => {
                 e.preventDefault();
 
@@ -27,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const pickupLocation = document.getElementById('pickupLocation').value;
                 const departureDate = document.getElementById('departureDate').value;
                 const departureTime = document.getElementById('departureTime').value;
-                const submit = document.getElementById('submit');
 
                 // message and spinner
                 // const messageEl = document.getElementById('message');
