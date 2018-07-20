@@ -16,11 +16,7 @@ const {
 } = FormValidation;
 
 const {
-    createRideOffer,
-    updateRideOffer,
-    acceptRejectRideRequest,
-    deleteRideOffer,
-    getAllJoinRequests,
+    dashboard,
     createUser,
     loginUser,
     logOutUser
@@ -29,7 +25,12 @@ const {
 const {
     getAllRideOffers,
     getARideOffer,
-    joinRide
+    joinRide,
+    createRideOffer,
+    updateRideOffer,
+    acceptRejectRideRequest,
+    deleteRideOffer,
+    getAllJoinRequests,
 } = ridesController;
 
 // Rides routes
@@ -43,6 +44,12 @@ routes.get('/rides/:rideId', checkParams, getARideOffer);
 routes.post('/rides/:rideId/requests', checkParams, verifyUser, joinRide);
 
 // User routes
+// Create ride offer
+routes.get(
+    '/users/dashboard',
+    verifyUser,
+    dashboard
+);
 // Create ride offer
 routes.post(
     '/users/rides',
