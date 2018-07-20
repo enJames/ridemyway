@@ -1,10 +1,4 @@
 import connectionPool from './connectionPool';
-import seedData from './seedData';
-
-const {
-    user, rideOffer, joinRide
-} = seedData;
-
 
 const Models = () => {
     // Create Users Table
@@ -21,9 +15,7 @@ const Models = () => {
         "imgUrl" VARCHAR,
         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
-        .then(() => {
-            user();
-            connectionPool.query(`CREATE TABLE IF NOT EXISTS "RideOffers" (
+        .then(() => connectionPool.query(`CREATE TABLE IF NOT EXISTS "RideOffers" (
                 "id" SERIAL PRIMARY KEY,
                 "fromState" VARCHAR NOT NULL,
                 "fromCity" VARCHAR NOT NULL,
@@ -37,19 +29,13 @@ const Models = () => {
                 "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
                 "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
-                .then(() => {
-                    rideOffer();
-                    // Create JoinRide Table
-                    connectionPool.query(`CREATE TABLE IF NOT EXISTS "JoinRide" (
+            .then(() => connectionPool.query(`CREATE TABLE IF NOT EXISTS "JoinRide" (
                         id SERIAL PRIMARY KEY,
                         "rideId" INTEGER REFERENCES "RideOffers" (id) ON DELETE CASCADE,
                         "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
                         status VARCHAR NOT NULL,
                         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                        "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
-                        .then(() => joinRide());
-                });
-        });
+                        "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)));
 };
 
 export default Models;

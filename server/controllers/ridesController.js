@@ -5,7 +5,12 @@ const { sendResponse } = Reusables;
 
 const ridesController = {
     getAllRideOffers: (req, res) => connectionPool.query('SELECT * FROM "RideOffers"')
-        .then(rideData => sendResponse(res, 200, 'success', 'all ride offers', rideData.rows))
+        .then((rideData) => {
+            if (!rideData.rows.length === 0) {
+                return sendResponse(res, 404, 'fail', 'No ride offers yet');
+            }
+            return sendResponse(res, 200, 'success', 'all ride offers', rideData.rows);
+        })
         .catch(error => sendResponse(res, 500, 'error', 'connection error while fetching rides', error)),
     getARideOffer: (req, res) => {
         const { rideId } = req.params;
