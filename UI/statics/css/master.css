@@ -32,11 +32,11 @@ html,body {
 }
 #message {
     position: fixed;
-    top: 20vh;
+    top: 10vh;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    margin: 0;
+    margin: 0 auto;
     padding: 10px 15px;
     font-size: 14px;
     text-align: center;
@@ -544,5 +544,8 @@ footer h3 {
         -o-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -ms-box-sizing: border-box;
+    }
+    #message {
+        width: 96%;
     }
 }
