@@ -10,12 +10,24 @@ const ridesController = {
     getARideOffer: (req, res) => {
         const { rideId } = req.params;
         // Search for the ride
-        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "id" = ${rideId}`)
+        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "id" = '${rideId}'`)
             .then((rideData) => {
-                if (!rideData.rows[0]) {
+                const rideDetails = rideData.rows[0];
+
+                // If ride does not
+                if (!rideDetails) {
                     return sendResponse(res, 404, 'fail', 'ride does not exist');
                 }
-                return sendResponse(res, 200, 'success', 'Ride found', rideData.rows[0]);
+
+                connectionPool.query(`SELECT * FROM "Users" WHERE "id"='${rideDetails.userId}'`)
+                    .then((userData) => {
+                        const responseObject = {
+                            rideDetails,
+                            userData
+                        };
+
+                        return sendResponse(res, 200, 'success', 'Ride found', responseObject);
+                    });
             })
             .catch(error => sendResponse(res, 500, 'error', 'connection error while fetching ride', error));
     },
