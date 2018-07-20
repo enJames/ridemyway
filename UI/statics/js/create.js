@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // if user is not logged in
-            const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/auth/signup';
+            const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/users/rides';
 
             submit.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -60,10 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(url, fetchDataObject)
                     .then(res => res.json())
                     .then((res) => {
-                        if (res.status === 'success') {
-                            PageFunctions.showMessage(res.status, res.message);
-                            return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
-                        }
                         return PageFunctions.showMessage(res.status, res.message);
                     })
                     .catch(error => PageFunctions.showMessage(res.status, res.message));
