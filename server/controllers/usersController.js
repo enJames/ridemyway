@@ -8,186 +8,6 @@ dotenv.config();
 const { sendResponse } = Reusables;
 
 const usersController = {
-    createRideOffer: (req, res) => {
-        const { userId } = req.authData;
-        const {
-            fromState,
-            fromCity,
-            toState,
-            toCity,
-            price,
-            seats,
-            departureDate,
-            departureTime,
-            pickupLocation
-        } = req.body;
-        // Get userId from jwt
-        // Persist users data to database
-        connectionPool.query(`INSERT INTO "RideOffers" (
-            "fromState",
-            "fromCity",
-            "toState",
-            "toCity",
-            "price",
-            "seats",
-            "departureDate",
-            "departureTime",
-            "pickupLocation",
-            "userId"
-        ) VALUES (
-            '${fromState}',
-            '${fromCity}',
-            '${toState}',
-            '${toCity}',
-            '${price}',
-            '${seats}',
-            '${departureDate}',
-            '${departureTime}',
-            '${pickupLocation}',
-            '${userId}'
-        )`)
-            .then(() => sendResponse(res, 201, 'success', 'ride offer created'))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to sign you up', error));
-    },
-    getAllJoinRequests: (req, res) => {
-        const { rideId } = req.params;
-        // Search for the ride
-        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "id" = ${rideId}`)
-            .then((rideData) => {
-                const rideOffer = rideData.rows[0];
-
-                // Search for the Users that requested to join the ride
-                connectionPool.query(
-                    `SELECT "firstname", "lastname", "phone", "imgUrl"
-                        FROM "JoinRide"
-                        JOIN "RideOffers" ON "JoinRide"."rideId" = "RideOffers"."id"
-                        JOIN "Users" ON "JoinRide"."userId" = "Users"."id"
-                        WHERE "RideOffers"."id" = ${rideId}`
-                )
-                    .then((usersData) => {
-                        const requestedUsers = usersData.rows;
-
-                        if (requestedUsers.length === 0) {
-                            return sendResponse(res, 404, 'fail', 'No requests for this ride yet');
-                        }
-
-                        // Ride offer and requested users
-                        const result = {
-                            rideOffer,
-                            requestedUsers
-                        };
-                        return sendResponse(res, 200, 'success', `found ${requestedUsers.length} requests`, result);
-                    })
-                    .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
-            })
-            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
-    },
-    acceptRejectRideRequest: (req, res) => {
-        const { rideId, requestId } = req.params;
-        const { action } = req.body;
-
-        if (action !== 'accept' && action !== 'decline') {
-            return sendResponse(res, 400, 'fail', 'action must be explicitly stated as either "accept" or "decline"');
-        }
-
-        connectionPool.query(
-            `SELECT * FROM "JoinRide" WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
-        )
-            .then((requestData) => {
-                const request = requestData.rows[0];
-                if (!request) {
-                    return sendResponse(res, 404, 'fail', 'request does not exist');
-                }
-
-                if (request.status === 'pending') {
-                    if (action === 'accept') {
-                        connectionPool.query(
-                            `UPDATE "JoinRide"
-                            SET "status" = 'accepted'
-                            WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
-                        )
-                            .then(() => sendResponse(res, 200, 'success', 'accepted ride request successfully'));
-                    }
-                    if (action === 'decline') {
-                        connectionPool.query(
-                            `UPDATE "JoinRide" SET "status" = 'declined'
-                            WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
-                        )
-                            .then(() => sendResponse(res, 200, 'success', 'declined ride request successfully'));
-                    }
-
-                    return sendResponse(res, 404, 'fail', 'request not understood');
-                }
-
-                if (request.status === 'accept') {
-                    if (action === 'accept') {
-                        return sendResponse(res, 400, 'fail', 'You already accepted this request');
-                    }
-                    if (action === 'decline') {
-                        connectionPool.query(
-                            `UPDATE "JoinRide" SET "status" = 'declined'
-                            WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
-                        )
-                            .then(() => sendResponse(res, 200, 'success', 'declined ride request successfully'));
-                    }
-                    return sendResponse(res, 400, 'fail', 'request not understood');
-                }
-
-                // if request.status is decline
-                if (action === 'accept') {
-                    connectionPool.query(
-                        `UPDATE "JoinRide"
-                        SET "status" = 'accepted'
-                        WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
-                    )
-                        .then(() => sendResponse(res, 200, 'success', 'accepted ride request successfully'));
-                }
-                if (action === 'decline') {
-                    return sendResponse(res, 400, 'fail', 'you already declined request');
-                }
-            });
-    },
-    updateRideOffer: (req, res) => {
-        const { rideId } = req.params;
-        const { userId } = req.authData;
-
-        const {
-            fromState,
-            fromCity,
-            toState,
-            toCity,
-            price,
-            departureDate,
-            departureTime,
-            pickupLocation
-        } = req.body;
-
-        connectionPool.query(
-            `UPDATE "RideOffers" SET
-                "fromState"='${fromState}',
-                "fromCity"='${fromCity}',
-                "toState"='${toState}',
-                "toCity"='${toCity}',
-                "price"='${price}',
-                "departureDate"='${departureDate}',
-                "departureTime"='${departureTime}',
-                "pickupLocation"='${pickupLocation}'
-            WHERE "id" = '${rideId}' AND "userId" = '${userId}' RETURNING *`
-        )
-            .then(() => sendResponse(res, 200, 'success', 'ride offer updated'))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to update ride offer', error));
-    },
-    deleteRideOffer: (req, res) => {
-        const { rideId } = req.params;
-        const { userId } = req.authData;
-
-        connectionPool.query(
-            `DELETE FROM "RideOffers" WHERE "id" = '${rideId}'
-            AND "userId" = '${userId}'`
-        )
-            .then(() => sendResponse(res, 200, 'success', 'ride offer deleted'))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to delete ride offer', error));
-    },
     createUser: (req, res) => {
         const { firstname, email, password } = req.body;
 
@@ -266,6 +86,40 @@ const usersController = {
                         return sendResponse(res, 200, 'success', 'account logged in');
                     });
             });
+    },
+    dashboard: (req, res) => {
+        const { userId } = req.authData;
+        const responseObject = {};
+
+        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "userId" = '${userId}'`)
+            .then((rideData) => {
+                const runningOffer = rideData.rows[0];
+
+                if (!runningOffer) {
+                    responseObject.runningOffer = 'You currently do not have any running ride offer.';
+                } else {
+                    responseObject.runningOffer = runningOffer;
+                }
+
+                connectionPool.query(
+                    `SELECT "fromState", "toState", "departureDate", "departureTime" FROM "RideOffers"
+                    JOIN "JoinRide" ON "RideOffers"."id" = "JoinRide"."rideId"
+                    WHERE "JoinRide"."userId" = ${userId}`
+                )
+                    .then((joinRideData) => {
+                        const runningJoinRequest = joinRideData.rows[0];
+
+                        if (!runningJoinRequest) {
+                            responseObject.runningJoinRequest = 'You currently do not have any join ride request.';
+                        } else {
+                            responseObject.runningJoinRequest = runningJoinRequest;
+                        }
+
+                        return sendResponse(res, 200, 'success', 'fetched dashboard details', responseObject);
+                    })
+                    .catch(error => sendResponse(res, 500, 'fail', 'Error fetching join request', error.details));
+            })
+            .catch(error => sendResponse(res, 500, 'fail', 'Error fetching ride offer details', error.details));
     },
     logOutUser: (req, res) => {
         // If logged in, redirect to dashboard
