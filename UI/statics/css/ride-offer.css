@@ -60,7 +60,8 @@ body {
 }
 .item-details a {
     text-decoration: none;
-    color: rgb(0,30,80);
+    font-weight: bold;
+    color: rgb(14,113,198);
 }
 
 /* --------- Ride info responses page -------- */
