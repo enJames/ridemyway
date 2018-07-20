@@ -21,9 +21,11 @@ const ridesController = {
 
                 connectionPool.query(`SELECT * FROM "Users" WHERE "id"='${rideDetails.userId}'`)
                     .then((userData) => {
+                        const user = userData.rows[0];
+
                         const responseObject = {
                             rideDetails,
-                            userData
+                            user
                         };
 
                         return sendResponse(res, 200, 'success', 'Ride found', responseObject);
