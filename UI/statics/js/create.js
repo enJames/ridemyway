@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const toState = document.getElementById('toState').value;
                 const toCity = document.getElementById('toCity').value;
                 const price = document.getElementById('price').value;
+                const seats = document.getElementById('seats').value;
                 const pickupLocation = document.getElementById('pickupLocation').value;
                 const departureDate = document.getElementById('departureDate').value;
                 const departureTime = document.getElementById('departureTime').value;
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     toState,
                     toCity,
                     price,
+                    seats,
                     pickupLocation,
                     departureDate,
                     departureTime
