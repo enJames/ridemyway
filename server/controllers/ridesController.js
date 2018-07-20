@@ -23,11 +23,11 @@ const ridesController = {
                     `SELECT "id", "firstname", "lastname" FROM "Users" WHERE "id"='${rideDetails.userId}'`
                 )
                     .then((userData) => {
-                        const user = userData.rows[0];
+                        const driver = userData.rows[0];
 
                         const responseObject = {
                             rideDetails,
-                            user
+                            driver
                         };
 
                         return sendResponse(res, 200, 'success', 'Ride found', responseObject);
