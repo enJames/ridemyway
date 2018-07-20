@@ -19,7 +19,9 @@ const ridesController = {
                     return sendResponse(res, 404, 'fail', 'ride does not exist');
                 }
 
-                connectionPool.query(`SELECT * FROM "Users" WHERE "id"='${rideDetails.userId}'`)
+                connectionPool.query(
+                    `SELECT "id", "firstname", "lastname" FROM "Users" WHERE "id"='${rideDetails.userId}'`
+                )
                     .then((userData) => {
                         const user = userData.rows[0];
 
