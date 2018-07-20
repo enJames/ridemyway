@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let ridesHTML = '<h1>All ride offers</h1>';
 
                     if (res.data.length === 0) {
-                        ridesHTML += '<p>No ride offers yet</p>';
+                        ridesHTML += '<p class="text-center">No ride offers yet</p>';
 
                         // Append rides to div for viewing
                         allRidesHook.innerHTML = ridesHTML;
