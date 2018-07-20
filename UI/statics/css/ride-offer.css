@@ -58,6 +58,10 @@ body {
     text-align: center;
     font-weight: bold;
 }
+.item-details a {
+    text-decoration: none;
+    color: rgb(0,30,80);
+}
 
 /* --------- Ride info responses page -------- */
 .ride-info {
