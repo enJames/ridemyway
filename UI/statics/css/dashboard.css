@@ -90,6 +90,7 @@ body {
 .no-running {
     font-style: italic;
     font-size: 15px;
+    margin: 0;
     padding: 15px;
     box-sizing: border-box;
 }
