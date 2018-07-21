@@ -14,13 +14,6 @@ body {
 .indicators {
     padding-top: 30px;
 }
-.indicators a {
-    text-decoration: none;
-    color: black;
-}
-.indicators a:hover {
-    background-color: rgba(0,30,80,.5);
-}
 
 .currently-running {
     width: 100%;
