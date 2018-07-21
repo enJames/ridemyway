@@ -1,4 +1,4 @@
-const PageFunctions = {
+''const PageFunctions = {
     changeNavigation: (resStatus, currentPage) => {
         const navigationId = document.getElementById('navigationId');
 
@@ -130,5 +130,39 @@ const PageFunctions = {
                 })
                 .catch(error => PageFunctions.showMessage(res.status, res.message));
         }, false);
+    },
+    dateToWords: (dateToConvert) => {
+        const monthsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        const dateArray = dateToConvert.split('T')[0].split('-');
+        const [year, month, day] = dateArray;
+
+        const dateInWords = `${monthsArray[month - 1]} ${day}, ${year}`;
+
+        return dateInWords;
+    },
+    to12hrFormat: (timeToConvert) => {
+        let amOrpm;
+        let hour;
+        const timeArray = timeToConvert.split(':');
+        const [splittedHour, minute] = timeArray;
+
+        if (splittedHour === '00') {
+            hour = '12';
+            amOrpm = 'AM';
+        } else if (splittedHour === '12') {
+            hour = splittedHour;
+            amOrpm = 'PM';
+        } else if (splittedHour > '12') {
+            hour = splittedHour - 12;
+            amOrpm = 'PM';
+        } else {
+            hour = splittedHour
+            amOrpm = 'AM'
+        }
+
+        const timeIn12hrFormat = `${hour}: ${minute} ${amOrpm}`;
+
+        return timeIn12hrFormat;
     }
 };

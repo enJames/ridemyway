@@ -1,0 +1,39 @@
+#message {
+    position: fixed;
+    top: 10vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    margin: 0 auto;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+    opacity: 0;
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+}
+#spinner {
+    position: absolute;
+    right: 15px;
+    font-size: 22px;
+    opacity: 0;
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+}
+.loading {
+    width: 100%;
+    padding: 30vh 0;
+    color: rgb(0,30,80);
+    text-align: center;
+}
+.loading .fa {
+    font-size: 100px;
+}

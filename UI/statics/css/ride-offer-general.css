@@ -30,8 +30,13 @@
     display: flex;
     width: 70%;
     margin: auto auto 50px;
-    border-radius: 5px 0 0 5px;
-    box-shadow: 1px 1px 10px -1px rgba(0,0,0,.3);
+    border-radius: 5px;
+    box-shadow: 2px 2px 15px 0px rgba(0,0,0,.3);
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -133,5 +138,20 @@
     .offer-item, .item-details {
         width: 100%;
         text-align: center;
+    }
+    .ride-type {
+        width: 40px;
+    }
+    .ride-type i {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .ride-type {
+        width: 20px;
+    }
+    .ride-type i {
+        margin-left: 15px;
     }
 }
