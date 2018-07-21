@@ -13,6 +13,7 @@ const Models = () => {
         "city" VARCHAR,
         "state" VARCHAR,
         "imgUrl" VARCHAR,
+        "completeness" VARCHAR NOT NULL,
         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
         .then(() => connectionPool.query(`CREATE TABLE IF NOT EXISTS "RideOffers" (
