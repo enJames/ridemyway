@@ -1,4 +1,4 @@
-''const PageFunctions = {
+const PageFunctions = {
     changeNavigation: (resStatus, currentPage) => {
         const navigationId = document.getElementById('navigationId');
 
