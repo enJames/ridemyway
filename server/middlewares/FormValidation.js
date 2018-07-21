@@ -7,38 +7,38 @@ const numberRegex = /^[0-9]+$/;
 
 const FormValidation = {
     validateSignupForm: (req, res, next) => {
+        if (!req.body.firstname || !req.body.firstname.trim()) {
+            return sendResponse(res, 400, 'fail', 'firstname is required');
+        }
+        if (!req.body.email || !req.body.email.trim()) {
+            return sendResponse(res, 400, 'fail', 'email is required');
+        }
+        if (!emailRegex.test(req.body.email)) {
+            return sendResponse(res, 400, 'fail', 'invalid email address');
+        }
         if (!req.body.password || !req.body.password.trim()) {
             return sendResponse(res, 400, 'fail', 'password is required');
         }
         if (req.body.password !== req.body.confirmPassword) {
             return sendResponse(res, 400, 'fail', 'passwords do not match');
         }
+
+        return next();
+    },
+    validateLoginForm: (req, res, next) => {
         if (!req.body.email || !req.body.email.trim()) {
             return sendResponse(res, 400, 'fail', 'email is required');
         }
         if (!emailRegex.test(req.body.email)) {
             return sendResponse(res, 400, 'fail', 'invalid email address');
         }
-        if (!req.body.firstname || !req.body.firstname.trim()) {
-            return sendResponse(res, 400, 'fail', 'firstname is required');
-        }
-
-        return next();
-    },
-    ValidateLoginForm: (req, res, next) => {
         if (!req.body.password || !req.body.password.trim()) {
             return sendResponse(res, 400, 'fail', 'password is required');
         }
-        if (!req.body.email || !req.body.email.trim()) {
-            return sendResponse(res, 400, 'fail', 'email is required');
-        }
-        if (!emailRegex.test(req.body.email)) {
-            return sendResponse(res, 400, 'fail', 'invalid email address');
-        }
 
         return next();
     },
-    ValidateCreateOfferForm: (req, res, next) => {
+    validateCreateOfferForm: (req, res, next) => {
         if (!req.body.fromState || !req.body.fromState.trim()) {
             return sendResponse(res, 400, 'fail', 'current state is required');
         }
@@ -65,26 +65,19 @@ const FormValidation = {
         }
 
         return next();
-    }
-    /*
-    profileUpdate: (req, res, next) => {
-        if (!req.body.password || !req.body.password.trim()) {
-            return sendResponse(res, 400, 'fail', 'password is required');
-        }
-
-        if (!req.body.email || !req.body.email.trim()) {
-            return sendResponse(res, 400, 'fail', 'email is required');
-        }
-
-        if (!emailRegex.test(req.body.email)) {
-            return sendResponse(res, 400, 'fail', 'invalid email address');
-        }
-
+    },
+    validateEditProfileForm: (req, res, next) => {
         if (!req.body.firstname || !req.body.firstname.trim()) {
             return sendResponse(res, 400, 'fail', 'firstname is required');
         }
         if (!req.body.lastname || !req.body.lastname.trim()) {
             return sendResponse(res, 400, 'fail', 'lastname is required');
+        }
+        if (!req.body.email || !req.body.email.trim()) {
+            return sendResponse(res, 400, 'fail', 'email is required');
+        }
+        if (!emailRegex.test(req.body.email)) {
+            return sendResponse(res, 400, 'fail', 'invalid email address');
         }
         if (!req.body.gender || !req.body.gender.trim()) {
             return sendResponse(res, 400, 'fail', 'gender is required');
@@ -101,8 +94,8 @@ const FormValidation = {
         if (!req.body.state || !req.body.state.trim()) {
             return sendResponse(res, 400, 'fail', 'state is required');
         }
-        return next();req.body.
-    } */
+        return next();
+    }
 };
 
 export default FormValidation;
