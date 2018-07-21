@@ -8,7 +8,7 @@
     text-decoration: none;
 }
 .view-offer a:hover {
-    background-color: rgba(180,180,180,.01);
+    box-shadow: 1px 1px 10px -4px rgba(0,0,0,.3);
 }
 .view-offer h1 {
     text-align: center;

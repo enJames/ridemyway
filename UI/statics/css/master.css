@@ -30,45 +30,7 @@ html,body {
     padding: 10px;
     text-align: center;
 }
-#message {
-    position: fixed;
-    top: 10vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    margin: 0 auto;
-    padding: 10px 15px;
-    font-size: 14px;
-    color: white;
-    text-align: center;
-    border-radius: 3px;
-    opacity: 0;
-    transition: .5s ease-in-out;
-    -webkit-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    -ms-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-}
-#spinner {
-    position: absolute;
-    right: 15px;
-    font-size: 22px;
-    opacity: 0;
-    transition: .5s ease-in-out;
-    -webkit-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    -ms-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-}
-.loading {
-    width: 100%;
-    padding: 30vh 0;
-    color: rgb(0,30,80);
-    text-align: center;
-}
-.loading .fa {
-    font-size: 100px;
-}
+
 /* ---------Navigation-----------*/
 .navigation-bar {
     display: flex;
@@ -216,7 +178,7 @@ html,body {
     margin: auto;
 }
 .user-nav-wrapper .dash-icon {
-    margin-right: 35px;
+    margin-left: 30px;
 }
 .user-wrapper {
     position: relative;
@@ -281,8 +243,7 @@ html,body {
     border-bottom: 1px solid rgba(180,180,180,.4);
 }
 .dropdown-li a:hover {
-    background-color: white;
-    color: rgb(0,30,80);
+    background-color: rgb(14,113,198);
 }
 
 /* ---------- Banner and background tints ---------- */
@@ -427,17 +388,10 @@ html,body {
 .btn-container {
     width: 200px;
     margin: auto auto 50px;
-    padding: 10px;
     background-color: rgb(14,113,191);
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
     -moz-transition: all .4s ease-in-out;
@@ -447,9 +401,17 @@ html,body {
     background-color: rgba(14,113,191,.6);
 }
 .btn-container a {
+    display: block;
     width: 100%;
+    padding: 10px;
     color: white;
     text-decoration: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    transition: all .4s ease-in-out;
 }
 
 /* --------Footer Information-------- */
@@ -524,9 +486,6 @@ footer h3 {
         border: none;
         background: none;
         color: red;
-    }
-    .user-nav-wrapper .dash-icon {
-        margin-right: 25px;
     }
     .input-group {
         flex-direction: column;
