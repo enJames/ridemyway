@@ -17,10 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const { runningOffer, runningJoinRequest } = res.data;
                 const rideSummary = document.getElementById('rideSummary');
                 const rideBooking = document.getElementById('rideBooking');
-
-                const departureDate = PageFunctions.dateToWords(runningOffer.departureDate);
-                const departureTime = PageFunctions.to12hrFormat(runningOffer.departureTime);
-
                 let runningOfferHTML = '';
                 let runningJoinRequestHTML = '';
 
