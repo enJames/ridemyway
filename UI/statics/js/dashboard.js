@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p>Departure Time: <span>${PageFunctions.to12hrFormat(runningOffer.departureTime)}</span></p>
                     </div>
                     <div class="btn-container">
-                        <a href="responses.html">See details</a>
+                        <a href="responses.html?rideId=${runningOffer.rideId}">See details</a>
                     </div>`
                 } else {
                     runningOfferHTML = runningOffer;
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p>Departure Time: <span>${PageFunctions.to12hrFormat(runningJoinRequest.departureTime)}</span></p>
                     </div>
                     <div class="btn-container">
-                        <a href="responses.html">See details</a>
+                        <a href="ride-offer.html?rideId=${runningJoinRequest.id}">See details</a>
                     </div>`
                 } else {
                     runningJoinRequestHTML = runningJoinRequest;
