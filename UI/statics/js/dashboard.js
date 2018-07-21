@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="departure">
                         <p>Departure Date: <span>${PageFunctions.dateToWords(runningOffer.departureDate)}</span></p>
-                        <p>Departure Time: <span>${PageFunctions.dateToWords(runningOffer.departureTime)}</span></p>
+                        <p>Departure Time: <span>${PageFunctions.to12to12hrFormat(runningOffer.departureTime)}</span></p>
                     </div>
                     <div class="btn-container">
                         <a href="responses.html">See details</a>
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="departure">
                         <p>Departure Date: <span>${PageFunctions.dateToWords(runningJoinRequest.departureDate)}</span></p>
-                        <p>Departure Time: <span>${PageFunctions.dateToWords(runningJoinRequest.departureTime)}</span></p>
+                        <p>Departure Time: <span>${PageFunctions.to12to12hrFormat(runningJoinRequest.departureTime)}</span></p>
                     </div>
                     <div class="btn-container">
                         <a href="responses.html">See details</a>
