@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 rideSummary.innerHTML = runningOfferHTML;
                 rideBooking.innerHTML = runningJoinRequestHTML;
 
-                return { rideSummary.innerHTML, rideBooking.innerHTML };
+                return { rideSummary: rideSummary.innerHTML, rideBooking: rideBooking.innerHTML };
+            }
         })
         .catch((err) => console.error('There was a problem', err));
 }, false);
