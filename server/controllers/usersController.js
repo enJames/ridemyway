@@ -121,6 +121,23 @@ const usersController = {
             })
             .catch(error => sendResponse(res, 500, 'fail', 'Error fetching ride offer details', error.details));
     },
+    sendUserProfile: (req, res) => {
+        const userId = req.authData;
+
+        connectionPool.query(
+            `SELECT "firstname", "lastname", "email", "gender", "phone", "city", "state", "imgUrl", "completeness"
+            WHERE "id" = ${userId}`
+        )
+            .then((userData) => {
+                const user = userData.rows[0];
+
+                if (!user) {
+                    return sendResponse(res, 404, 'fail', 'User does not exist');
+                }
+
+                return sendResponse(res, 200, 'success', 'User found', user);
+            });
+    },
     logOutUser: (req, res) => {
         // If logged in, redirect to dashboard
         if (!req.cookies.token) {

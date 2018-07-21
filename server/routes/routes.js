@@ -16,9 +16,10 @@ const {
 } = FormValidation;
 
 const {
-    dashboard,
     createUser,
     loginUser,
+    dashboard,
+    sendUserProfile,
     logOutUser
 } = usersController;
 
@@ -92,6 +93,13 @@ routes.put(
     verifyUser,
     authorizeAction,
     acceptRejectRideRequest
+);
+
+// User's profile
+routes.put(
+    '/users/profile',
+    verifyUser,
+    sendUserProfile
 );
 
 routes.get('/auth/check', checkUserIsLoggedIn);
