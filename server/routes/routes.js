@@ -12,7 +12,10 @@ const {
 } = Protect;
 
 const {
-    validateSignupForm, ValidateLoginForm, ValidateCreateOfferForm
+    validateSignupForm,
+    validateLoginForm,
+    validateCreateOfferForm,
+    validateEditProfileForm
 } = FormValidation;
 
 const {
@@ -20,6 +23,7 @@ const {
     loginUser,
     dashboard,
     sendUserProfile,
+    editUserProfile,
     logOutUser
 } = usersController;
 
@@ -55,7 +59,7 @@ routes.get(
 routes.post(
     '/users/rides',
     verifyUser,
-    ValidateCreateOfferForm,
+    validateCreateOfferForm,
     createRideOffer
 );
 
@@ -95,17 +99,21 @@ routes.put(
     acceptRejectRideRequest
 );
 
-// User's profile
+// Send user's profile
+routes.get('/users/profile', verifyUser, sendUserProfile);
+
+// Edit user's profile
 routes.put(
-    '/users/profile',
+    '/users/profile/edit',
     verifyUser,
-    sendUserProfile
+    validateEditProfileForm,
+    editUserProfile,
 );
 
 routes.get('/auth/check', checkUserIsLoggedIn);
 
 routes.post('/auth/signup', validateSignupForm, createUser);
-routes.post('/auth/login', ValidateLoginForm, loginUser);
+routes.post('/auth/login', validateLoginForm, loginUser);
 routes.post('/auth/logout', logOutUser);
 
 

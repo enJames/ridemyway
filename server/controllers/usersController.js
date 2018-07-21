@@ -138,6 +138,27 @@ const usersController = {
                 return sendResponse(res, 200, 'success', 'User found', user);
             });
     },
+    editUserProfile: (req, res) => {
+        const userId = req.authData;
+        const {
+            firstname, lastname, email, gender, phone, city, state
+        } = req.body;
+
+        connectionPool.query(
+            `UPDATE "Users"
+            SET
+                "firstname" = '${firstname}',
+                "lastname" = '${lastname}',
+                "email" = '${email}',
+                "gender" = '${gender}',
+                "phone" = '${phone}',
+                "city" = '${city}',
+                "state" = '${state}',
+                "completeness" = '88%'
+            WHERE "id" = ${userId}`
+        )
+            .then(() => sendResponse(res, 200, 'success', 'Profile updated'));
+    },
     logOutUser: (req, res) => {
         // If logged in, redirect to dashboard
         if (!req.cookies.token) {
