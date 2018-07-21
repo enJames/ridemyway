@@ -87,6 +87,7 @@ const ridesController = {
     },
     createRideOffer: (req, res) => {
         const { userId } = req.authData;
+
         const {
             fromState,
             fromCity,
@@ -98,33 +99,49 @@ const ridesController = {
             departureTime,
             pickupLocation
         } = req.body;
-        // Get userId from jwt
-        // Persist users data to database
-        connectionPool.query(`INSERT INTO "RideOffers" (
-            "fromState",
-            "fromCity",
-            "toState",
-            "toCity",
-            "price",
-            "seats",
-            "departureDate",
-            "departureTime",
-            "pickupLocation",
-            "userId"
-        ) VALUES (
-            '${fromState}',
-            '${fromCity}',
-            '${toState}',
-            '${toCity}',
-            '${price}',
-            '${seats}',
-            '${departureDate}',
-            '${departureTime}',
-            '${pickupLocation}',
-            '${userId}'
-        )`)
-            .then(() => sendResponse(res, 201, 'success', 'ride offer created'))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to sign you up', error));
+
+        const today = new Date();
+        const tomorrow = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate() + 1}`;
+
+        if (!departureDate >= tomorrow) {
+            return sendResponse(res, 405, 'fail', 'Departure date is too sudden. Consider changing to a later date');
+        }
+
+        // check that user has no pending ride offer
+        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "userId" = ${userId} AND "departureDate" >= NOW()::date`)
+            .then((rideData) => {
+                if (rideData.rows.length > 0) {
+                    return sendResponse(res, 200, 'fail', 'You still have a pending ride offer');
+                }
+
+                // If no pending ride offer, create ride offer
+                connectionPool.query(
+                    `INSERT INTO "RideOffers" (
+                        "fromState",
+                        "fromCity",
+                        "toState",
+                        "toCity",
+                        "price",
+                        "seats",
+                        "departureDate",
+                        "departureTime",
+                        "pickupLocation",
+                        "userId"
+                    ) VALUES (
+                        '${fromState}',
+                        '${fromCity}',
+                        '${toState}',
+                        '${toCity}',
+                        '${price}',
+                        '${seats}',
+                        '${departureDate}',
+                        '${departureTime}',
+                        '${pickupLocation}',
+                        '${userId}'
+                    )`
+                )
+                    .then(() => sendResponse(res, 201, 'success', 'Ride offer created'));
+            });
     },
     getAllJoinRequests: (req, res) => {
         const { rideId } = req.params;
