@@ -94,6 +94,10 @@ body {
     padding: 15px;
     box-sizing: border-box;
 }
+.no-running a {
+    color: rgb(14,113,198);
+    font-weight: bold;
+}
 .space {
     flex: .3;
 }
