@@ -87,7 +87,10 @@ body {
 .ride-summary .btn-container a {
     color: white;
 }
-
+.no-running {
+    padding: 15px;
+    box-sizing: border-box;
+}
 .space {
     flex: .3;
 }

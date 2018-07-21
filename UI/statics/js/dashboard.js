@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="responses.html?rideId=${runningOffer.rideId}">See details</a>
                     </div>`
                 } else {
-                    runningOfferHTML = runningOffer;
+                    runningOfferHTML = `<p class="no-running">${runningOffer}</p>`;
                 }
 
                 if (typeof(runningJoinRequest) === 'object') {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="ride-offer.html?rideId=${runningJoinRequest.id}">See details</a>
                     </div>`
                 } else {
-                    runningJoinRequestHTML = runningJoinRequest;
+                    runningJoinRequestHTML = `<p class="no-running">${runningJoinRequest}</p>`;
                 }
 
                 // Append to DOM
