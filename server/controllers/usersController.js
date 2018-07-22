@@ -15,8 +15,8 @@ const usersController = {
         bcrypt
             .hash(password, 10)
             .then(hash => connectionPool.query(
-                `INSERT INTO "Users" ("firstname", "email", "password")
-                VALUES ('${firstname}','${email}', '${hash}') RETURNING *`
+                `INSERT INTO "Users" ("firstname", "email", "password", "completeness")
+                VALUES ('${firstname}','${email}', '${hash}', '33%') RETURNING *`
             )
                 .then((userData) => {
                     const user = userData.rows[0];
