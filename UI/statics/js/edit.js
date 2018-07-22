@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 fetch(url, fetchDataObject)
-                    .then(res => res.json())
+                    .then(resp => resp.json())
                     .then((resp) => {
                         PageFunctions.toggleProfileIndicatorText(resp.data.completeness);
                         return PageFunctions.showMessage(resp.status, resp.message);
