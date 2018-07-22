@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             submit.addEventListener('click', (e) => {
                 e.preventDefault();
-
+                alert('hi');
                 const firstname = document.getElementById('firstname').value;
                 const lastname = document.getElementById('lastname').value;
                 const gender = document.getElementById('gender').value;
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     city,
                     state
                 };
-
+                console.log(userData);
                 const fetchDataObject = {
                     method: 'PUT',
                     body: JSON.stringify(userData),
