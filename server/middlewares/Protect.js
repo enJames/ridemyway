@@ -44,8 +44,7 @@ const Protect = {
         if (!decoded) {
             return sendResponse(res, 401, 'fail', 'Not authenticated');
         }
-
-        return sendResponse(res, 200, 'success', 'Authenticated');
+        return sendResponse(res, 200, 'success', 'Authenticated', decoded);
     },
     verifyUser: (req, res, next) => {
         if (req.cookies.token) {
