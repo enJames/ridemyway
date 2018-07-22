@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 const fetchDataObject = {
-                    method: 'POST',
+                    method: 'PUT',
                     body: JSON.stringify(userData),
                     headers: {
                         'Accept': 'application/json',
