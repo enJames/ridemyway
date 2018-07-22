@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
         .then(res => res.json())
         .then((res) => {
+            console.log(res);
             PageFunctions.changeNavigation(res.status, 'all-offers');
 
             if (res.status === 'success') {
