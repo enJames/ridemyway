@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formBody.innerHTML = editFormHTML;
 
                 // Display profile completeness
-                PageFunctions.toggleProfileIndicatorText(res.data.completeness);
+                PageFunctions.toggleProfileIndicatorText(completeness);
 
                 // Update gender
                 const genderInput = document.getElementById('gender');
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(url, fetchDataObject)
                     .then(resp => resp.json())
                     .then((resp) => {
-                        PageFunctions.toggleProfileIndicatorText(resp.data.completeness);
+                        PageFunctions.toggleProfileIndicatorText(completeness);
                         return PageFunctions.showMessage(resp.status, resp.message);
                     })
                     .catch(error => console.error('There was a problem', error));
