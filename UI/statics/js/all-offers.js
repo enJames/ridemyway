@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             fetch('https://enjames-ridemyway.herokuapp.com/api/v1/rides')
-                .then(res => res.json())
-                .then((res) => {
+                .then(resp => res.json())
+                .then((resp) => {
                     const allRidesHook = document.getElementById('allRidesHook');
                     let ridesHTML = '<h1>All ride offers</h1>';
 
-                    if (res.data.length === 0) {
+                    if (resp.data.length === 0) {
                         ridesHTML += '<p class="text-center">No ride offers yet</p>';
 
                         // Append rides to div for viewing
@@ -27,10 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         return allRidesHook.innerHTML;
                     }
 
-                    res.data.forEach((ride) => {
+                    resp.data.forEach((ride) => {
                         const { price } = ride;
                         let thePrice = parseInt(price, 10).toLocaleString();
-                        ridesHTML += `<a class="ride-offer-wrapper" href="ride-offer.html?rideId=${ride.id}">
+                        let location;
+
+                        // Check if ride belongs to logged in user
+                        if (res.data.userId === resp.data.userId) {
+                            location = 'responses.html';
+                        } else {
+                            location = `ride-offer.html?rideId=${ride.id}`
+                        }
+
+                        ridesHTML += `<a class="ride-offer-wrapper" href="${location}">
                             <div class="ride-offer">
                                 <div class="offer-details">
                                     <div class="from">
