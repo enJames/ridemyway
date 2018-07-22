@@ -139,7 +139,7 @@ const usersController = {
             });
     },
     editUserProfile: (req, res) => {
-        const userId = req.authData;
+        const { userId } = req.authData;
         const {
             firstname, lastname, email, gender, phone, city, state
         } = req.body;
