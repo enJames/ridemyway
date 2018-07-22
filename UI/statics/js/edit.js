@@ -75,58 +75,58 @@ document.addEventListener('DOMContentLoaded', () => {
                 formBody.innerHTML = editFormHTML;
 
                 PageFunctions.toggleProfileIndicatorText(res.data.completeness);
-
-                // put request: update user's information
-                const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/users/profile/edit';
-
-                submit.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    const firstname = document.getElementById('firstname').value;
-                    const firstname = document.getElementById('lastname').value;
-                    const firstname = document.getElementById('gender').value;
-                    const email = document.getElementById('email').value;
-                    const phone = document.getElementById('phone').value;
-                    const phone = document.getElementById('city').value;
-                    const phone = document.getElementById('state').value;
-                    const submit = document.getElementById('submit');
-
-                    // message and spinner
-                    const messageEl = document.getElementById('message');
-                    const spinner = document.getElementById('spinner');
-
-                    // Display spinner while systems sends request
-                    spinner.style.opacity = '1';
-
-                    const userData = {
-                        firstname,
-                        lastname,
-                        gender,
-                        email,
-                        phone,
-                        city,
-                        state
-                    };
-
-                    const fetchDataObject = {
-                        method: 'POST',
-                        body: JSON.stringify(userData),
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        credentials: 'include'
-                    }
-
-                    fetch(url, fetchDataObject)
-                        .then(res => res.json())
-                        .then((res) => {
-                            PageFunctions.toggleProfileIndicatorText(res.data.completeness);
-                            return PageFunctions.showMessage(res.status, res.message);
-                        })
-                        .catch(error => PageFunctions.showMessage(res.status, res.message));
-                }, false);
             }
+
+            // put request: update user's information
+            const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/users/profile/edit';
+
+            submit.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const firstname = document.getElementById('firstname').value;
+                const lastname = document.getElementById('lastname').value;
+                const gender = document.getElementById('gender').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const city = document.getElementById('city').value;
+                const state = document.getElementById('state').value;
+                const submit = document.getElementById('submit');
+
+                // message and spinner
+                const messageEl = document.getElementById('message');
+                const spinner = document.getElementById('spinner');
+
+                // Display spinner while systems sends request
+                spinner.style.opacity = '1';
+
+                const userData = {
+                    firstname,
+                    lastname,
+                    gender,
+                    email,
+                    phone,
+                    city,
+                    state
+                };
+
+                const fetchDataObject = {
+                    method: 'POST',
+                    body: JSON.stringify(userData),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                }
+
+                fetch(url, fetchDataObject)
+                    .then(res => res.json())
+                    .then((res) => {
+                        PageFunctions.toggleProfileIndicatorText(res.data.completeness);
+                        return PageFunctions.showMessage(res.status, res.message);
+                    })
+                    .catch(error => PageFunctions.showMessage(res.status, res.message));
+            }, false);
         })
         .catch((err) => console.error('There was a problem', err));
 
