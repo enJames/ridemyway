@@ -58,9 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Append to DOM
                 rideSummary.innerHTML = runningOfferHTML;
                 rideBooking.innerHTML = runningJoinRequestHTML;
-
-                return { rideSummary: rideSummary.innerHTML, rideBooking: rideBooking.innerHTML };
             }
+
+            // Get profile completeness
+            fetch('https://enjames-ridemyway.herokuapp.com/api/v1/users/profile', {
+                method: 'GET',
+                credentials: 'include'
+            })
+                .then(res => res.json())
+                .then((res) => PageFunctions.toggleProfileIndicatorText(res.data.completeness))
         })
         .catch((err) => console.error('There was a problem', err));
 }, false);

@@ -37,3 +37,54 @@
 .loading .fa {
     font-size: 100px;
 }
+.profile-completeness {
+    position: fixed;
+    display: none;
+    opacity: 0;
+    background-color: white;
+    bottom: 30px;
+    right: 20px;
+    width: 75px;
+    padding: 10px;
+    border-radius: 150px;
+    box-shadow: 1px 1px 15px 1px rgba(0,0,0,.4);
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+}
+#description {
+    display: none;
+    text-align: center;
+    vertical-align: middle;
+    transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+}
+#description p {
+    margin: 0;
+}
+#description a {
+    text-decoration: none;
+    color: rgb(14,113,198);
+}
+#profileCompletenessIndicator {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: rgba(100,10,0,.5);
+    width: 55px;
+    margin: auto 0 auto auto;
+    padding: 15px 0;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    border-radius: 2500px;
+}

@@ -83,6 +83,38 @@ const PageFunctions = {
             element.style.display = 'none';
         }
     },
+    toggleProfileIndicatorText: (profileCompleteness) => {
+        if (profileCompleteness !== '100%') {
+            const profileCompletenessDiv = document.getElementsByClassName('profile-completeness')[0];
+            const profileCompletenessIndicator = document.getElementById('profileCompletenessIndicator');
+            const description = document.getElementById('description');
+
+            // display profileCompletenessIndicator
+            profileCompletenessDiv.style.display = 'block';
+            profileCompletenessDiv.style.opacity = '1';
+            profileCompletenessIndicator.innerHTML = profileCompleteness;
+
+            profileCompletenessIndicator.addEventListener('click', () => {
+                if (profileCompletenessDiv.clientWidth < 200) {
+                    profileCompletenessDiv.style.width = '232px';
+
+                    setTimeout(() => {
+                        description.style.display = 'inline-block';
+                        setTimeout(() => {
+                            description.style.opacity = '1';
+                        },50)
+                    },400)
+                } else {
+                    description.style.opacity = '0';
+
+                    setTimeout(() => {
+                        description.style.display = 'none';
+                        profileCompletenessDiv.style.width = '75px';
+                    },400)
+                }
+            },false);
+        }
+    },
     showMessage: (status, message) => {
         // message and spinner
         const messageEl = document.getElementById('message');

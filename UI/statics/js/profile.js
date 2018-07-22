@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Append to DOM
                 profileBody.innerHTML = profileBodyHTML;
 
-                return profileBody.innerHTML;
+                PageFunctions.toggleProfileIndicatorText(res.data.completeness);
             }
         })
         .catch((err) => console.error('There was a problem', err));

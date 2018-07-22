@@ -14,7 +14,6 @@ body {
 .indicators {
     padding-top: 30px;
 }
-
 .currently-running {
     width: 100%;
     margin: auto auto 100px;
@@ -33,6 +32,10 @@ body {
     color: white;
     box-shadow: 1px 1px 5px -1px rgba(0,0,0,.3);
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 .header h3, .sub-header h4 {
     margin: 0;
