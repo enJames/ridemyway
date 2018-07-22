@@ -89,6 +89,11 @@ const PageFunctions = {
             const profileCompletenessIndicator = document.getElementById('profileCompletenessIndicator');
             const description = document.getElementById('description');
 
+            if (profileCompleteness === '33%') {
+                profileCompletenessIndicator.backgroundColor = 'rgb(180,20,0)';
+            } else if (profileCompleteness === '88%') {
+                profileCompletenessIndicator.backgroundColor = 'rgb(120,170,0)';
+            }
             // display profileCompletenessIndicator
             profileCompletenessDiv.style.display = 'block';
             profileCompletenessDiv.style.opacity = '1';
