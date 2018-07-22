@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             fetch('https://enjames-ridemyway.herokuapp.com/api/v1/rides')
-                .then(resp => res.json())
+                .then(resp => resp.json())
                 .then((resp) => {
                     const allRidesHook = document.getElementById('allRidesHook');
                     let ridesHTML = '<h1>All ride offers</h1>';
