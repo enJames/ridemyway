@@ -50,13 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="input-wrapper">
                             <label for="city">City</label>
-                            <input type="text" id="city" value="${${(city)?city:''}}" required>
+                            <input type="text" id="city" value="${(city)?city:''}" required>
                         </div>
                     </div>
                     <div class="input-group">
                         <div class="input-wrapper">
                             <label for="state">State</label>
-                            <input type="text" id="state" value="${${(state)?state:''}}" required>
+                            <input type="text" id="state" value="${(state)?state:''}" required>
                         </div>
                         <div class="input-wrapper">
                             <label for="country">Country</label>
