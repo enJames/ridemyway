@@ -14,52 +14,75 @@ document.addEventListener('DOMContentLoaded', () => {
             PageFunctions.enableLogout();
 
             if (res.status === 'success') {
-                const { runningOffer, runningJoinRequest } = res.data;
-                const rideSummary = document.getElementById('rideSummary');
-                const rideBooking = document.getElementById('rideBooking');
-                let runningOfferHTML = '';
-                let runningJoinRequestHTML = '';
-
-                // Check if an object is returned
-                if (typeof(runningOffer) === 'object') {
-                    runningOfferHTML = `<div class="trip">
-                        <span>${runningOffer.fromState}</span>
-                        <i class="fa fa-long-arrow-right"></i>
-                        <span>${runningOffer.toState}</span>
+                const {
+                    firstname, lastname, email, gender, phone, city, state, imgUrl, completeness
+                } = res.data;
+                const profileBody = document.getElementById('profileBody');
+                const profileBodyHTML = `<div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>First Name</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${firstname}</span>
+                        </div>
                     </div>
-                    <div class="departure">
-                        <p>Departure Date: <span>${PageFunctions.dateToWords(runningOffer.departureDate)}</span></p>
-                        <p>Departure Time: <span>${PageFunctions.to12hrFormat(runningOffer.departureTime)}</span></p>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>Last Name</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(lastname)?lastname:''}</span>
+                        </div>
                     </div>
-                    <div class="btn-container">
-                        <a href="responses.html?rideId=${runningOffer.rideId}">See details</a>
-                    </div>`
-                } else {
-                    runningOfferHTML = `<p class="no-running">${runningOffer}. <a class="no-running-ref" href="create.html">Create a ride</a></p>`;
-                }
-
-                if (typeof(runningJoinRequest) === 'object') {
-                    runningJoinRequestHTML = `<div class="trip">
-                        <span>${runningJoinRequest.fromState}</span>
-                        <i class="fa fa-long-arrow-right"></i>
-                        <span>${runningJoinRequest.toState}</span>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>Gender</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(gender)?lastname:''}</span>
+                        </div>
                     </div>
-                    <div class="departure">
-                        <p>Departure Date: <span>${PageFunctions.dateToWords(runningJoinRequest.departureDate)}</span></p>
-                        <p>Departure Time: <span>${PageFunctions.to12hrFormat(runningJoinRequest.departureTime)}</span></p>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>Email address</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${email}</span>
+                        </div>
                     </div>
-                    <div class="btn-container">
-                        <a href="ride-offer.html?rideId=${runningJoinRequest.id}">See details</a>
-                    </div>`
-                } else {
-                    runningJoinRequestHTML = `<p class="no-running">${runningJoinRequest}. <a class="no-running-ref" href="all-offers.html">Join a ride</a></p>`;
-                }
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>Mobile Number</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(phone)?phone:''}</span>
+                        </div>
+                    </div>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>City</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(city)?city:''}</span>
+                        </div>
+                    </div>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>State</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(state)?state:''}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-container">
+                    <a href="edit.html">Edit</a>
+                </div>`;
 
                 // Append to DOM
-                rideSummary.innerHTML = runningOfferHTML;
-                rideBooking.innerHTML = runningJoinRequestHTML;
+                profileBody.innerHTML = profileBodyHTML;
 
-                return { rideSummary: rideSummary.innerHTML, rideBooking: rideBooking.innerHTML };
+                return profileBody.innerHTML;
             }
         })
         .catch((err) => console.error('There was a problem', err));
