@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="input-group">
                         <div class="input-wrapper">
                             <label for="gender">Gender</label>
-                            <select id="gender" ${(gender)?"disabled":''} required>
+                            <select id="gender" required>
                                 <option value="" hidden>--Select--</option>
                                 <option value="Female">Female</option>
-                                <option value="Male" selected>Male</option>
+                                <option value="Male">Male</option>
                             </select>
                         </div>
                         <div class="input-wrapper">
@@ -46,17 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="input-group">
                         <div class="input-wrapper">
                             <label for="phone">Mobile Number</label>
-                            <input type="tel" id="phone" value="${phone}" required>
+                            <input type="tel" id="phone" value="${(phone)?phone:''}" required>
                         </div>
                         <div class="input-wrapper">
                             <label for="city">City</label>
-                            <input type="text" id="city" value="${city}" required>
+                            <input type="text" id="city" value="${${(city)?city:''}}" required>
                         </div>
                     </div>
                     <div class="input-group">
                         <div class="input-wrapper">
                             <label for="state">State</label>
-                            <input type="text" id="state" value="${state}" required>
+                            <input type="text" id="state" value="${${(state)?state:''}}" required>
                         </div>
                         <div class="input-wrapper">
                             <label for="country">Country</label>
