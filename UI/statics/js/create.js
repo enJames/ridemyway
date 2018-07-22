@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
 
+            console.log(res);
+
             const { firstname, city, state } = res.data[0];
 
             PageFunctions.changeNavigation(res.status, 'create');
