@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         PageFunctions.toggleProfileIndicatorText(resp.data.completeness);
                         return PageFunctions.showMessage(resp.status, resp.message);
                     })
-                    .catch(error => PageFunctions.showMessage(resp.status, resp.message));
+                    .catch(error => console.error('There was a problem', error));
             }, false);
         })
         .catch((err) => console.error('There was a problem', err));
