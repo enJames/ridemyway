@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>Gender</span>
                         </div>
                         <div class="item-details">
-                            <span>${(gender)?lastname:''}</span>
+                            <span>${(gender)?gender:''}</span>
                         </div>
                     </div>
                     <div class="profile-item-wrapper">
