@@ -122,11 +122,11 @@ const usersController = {
             .catch(error => sendResponse(res, 500, 'fail', 'Error fetching ride offer details', error.details));
     },
     sendUserProfile: (req, res) => {
-        const userId = req.authData;
+        const { userId } = req.authData;
 
         connectionPool.query(
             `SELECT "firstname", "lastname", "email", "gender", "phone", "city", "state", "imgUrl", "completeness"
-            WHERE "id" = ${userId}`
+            FROM "Users" WHERE "id" = ${userId}`
         )
             .then((userData) => {
                 const user = userData.rows[0];
