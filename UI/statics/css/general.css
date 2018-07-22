@@ -87,3 +87,15 @@
     text-align: center;
     border-radius: 2500px;
 }
+.no-running {
+    font-style: italic;
+    font-size: 15px;
+    margin: 0;
+    padding: 15px;
+    box-sizing: border-box;
+}
+.no-running a {
+    text-decoration: none;
+    color: rgb(14,113,198);
+    font-weight: bold;
+}

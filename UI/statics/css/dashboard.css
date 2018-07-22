@@ -83,18 +83,6 @@ body {
 .ride-summary .btn-container a {
     color: white;
 }
-.no-running {
-    font-style: italic;
-    font-size: 15px;
-    margin: 0;
-    padding: 15px;
-    box-sizing: border-box;
-}
-.no-running a {
-    text-decoration: none;
-    color: rgb(14,113,198);
-    font-weight: bold;
-}
 .space {
     flex: .3;
 }
