@@ -40,6 +40,9 @@
     text-align: left;
     font-weight: bold;
 }
+.btn-container {
+    margin: 30px auto;
+}
 
 @media screen and (max-width: 600px) {
     .offer-details {

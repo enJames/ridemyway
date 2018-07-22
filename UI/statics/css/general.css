@@ -79,7 +79,6 @@
 #profileCompletenessIndicator {
     display: inline-block;
     vertical-align: middle;
-    background-color: rgba(100,10,0,.5);
     width: 55px;
     margin: auto 0 auto auto;
     padding: 15px 0;

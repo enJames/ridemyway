@@ -6,6 +6,7 @@
         <link rel="shortcut icon" href="statics/img/logormw.png">
         <link rel="stylesheet" href="statics/css/master.css">
         <link rel="stylesheet" href="statics/css/ride-offer-general.css">
+        <link rel="stylesheet" href="statics/css/general.css">
         <link rel="stylesheet" href="statics/css/dashboard.css">
         <link rel="stylesheet" href="statics/css/create.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -29,17 +30,17 @@
                     <ul class="navigation-ul">
                         <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
                         <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
-                        <li class="navigation-li"><a href="/logout.html">Log out</a></li>
+                        <li class="navigation-li" id="logout">Log out</li>
                     </ul>
                 </div>
             </div>
             <div class="user-navigation" id="userNavigation">
                 <div class="user-nav-wrapper">
-                    <a href="create.html">
+                    <!-- <a href="create.html">
                         <div class="dash-icon">
                             <i class="fa fa-plus"></i>
                         </div>
-                    </a>
+                    </a> -->
                     <a href="#">
                         <div class="dash-icon">
                             <i class="fa fa-bell"></i>
@@ -50,11 +51,11 @@
                             <i class="fa fa-envelope"></i>
                         </div>
                     </a>
-                    <a href="profile.html">
+                    <!-- <a href="profile.html">
                         <div class="dash-icon">
                             <i class="fa fa-user"></i>
                         </div>
-                    </a>
+                    </a> -->
                 </div>
                 <div class="user" id="userNavToggler">
                     <div class="user-wrapper">
@@ -79,60 +80,20 @@
             </div>
         </nav>
         <div class="form">
+            <div class="profile-completeness">
+                <p id="profileCompletenessIndicator">88%</p>
+                <div id="description">
+                    <p>Profile completeness:</p>
+                    <a href="edit.html">Update</a>
+                </div>
             <div class="form-header">
                 <h2>Edit profile</h2>
             </div>
             <div class="form-section">
-                <div class="form-body">
-                    <form method="POST">
-                        <div class="input-group">
-                            <div class="input-wrapper">
-                                <label for="firstname">First Name</label>
-                                <input type="text" id="firstname" value="Emmanuel">
-                            </div>
-                            <div class="input-wrapper">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" id="lastname" value="Banjoko">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <div class="input-wrapper">
-                                <label for="gender">Gender</label>
-                                <select disabled>
-                                    <option value="" hidden>--Select--</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Male" selected>Male</option>
-                                </select>
-                            </div>
-                            <div class="input-wrapper">
-                                <label for="email">Email address</label>
-                                <input type="email" id="email" value="emmanuel@emma.com" readonly>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <div class="input-wrapper">
-                                <label for="phone">Mobile Number</label>
-                                <input type="tel" id="phone" value="080234568122">
-                            </div>
-                            <div class="input-wrapper">
-                                <label for="city">City</label>
-                                <input type="text" id="city" value="Gbagada">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <div class="input-wrapper">
-                                <label for="state">State</label>
-                                <input type="text" id="state" value="Lagos">
-                            </div>
-                            <div class="input-wrapper">
-                                <label for="country">Country</label>
-                                <input type="text" id="country" value="Nigeria">
-                            </div>
-                        </div>
-                        <div class="btn-wrapper">
-                            <button type="submit" class="form-btn" id="submit">Save</button>
-                        </div>
-                    </form>
+                <div class="form-body" id="formBody">
+                    <div class="loading">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
                 </div>
             </div>
         </div>

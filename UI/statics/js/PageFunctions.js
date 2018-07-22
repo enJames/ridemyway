@@ -90,9 +90,9 @@ const PageFunctions = {
             const description = document.getElementById('description');
 
             if (profileCompleteness === '33%') {
-                profileCompletenessIndicator.backgroundColor = 'rgb(180,20,0)';
+                profileCompletenessIndicator.style.backgroundColor = 'rgb(180,20,0)';
             } else if (profileCompleteness === '88%') {
-                profileCompletenessIndicator.backgroundColor = 'rgb(120,170,0)';
+                profileCompletenessIndicator.style.backgroundColor = 'rgb(120,170,0)';
             }
             // display profileCompletenessIndicator
             profileCompletenessDiv.style.display = 'block';
