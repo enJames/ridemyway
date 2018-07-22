@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log(res);
 
-            const { firstname, city, state } = res.data[0];
+            const { firstname, city, state } = res.data;
 
             PageFunctions.changeNavigation(res.status, 'create');
             PageFunctions.enableLogout();
