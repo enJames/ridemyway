@@ -66,10 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 credentials: 'include'
             })
                 .then(resp => resp.json())
-                .then((resp) => {
-                    console.log(resp);
-                    PageFunctions.toggleProfileIndicatorText(resp.data.completeness);
-                })
+                .then(resp => PageFunctions.toggleProfileIndicatorText(resp.data.completeness))
                 .catch((err) => console.error('There was a problem', err));
         })
         .catch((err) => console.error('There was a problem', err));
