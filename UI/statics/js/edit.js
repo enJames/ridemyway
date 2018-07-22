@@ -80,6 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Display profile completeness
                 PageFunctions.toggleProfileIndicatorText(res.data.completeness);
 
+                // Update gender
+                const genderInput = document.getElementById('gender');
+
+                if (gender !== null) {
+                    genderInput.value = gender;
+                    genderInput.disabled = true;
+                }
+
                 // Get submit button
                 submit = document.getElementById('submit');
             }
