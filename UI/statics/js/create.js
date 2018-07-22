@@ -1,24 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('https://enjames-ridemyway.herokuapp.com/api/v1/auth/check', {
+    fetch('https://enjames-ridemyway.herokuapp.com/api/v1/users/profile', {
         method: 'GET',
         credentials: 'include'
     })
         .then(res => res.json())
         .then((res) => {
-            // if user is logged in
-            PageFunctions.changeNavigation(res.status, 'create');
-
-            if (res.status === 'success') {
-                PageFunctions.enableLogout();
-                PageFunctions.displayUserNavigation();
+            // if user is not logged in
+            if (res.status === 'fail' && res.message === 'Not authenticated') {
+                return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
 
-            // if user is not logged in
-            const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/users/rides';
+            const { firstname, city, state } = res.data[0];
 
-            // Submit button
+            PageFunctions.changeNavigation(res.status, 'create');
+            PageFunctions.enableLogout();
+            PageFunctions.displayUserNavigation();
+
+            // Get form Hook
+            const formBody = document.getElementById('formBody');
+
+            if (res.data.completeness !== '100%') {
+                formBody.innerHTML = `We are so sorry ${firstname}, you cannot create a ride yet because your profile is less than 100%. Please <a href="edit.html">update</a> your profile information and try again`;
+                return;
+            }
+
+            // Render form if profile is 100%
+            const createRideFormHTML = `<form method="POST">
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <label for="fromState">State</label>
+                            <input type="text" id="fromState" value="${state}" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="fromCity">City</label>
+                            <input type="text" id="fromCity" value="${city}" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <label for="toState">State</label>
+                            <input type="text" id="toState" placeholder="Destination State" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="toCity">City</label>
+                            <input type="text" id="toCity" placeholder="Destination City" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <label for="departure">Departure Date</label>
+                            <input type="date" id="departureDate" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="departure">Departure Time</label>
+                            <input type="time" id="departureTime" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <label for="price">Price (₦)</label>
+                            <input type="number" id="price" placeholder="eg 2500" min="0" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="seats">Seats</label>
+                            <input type="number" id="seats" placeholder="eg 4" min="1" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="pickupLocation">Pick up location</label>
+                            <input type="text" id="pickupLocation" required>
+                        </div>
+                    </div>
+                    <div class="payment-information">
+                        <p>Please note that RideMyWay does not handle payments for rides.</p>
+                    </div>
+                    <div class="btn-wrapper">
+                        <button type="submit" class="form-btn" id="submit">Create ride offer <i class="fa fa-spinner fa-spin" id="spinner"></i> </button>
+                    </div>
+                </form>`;
+
+                // Append to DOM
+                formBody.innerHTML = createRideFormHTML;
+
+            // Get Submit button
             const submit = document.getElementById('submit');
 
+            // create ride url
+            const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/users/rides';
+
+            // onclick
             submit.addEventListener('click', (e) => {
                 e.preventDefault();
 
@@ -33,11 +102,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const departureTime = document.getElementById('departureTime').value;
 
                 // message and spinner
-                // const messageEl = document.getElementById('message');
+                const messageEl = document.getElementById('message');
                 const spinner = document.getElementById('spinner');
 
-                // Display spinner while systems sends request
+                // Display spinner while systems processes request
                 spinner.style.opacity = '1';
+
+                // prevent abrupt ride Offers
+
+                const now = new Date();
+                const today = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
+                if (departureDate <= today) {
+                    return PageFunctions.showMessage('fail', 'Departure date is too abrupt, tomorrow would be just fine.');
+                }
 
                 const userData = {
                     fromState,
