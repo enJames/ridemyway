@@ -128,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, false);
             })
             .catch((err) => console.error('There was a problem', err));
-            }
         })
         .catch((err) => console.error('There was a problem', err));
 
