@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     firstname, lastname, email, gender, phone, city, state, imgUrl, completeness
                 } = res.data;
                 const formBody = document.getElementById('formBody');
-                const editFormHTML = `<form method="POST">
+                const editFormHTML = `<form method="PUT">
                     <div class="input-group">
                         <div class="input-wrapper">
                             <label for="firstname">First Name</label>
