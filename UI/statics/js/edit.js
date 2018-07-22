@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             submit.addEventListener('click', (e) => {
                 e.preventDefault();
-                alert('hi');
                 const firstname = document.getElementById('firstname').value;
                 const lastname = document.getElementById('lastname').value;
                 const gender = document.getElementById('gender').value;
@@ -127,11 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 fetch(url, fetchDataObject)
                     .then(res => res.json())
-                    .then((res) => {
-                        PageFunctions.toggleProfileIndicatorText(res.data.completeness);
-                        return PageFunctions.showMessage(res.status, res.message);
+                    .then((resp) => {
+                        PageFunctions.toggleProfileIndicatorText(resp.data.completeness);
+                        return PageFunctions.showMessage(resp.status, resp.message);
                     })
-                    .catch(error => PageFunctions.showMessage(res.status, res.message));
+                    .catch(error => PageFunctions.showMessage(resp.status, resp.message));
             }, false);
         })
         .catch((err) => console.error('There was a problem', err));
