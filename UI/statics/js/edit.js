@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // activate logout functionality
             PageFunctions.enableLogout();
 
+            // initialise submit button variable
+            let submit;
+
             if (res.status === 'success') {
                 const {
                     firstname, lastname, email, gender, phone, city, state, imgUrl, completeness
@@ -74,7 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Append to DOM
                 formBody.innerHTML = editFormHTML;
 
+                // Display profile completeness
                 PageFunctions.toggleProfileIndicatorText(res.data.completeness);
+
+                // Get submit button
+                submit = document.getElementById('submit');
             }
 
             // put request: update user's information
@@ -90,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const phone = document.getElementById('phone').value;
                 const city = document.getElementById('city').value;
                 const state = document.getElementById('state').value;
-                const submit = document.getElementById('submit');
 
                 // message and spinner
                 const messageEl = document.getElementById('message');
