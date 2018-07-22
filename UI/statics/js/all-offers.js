@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         let location;
 
                         // Check if ride belongs to logged in user
-                        if (res.data.userId === resp.data.userId) {
+                        if (res.data.userId === ride.userId) {
                             location = 'responses.html';
                         } else {
                             location = `ride-offer.html?rideId=${ride.id}`
                         }
-
+                        console.log(location);
                         ridesHTML += `<a class="ride-offer-wrapper" href="${location}">
                             <div class="ride-offer">
                                 <div class="offer-details">
