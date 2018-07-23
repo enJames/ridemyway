@@ -34,6 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
             submit.addEventListener('click', (e) => {
                 e.preventDefault();
 
+                if (!uploader.files) {
+                    return PageFunctions.showMessage('fail', 'You have not chosen a file to upload');
+                }
+
                 // Get spinner
                 const spinner = document.getElementById('spinner');
 
