@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submit.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                if (!uploader.files) {
+                if (!uploader.value) {
                     return PageFunctions.showMessage('fail', 'You have not chosen a file to upload');
                 }
 
