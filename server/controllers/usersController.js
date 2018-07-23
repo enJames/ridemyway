@@ -1,9 +1,7 @@
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import cloudinary from 'cloudinary';
-import fs from 'fs';
 import jwt from 'jsonwebtoken';
-import path from 'path';
 import connectionPool from '../models/connectionPool';
 import Reusables from '../Reusables';
 
@@ -165,7 +163,7 @@ const usersController = {
     uploadImage: (req, res) => {
         const { userId } = req.authData;
 
-        if (!req.files) {
+        if (!req.files.image) {
             return sendResponse(res, 200, 'fail', 'No image uploaded');
         }
 
@@ -180,16 +178,9 @@ const usersController = {
                     `UPDATE "Users" SET
                         "imgUrl" = '${result.url}',
                         "completeness" = '100%'
-                    WHERE "id" = ${userId}`
+                    WHERE "id" = ${userId} RETURNING "imgUrl"`
                 )
-                    .then(() => {
-                        // delete temporary folder
-                        rmdir(path.join(__dirname, '../tmp'))
-                            .then((response) => {
-                                console.log(response);
-                            });
-                        return sendResponse(res, 200, 'success', 'Image uploaded');
-                    });
+                    .then(imgData => sendResponse(res, 200, 'success', 'Image uploaded', imgData.rows[0].imgUrl));
             });
     },
     logOutUser: (req, res) => {

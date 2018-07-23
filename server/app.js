@@ -27,10 +27,6 @@ cloudinary.config({
     api_secret: process.env.api_secret
 });
 
-expressBusboy.extend(app, {
-    upload: true,
-    path: path.join(__dirname, '/tmp')
-});
 app.use(cors({
     allowedOrigins: [
         'http://localhost:8000', 'https://enjames.github.io'
@@ -40,6 +36,10 @@ app.use(urlencoded); // parse form data
 app.use(json); // parse json data
 app.use(logger('combined')); // Log requests info
 app.use(cookieParser()); // parse cookie in headers
+expressBusboy.extend(app, {
+    upload: true,
+    path: path.join(__dirname, '/tmp')
+});
 
 // Create Tables
 Models();
