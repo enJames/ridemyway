@@ -49,10 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: formData,
                     credentials: 'include'
                 })
-                    .then(res => res.json())
-                    .then((res) => {
-                        PageFunctions.showMessage(res.status, res.message);
-                        if (res.status === 'success') {
+                    .then(resp => resp.json())
+                    .then((resp) => {
+                        console.log(resp);
+                        PageFunctions.showMessage(resp.status, resp.message);
+                        if (resp.status === 'success') {
                             return location.href = 'https://enjames.github.io/ridemyway/UI/profile.html';
                         }
                     })
