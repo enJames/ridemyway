@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then((resp) => {
                         PageFunctions.showMessage(resp.status, resp.message);
                         if (resp.status === 'success') {
-                            return location.replace('https://enjames-ridemyway.herokuapp.com/api/v1/users/profile');
+                            return location.href = 'https://enjames.github.io/ridemyway/UI/profile.html';
                         }
                     })
             }, false);
