@@ -1,19 +1,36 @@
 import bodyParser from 'body-parser';
+import cloudinary from 'cloudinary';
 import cookieParser from 'cookie-parser';
 import cors from 'express-cors';
+import dotenv from 'dotenv';
 import express from 'express';
+import expressBusboy from 'express-busboy';
 import logger from 'morgan';
+import path from 'path';
 import { serve, setup } from 'swagger-ui-express';
 
 import routes from './routes/routes';
 import Models from './models/Models';
 import swaggerDocument from './swaggerDocument';
 
+dotenv.config();
+
 const app = express();
-const urlencoded = bodyParser.urlencoded({ extended: false });
-const json = bodyParser.json({ extended: false });
+const urlencoded = bodyParser.urlencoded({ extended: true });
+const json = bodyParser.json({ extended: true });
 const port = parseInt(process.env.PORT, 10) || 8000;
 
+// Configuration to uploading to cloudinary
+cloudinary.config({
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret
+});
+
+expressBusboy.extend(app, {
+    upload: true,
+    path: path.join(__dirname, '/tmp')
+});
 app.use(cors({
     allowedOrigins: [
         'http://localhost:8000', 'https://enjames.github.io'

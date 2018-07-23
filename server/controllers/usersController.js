@@ -1,6 +1,9 @@
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
+import cloudinary from 'cloudinary';
+import fs from 'fs';
 import jwt from 'jsonwebtoken';
+import path from 'path';
 import connectionPool from '../models/connectionPool';
 import Reusables from '../Reusables';
 
@@ -158,6 +161,36 @@ const usersController = {
             WHERE "id" = ${userId}`
         )
             .then(() => sendResponse(res, 200, 'success', 'Profile updated'));
+    },
+    uploadImage: (req, res) => {
+        const { userId } = req.authData;
+
+        if (!req.files) {
+            return sendResponse(res, 200, 'fail', 'No image uploaded');
+        }
+
+        // Retrieve file path from temp storage
+        const { file } = req.files.image;
+
+        // Upload to cloudinary
+        cloudinary.uploader.upload(file)
+            .then((result) => {
+                // Update database with image url
+                connectionPool.query(
+                    `UPDATE "Users" SET
+                        "imgUrl" = '${result.url}',
+                        "completeness" = '100%'
+                    WHERE "id" = ${userId}`
+                )
+                    .then(() => {
+                        // delete temporary folder
+                        rmdir(path.join(__dirname, '../tmp'))
+                            .then((response) => {
+                                console.log(response);
+                            });
+                        return sendResponse(res, 200, 'success', 'Image uploaded');
+                    });
+            });
     },
     logOutUser: (req, res) => {
         // If logged in, redirect to dashboard

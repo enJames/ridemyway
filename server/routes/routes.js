@@ -24,6 +24,7 @@ const {
     dashboard,
     sendUserProfile,
     editUserProfile,
+    uploadImage,
     logOutUser
 } = usersController;
 
@@ -35,7 +36,7 @@ const {
     updateRideOffer,
     acceptRejectRideRequest,
     deleteRideOffer,
-    getAllJoinRequests,
+    getAllJoinRequests
 } = ridesController;
 
 // Rides routes
@@ -107,7 +108,14 @@ routes.put(
     '/users/profile/edit',
     verifyUser,
     validateEditProfileForm,
-    editUserProfile,
+    editUserProfile
+);
+
+// Image upload
+routes.put(
+    '/users/profile/upload',
+    verifyUser,
+    uploadImage
 );
 
 routes.get('/auth/check', checkUserIsLoggedIn);
