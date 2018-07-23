@@ -31,5 +31,6 @@
     margin: auto;
 }
 .btn-wrapper button {
+    position: relative;
     font-size: 18px;
 }
