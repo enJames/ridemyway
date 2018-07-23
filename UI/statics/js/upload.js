@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: formData,
                     credentials: 'include'
                 })
-                    .then(res => res.json())
-                    .then((res) => {
-                        PageFunctions.showMessage(res.status, res.message);
-                        if (res.status === 'success') {
+                    .then(resp => resp.json())
+                    .then((resp) => {
+                        PageFunctions.showMessage(resp.status, resp.message);
+                        if (resp.status === 'success') {
                             return location.replace('https://enjames-ridemyway.herokuapp.com/api/v1/users/profile');
                         }
                     })
