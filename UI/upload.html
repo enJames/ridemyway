@@ -8,10 +8,10 @@
         <link rel="stylesheet" href="statics/css/ride-offer-general.css">
         <link rel="stylesheet" href="statics/css/dashboard.css">
         <link rel="stylesheet" href="statics/css/general.css">
-        <link rel="stylesheet" href="statics/css/ride-offer.css">
+        <link rel="stylesheet" href="statics/css/upload.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Ride offer — Ride My Way</title>
+        <title>Ride offers — Ride My Way</title>
     </head>
     <body>
         <nav class="navigation-bar">
@@ -22,15 +22,21 @@
                 <i class="fa fa-bars"></i>
             </button>
             <div class="navigation" id="navigationId">
-                <p>Working...</p>
+                <div class="navigation-items-wrapper">
+                    <ul class="navigation-ul">
+                        <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
+                        <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
+                        <li class="navigation-li" id="logout">Log out</li>
+                    </ul>
+                </div>
             </div>
-            <div class="user-navigation" id="userNavigation">
+            <div class="user-navigation">
                 <div class="user-nav-wrapper">
-                    <a href="create.html">
+                    <!--<a href="create.html">
                         <div class="dash-icon">
                             <i class="fa fa-plus"></i>
                         </div>
-                    </a>
+                    </a>-->
                     <a href="#">
                         <div class="dash-icon">
                             <i class="fa fa-bell"></i>
@@ -41,11 +47,11 @@
                             <i class="fa fa-envelope"></i>
                         </div>
                     </a>
-                    <a href="profile.html">
+                    <!--<a href="profile.html">
                         <div class="dash-icon">
                             <i class="fa fa-user"></i>
                         </div>
-                    </a>
+                    </a>-->
                 </div>
                 <div class="user" id="userNavToggler">
                     <div class="user-wrapper">
@@ -62,16 +68,34 @@
                                 <li class="dropdown-li"><a href="#">Messages</a></li>
                                 <li class="dropdown-li"><a href="create.html">Offer a ride</a></li>
                                 <li class="dropdown-li"><a href="history.html">Ride history</a></li>
-                                <li class="navigation-li" id="logout">Log out</li>
+                                <li class="dropdown-li"><a href="/logout.html">Log out</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-        <div class="view-offer" id="viewRideHook">
-            <div class="loading">
-                <i class="fa fa-spinner fa-spin"></i>
+        <div class="upload-div">
+            <p id="message"></p>
+            <div class="upload-wrapper">
+                <div class="image-preview-div">
+                    <div class="image-preview" >
+                        <img src="statics/img/placeholder.png" alt="Image Preview" id="imagePreview">
+                    </div>
+                </div>
+                <div class="image-upload-form">
+                    <form method="PUT" enctype="multipart/form-data">
+                        <div class="uploader-wrapper">
+                            <input type="file" name="image" id="uploader">
+                        </div>
+                        <div class="btn-wrapper">
+                            <button type="submit" class="form-btn" id="submit">
+                                Upload Image
+                                <i class="fa fa-spinner fa-spin" id="spinner"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         <footer>
@@ -92,6 +116,6 @@
         </footer>
         <script src="statics/js/PageFunctions.js"></script>
         <script src="statics/js/otherPages.js"></script>
-        <script src="statics/js/ride-offer.js"></script>
+        <script src="statics/js/upload.js"></script>
     </body>
 </html>

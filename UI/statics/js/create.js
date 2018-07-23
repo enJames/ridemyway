@@ -103,15 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const departureDate = document.getElementById('departureDate').value;
                 const departureTime = document.getElementById('departureTime').value;
 
-                // message and spinner
-                const messageEl = document.getElementById('message');
+                // Get spinner
                 const spinner = document.getElementById('spinner');
 
                 // Display spinner while systems processes request
                 spinner.style.opacity = '1';
 
                 // prevent abrupt ride Offers
-
                 const now = new Date();
                 const today = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
                 if (departureDate <= today) {

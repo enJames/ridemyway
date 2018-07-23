@@ -1,0 +1,35 @@
+.upload-div {
+    padding: 10vh 10px;
+}
+.upload-wrapper {
+    width: 250px;
+    margin: auto auto 50px;
+}
+.image-preview-div {
+    width: 100%;
+    height: 250px;
+}
+.image-preview {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.image-preview img {
+    width: 100%;
+}
+.uploader-wrapper {
+    margin: auto auto 40px;
+}
+.uploader-wrapper input {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 16px;
+}
+.btn-wrapper {
+    font-size: 18px;
+    width: 100%;
+    margin: auto;
+}
+.btn-wrapper button {
+    font-size: 18px;
+}
