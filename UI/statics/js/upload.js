@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (imgUrl !== null) {
                 imagePreview.src = res.data.imgUrl;
-            }            
+            }
 
             // Show image preview before upload, replace current image
             const uploader = document.getElementById('uploader');
@@ -47,9 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(url, {
                     method: 'PUT',
                     body: formData,
-                    headers: {
-                        'Content-Type':'multipart/form-data'
-                    },
                     credentials: 'include'
                 })
                     .then(res => res.json())
