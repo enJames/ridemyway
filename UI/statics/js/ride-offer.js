@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Check logged in status
-    fetch('https://enjames-ridemyway.herokuapp.com/api/v1/auth/check', {
+    fetch('https://enjames-ridemyway.herokuapp.com/api/v1/users/profile', {
         method: 'GET',
         credentials: 'include'
     })
