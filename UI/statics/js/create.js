@@ -10,13 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
 
-            console.log(res);
+            const { firstname, city, state, imgUrl } = res.data;
 
-            const { firstname, city, state } = res.data;
-
-            PageFunctions.changeNavigation(res.status, 'create');
             PageFunctions.enableLogout();
             PageFunctions.displayUserNavigation();
+
+            // Get image element and set src to current user image
+            const userAvatar = document.getElementById('userAvatar');
+
+            if (imgUrl !== null) {
+                userAvatar.src = res.data.imgUrl;
+            }
 
             // Get form Hook
             const formBody = document.getElementById('formBody');

@@ -10,13 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
 
-            // activate logout functionality
-            PageFunctions.enableLogout();
-
             if (res.status === 'success') {
+                // activate logout functionality
+                PageFunctions.enableLogout();
+
                 const {
                     firstname, lastname, email, gender, phone, city, state, imgUrl, completeness
                 } = res.data;
+                // Get image element and set src to current user image
+                const userAvatar = document.getElementById('userAvatar');
+
+                if (imgUrl !== null) {
+                    userAvatar.src = res.data.imgUrl;
+                }
+                
                 const profileBody = document.getElementById('profileBody');
                 const profileBodyHTML = `<div class="profile-section left">
                     <div class="profile-image">

@@ -10,16 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
 
-            // activate logout functionality
-            PageFunctions.enableLogout();
-
-            // initialise submit button variable
-            let submit;
-
             if (res.status === 'success') {
+                // activate logout functionality
+                PageFunctions.enableLogout();
+
+                // initialise submit button variable
+                let submit;
+
                 const {
                     firstname, lastname, email, gender, phone, city, state, imgUrl, completeness
                 } = res.data;
+
+                // Get image element and set src to current user image
+                const userAvatar = document.getElementById('userAvatar');
+
+                if (imgUrl !== null) {
+                    userAvatar.src = res.data.imgUrl;
+                }
+
                 const formBody = document.getElementById('formBody');
                 const editFormHTML = `<form method="PUT">
                     <div class="input-group">

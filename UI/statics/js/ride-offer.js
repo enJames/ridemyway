@@ -6,11 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     })
         .then(res => res.json())
         .then((res) => {
-            PageFunctions.changeNavigation(res.status, 'ride-offer');
-
             if (res.status === 'success') {
+                PageFunctions.changeNavigation(res.status, 'ride-offer');
                 PageFunctions.enableLogout();
                 PageFunctions.displayUserNavigation();
+
+                // Get image element and set src to current user image
+                const userAvatar = document.getElementById('userAvatar');
+                const { imgUrl } = res.data;
+
+                if (imgUrl !== null) {
+                    userAvatar.src = imgUrl;
+                }
             }
 
             // Get ride id from params

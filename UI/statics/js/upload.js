@@ -9,11 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html');
             }
             // Get image element and set src to current user image
+            const userAvatar = document.getElementById('userAvatar');
             const imagePreview = document.getElementById('imagePreview');
+
             const { imgUrl } = res.data;
 
             if (imgUrl !== null) {
-                imagePreview.src = res.data.imgUrl;
+                userAvatar.src = imgUrl;
+                imagePreview.src = imgUrl;
             }
 
             // Show image preview before upload, replace current image

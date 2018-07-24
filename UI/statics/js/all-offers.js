@@ -1,17 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Check logged in status
-    fetch('https://enjames-ridemyway.herokuapp.com/api/v1/auth/check', {
+    fetch('https://enjames-ridemyway.herokuapp.com/api/v1/users/profile', {
         method: 'GET',
         credentials: 'include'
     })
         .then(res => res.json())
         .then((res) => {
-            console.log(res);
-            PageFunctions.changeNavigation(res.status, 'all-offers');
-
             if (res.status === 'success') {
+                PageFunctions.changeNavigation(res.status, 'all-offers');
                 PageFunctions.enableLogout();
                 PageFunctions.displayUserNavigation();
+
+                // Get image element and set src to current user image
+                const userAvatar = document.getElementById('userAvatar');
+                const { imgUrl } = res.data;
+
+                if (imgUrl !== null) {
+                    userAvatar.src = imgUrl;
+                }
             }
 
             fetch('https://enjames-ridemyway.herokuapp.com/api/v1/rides')
@@ -66,5 +72,5 @@ document.addEventListener('DOMContentLoaded', () => {
                     allRidesHook.innerHTML = ridesHTML;
                 })
         })
-        .catch((err) => console.error('There was a problem', err));
+        .catch((err) => PageFunctions.showMessage('error', 'There was a problem fetching rides'));
 });
