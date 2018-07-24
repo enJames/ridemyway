@@ -139,7 +139,9 @@ const PageFunctions = {
         }
 
         // stops spinner once a response is displayed
-        spinner.style.opacity = '0';
+        if (spinner) {
+            spinner.style.opacity = '0';
+        }
 
         setTimeout(() => {
             messageEl.style.opacity = '0'; // hides message again
