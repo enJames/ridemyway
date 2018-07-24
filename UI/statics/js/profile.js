@@ -18,7 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     firstname, lastname, email, gender, phone, city, state, imgUrl, completeness
                 } = res.data;
                 const profileBody = document.getElementById('profileBody');
-                const profileBodyHTML = `<div class="profile-item-wrapper">
+                const profileBodyHTML = `<div class="profile-section left">
+                    <div class="profile-image">
+                        <div class="image">
+                            <img src="${(imgUrl)?imgUrl:'statics/img/user-avatar.jpg'}" alt="User avatar">
+                        </div>
+                        <div class="btn-container">
+                            <a href="upload.html">Change image</a>
+                        </div>
+                    </div>
+                    <div class="profile-completeness-profile">
+                        <h4>Profile completeness</h4>
+                        <div class="profile-percentage">
+                            <div id="percentageBar">
+                                <div id="percentage">${completeness}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="in-between"></div>
+                <div class="profile-section right">
+                    <div class="profile-item-wrapper">
                         <div class="profile-item">
                             <span>First Name</span>
                         </div>
@@ -74,13 +94,30 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>${(state)?state:''}</span>
                         </div>
                     </div>
-                </div>
-                <div class="btn-container">
-                    <a href="edit.html">Edit</a>
+                    <div class="btn-container">
+                        <a href="edit.html">Edit</a>
+                    </div>
                 </div>`;
 
                 // Append to DOM
                 profileBody.innerHTML = profileBodyHTML;
+
+                // Update profile completeness after DOM is updated
+                setTimeout(() => {
+                    const percentageBar = document.getElementById('percentageBar');
+
+                    percentageBar.style.width = completeness;
+                    if (completeness === '33%') {
+                        percentageBar.style.backgroundColor = 'rgb(180,20,0)';
+                    }
+                    if (completeness === '88%') {
+                        percentageBar.style.backgroundColor = 'rgb(120,170,0)';
+                    }
+                    if (completeness === '100%') {
+                        percentageBar.style.backgroundColor = 'rgb(10,120,0)';
+                    }
+                },300);
+
 
                 PageFunctions.toggleProfileIndicatorText(res.data.completeness);
             }

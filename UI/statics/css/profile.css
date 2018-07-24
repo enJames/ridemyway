@@ -1,12 +1,11 @@
 .profile {
-    background-color: white;
-    width: 500px;
+    width: 800px;
     margin: 50px auto;
-    padding-bottom: 1px;
-    box-shadow: 1px 1px 5px -1px rgba(0,0,0,.3);
+    padding: 0 15px;
 }
 .profile-header {
     background-color: rgb(0,30,80);
+    margin-bottom: 30px;
     padding: 15px;
     color: white;
     text-align: center;
@@ -20,8 +19,43 @@
     margin: 0;
 }
 .profile-body {
-    padding: 5px 30px;
+    display: flex;
+    background-color: white;
+    padding: 30px 30px 5px;
+    box-shadow: 1px 1px 5px -1px rgba(0,0,0,.3);
 }
+.left {
+    flex: 1;
+}
+.in-between {
+    flex: .4;
+}
+.right {
+    flex: 4;
+}
+.left .btn-container {
+    margin: 0;
+}
+.left .btn-container a {
+    padding: 5px;
+}
+
+.profile-completeness-profile {
+    margin-top: 20px;
+}
+.profile-completeness-profile h4 {
+    margin: 0 0 5px;
+    text-align: center;
+}
+.profile-percentage {
+    width: 100%;
+    border: 1px solid rgba(0,30,80,.7);
+}
+#percentage {
+    text-align: center;
+    color: white;
+}
+
 .profile-item-wrapper {
     display: flex;
     width: 100%;
@@ -41,7 +75,7 @@
     font-weight: bold;
 }
 .btn-container {
-    margin: 30px auto;
+    margin: 30px 0;
 }
 
 @media screen and (max-width: 600px) {
