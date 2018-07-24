@@ -23,10 +23,6 @@
             </button>
             <div class="navigation" id="navigationId">
                 <div class="navigation-items-wrapper">
-                    <form class="navigation-form" method="POST">
-                        <input type="search" id="searchInput" placeholder="Search a ride">
-                        <button type="submit" id="submit">Search</button>
-                    </form>
                     <ul class="navigation-ul">
                         <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
                         <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
@@ -90,8 +86,88 @@
                 <h2>Profile</h2>
             </div>
             <div class="profile-body" id="profileBody">
-                <div class="loading">
+                <!-- <div class="loading">
                     <i class="fa fa-spinner fa-spin"></i>
+                </div> -->
+                <div class="profile-section left">
+                    <div class="profile-image">
+                        <div class="image">
+                            <img src="statics/img/user-avatar.jpg" alt="User avatar">
+                        </div>
+                        <div class="btn-container">
+                            <a href="upload.html">Change image</a>
+                        </div>
+                    </div>
+                    <div class="profile-completeness-profile">
+                        <h4>Profile completeness</h4>
+                        <div class="profile-percentage">
+                            <div id="percentageBar">
+                                <div id="percentage">33%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="in-between"></div>
+                <div class="profile-section right">
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>First Name</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${firstname}</span>
+                        </div>
+                    </div>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>Last Name</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(lastname)?lastname:''}</span>
+                        </div>
+                    </div>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>Gender</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(gender)?gender:''}</span>
+                        </div>
+                    </div>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>Email address</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${email}</span>
+                        </div>
+                    </div>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>Mobile Number</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(phone)?phone:''}</span>
+                        </div>
+                    </div>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>City</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(city)?city:''}</span>
+                        </div>
+                    </div>
+                    <div class="profile-item-wrapper">
+                        <div class="profile-item">
+                            <span>State</span>
+                        </div>
+                        <div class="item-details">
+                            <span>${(state)?state:''}</span>
+                        </div>
+                    </div>
+                    <div class="btn-container">
+                        <a href="edit.html">Edit</a>
+                    </div>
                 </div>
             </div>
         </div>
