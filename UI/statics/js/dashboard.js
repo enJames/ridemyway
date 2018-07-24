@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .catch(err => PageFunctions.showMessage('error', 'Unable to load dashboard at the moment'));
         })
-        .catch(err => PageFunctions.showMessage('There was a problem'));
+        .catch(err => PageFunctions.showMessage('error', 'There was a problem'));
 
 
 }, false);
