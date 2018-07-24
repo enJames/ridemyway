@@ -7,19 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(resp => resp.json())
         .then(resp => {
             // if user is logged in
-            if (res.status === 'fail' && res.message === 'Not authenticated') {
+            if (resp.status === 'fail' && resp.message === 'Not authenticated') {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
 
             // Get image element and set src to current user image
             const userAvatar = document.getElementById('userAvatar');
-            const { imgUrl } = res.data;
+            const { imgUrl, completeness } = resp.data;
 
             if (imgUrl !== null) {
                 userAvatar.src = imgUrl;
             }
 
-            PageFunctions.toggleProfileIndicatorText(resp.data.completeness);
+            PageFunctions.toggleProfileIndicatorText(completeness);
 
             fetch('https://enjames-ridemyway.herokuapp.com/api/v1/users/dashboard', {
                 method: 'GET',
