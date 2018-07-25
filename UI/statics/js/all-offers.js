@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then((res) => {
             PageFunctions.changeNavigation(res.status, 'all-offers');
+            let loggedInUserId;
 
             if (res.status === 'success') {
                 PageFunctions.enableLogout();
@@ -14,7 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Get image element and set src to current user image
                 const userAvatar = document.getElementById('userAvatar');
-                const { imgUrl } = res.data;
+                const { imgUrl, userId } = res.data;
+
+                loggedInUserId = userId;
 
                 if (imgUrl !== null) {
                     userAvatar.src = imgUrl;
@@ -40,13 +43,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         let thePrice = parseInt(price, 10).toLocaleString();
                         let location;
 
+                        // if user is logged in
+                        if (loggedInUserId) {
                         // Check if ride belongs to logged in user
-                        if (res.data.userId === ride.userId) {
-                            location = 'responses.html';
+                            if (loggedInUserId === ride.userId) {
+                                location = 'responses.html';
+                            } else {
+                                location = `ride-offer.html?rideId=${ride.id}`;
+                            }
                         } else {
                             location = `ride-offer.html?rideId=${ride.id}`
                         }
-                        console.log(location);
+
                         ridesHTML += `<a class="ride-offer-wrapper" href="${location}">
                             <div class="ride-offer">
                                 <div class="offer-details">
