@@ -116,8 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // prevent abrupt ride Offers
                 const now = new Date();
                 const today = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
-                if (departureDate <= today) {
+                if (departureDate === today) {
                     return PageFunctions.showMessage('fail', 'Departure date is too abrupt, tomorrow would be just fine.');
+                }
+                if (departureDate < today) {
+                    return PageFunctions.showMessage('fail', 'Departure date is in the past, please set a date in the future. Tomorrow would be just fine.');
                 }
 
                 const userData = {
