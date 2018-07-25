@@ -6,7 +6,7 @@ import connectionPool from '../models/connectionPool';
 import Reusables from '../Reusables';
 
 dotenv.config();
-const { sendResponse } = Reusables;
+const { sendResponse, checkProfileCompleteness } = Reusables;
 
 const usersController = {
     createUser: (req, res) => {
@@ -154,11 +154,21 @@ const usersController = {
                 "gender" = '${gender}',
                 "phone" = '${phone}',
                 "city" = '${city}',
-                "state" = '${state}',
-                "completeness" = '88%'
-            WHERE "id" = ${userId}`
+                "state" = '${state}'
+            WHERE "id" = ${userId} RETURNING *`
         )
-            .then(() => sendResponse(res, 200, 'success', 'Profile updated'));
+            .then((completenessData) => {
+                const percentage = checkProfileCompleteness(completenessData.rows[0]);
+
+                // Update completeness column
+                connectionPool.query(
+                    `UPDATE "Users"
+                    SET
+                        "completeness" = '${percentage}'
+                    WHERE "id" = ${userId} RETURNING *`
+                )
+                    .then(() => sendResponse(res, 200, 'success', 'Profile updated'));
+            });
     },
     uploadImage: (req, res) => {
         const { userId } = req.authData;
