@@ -24,7 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Fetch ride owner's profile information
                 const rideOwnerId = window.location.search.substr(1).split('=')[1]; //
-                fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/users/${rideOwnerId}`)
+                fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/users/${rideOwnerId}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                })
                     .then(resp => resp.json())
                     .then((resp) => {
                         const profileBody = document.getElementById('profileBody');
@@ -107,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         profileBody.innerHTML = `<div class="no-running">Unable to fetch user's information at the moment. Please reload the page.</div>.`
                     })
+                    .catch(() => PageFunctions.showMessage('error', 'An error occurred. Please try reloading the page.'));
             }
         })
         .catch(() => PageFunctions.showMessage('error', 'An error occurred. Please try reloading the page.'));
