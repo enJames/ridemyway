@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Get image element and set src to current user image
                 const userAvatar = document.getElementById('userAvatar');
-                const { imgUrl, userId } = res.data;
+                const { imgUrl, id } = res.data;
 
-                loggedInUserId = userId;
+                loggedInUserId = id;
 
                 if (imgUrl !== null) {
                     userAvatar.src = imgUrl;
