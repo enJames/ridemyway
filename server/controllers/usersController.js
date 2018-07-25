@@ -203,6 +203,23 @@ const usersController = {
                     });
             });
     },
+    rideOwnerProfile: (req, res) => {
+        const { rideOwnerId } = req.params;
+
+        connectionPool.query(
+            `SELECT "id", "firstname", "lastname", "email", "gender", "phone", "city", "state", "imgUrl"
+            FROM "Users" WHERE "id" = ${rideOwnerId}`
+        )
+            .then((rideOwnerData) => {
+                const rideOwner = rideOwnerData.rows[0];
+
+                if (!rideOwner) {
+                    return sendResponse(res, 404, 'fail', 'Ride owner does not exist');
+                }
+
+                return sendResponse(res, 200, 'success', 'Rider owner found', rideOwner);
+            });
+    },
     logOutUser: (req, res) => {
         // If logged in, redirect to dashboard
         if (!req.cookies.token) {

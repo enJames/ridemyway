@@ -25,6 +25,7 @@ const {
     sendUserProfile,
     editUserProfile,
     uploadImage,
+    rideOwnerProfile,
     logOutUser
 } = usersController;
 
@@ -50,7 +51,7 @@ routes.get('/rides/:rideId', checkParams, getARideOffer);
 routes.post('/rides/:rideId/requests', checkParams, verifyUser, joinRide);
 
 // User routes
-// Create ride offer
+// Dashboard
 routes.get(
     '/users/dashboard',
     verifyUser,
@@ -100,8 +101,11 @@ routes.put(
     acceptRejectRideRequest
 );
 
-// Send user's profile
+// Send user's own profile
 routes.get('/users/profile', verifyUser, sendUserProfile);
+
+// Send ride creator's profile to other users
+routes.get('/users/:rideOwnerId', checkParams, verifyUser, rideOwnerProfile);
 
 // Edit user's profile
 routes.put(
