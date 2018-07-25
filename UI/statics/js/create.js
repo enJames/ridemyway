@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
 
-            const { firstname, city, state, imgUrl } = res.data;
+            const { firstname, city, state, imgUrl, completeness } = res.data;
 
             PageFunctions.enableLogout();
             PageFunctions.displayUserNavigation();
@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const userAvatar = document.getElementById('userAvatar');
 
             if (imgUrl !== null) {
-                userAvatar.src = res.data.imgUrl;
+                userAvatar.src = imgUrl;
             }
 
             // Get form Hook
             const formBody = document.getElementById('formBody');
 
-            if (res.data.completeness !== '100%') {
+            if (completeness !== '100%') {
                 formBody.innerHTML = `<div class="no-running">We are so sorry ${firstname}, you cannot create a ride yet because your profile is less than 100%. Please <a href="edit.html">update</a> your profile information and try again</div>`;
                 return;
             }
@@ -145,14 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(url, fetchDataObject)
                     .then(res => res.json())
                     .then((res) => {
+                        PageFunctions.showMessage(res.status, res.message);
                         if (res.status === 'success') {
-                            PageFunctions.showMessage(res.status, res.message);
                             return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
                         }
-                        return PageFunctions.showMessage(res.status, res.message);
                     })
                     .catch(error => PageFunctions.showMessage(res.status, res.message));
             }, false);
         })
-        .catch((err) => console.error('There was a problem', err));
+        .catch((err) => PageFunctions.showMessage('error', 'There was a problem while fetching rides'));
 }, false);
