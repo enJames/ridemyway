@@ -32,155 +32,157 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             // Check if user has a pending ride
-            fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/rides/${id}`, {
+            fetch('https://enjames-ridemyway.herokuapp.com/api/v1/users/dashboard', {
                 method: 'GET',
                 credentials: 'include'
             })
                 .then(resp => resp.json())
                 .then((resp) => {
-                    const now = new Date();
-                    let month = now.getMonth() + 1;
-                    let today;
-                    if (month > 9) {
-                        today = `${now.getFullYear()}-${month}-${now.getDate()}`;
-                    } else {
-                        today = `${now.getFullYear()}-0${now.getMonth()}-${now.getDate()}`;
-                    }
-
                     if (resp.status === 'success') {
-                        const { departureDate } = resp.data.rideDetails;
-                        const dateOfDeparture = departureDate.split('T')[0];
+                        const { runningOffer } = resp.data;
 
-                        // Check if ride is expired
-                        if (dateOfDeparture > today) {
+                        if (typeof(runningOffer) === 'object') {
                             formBody.innerHTML = `<div class="no-running">${firstname}, you still have a pending ride offer. You can create a new ride only when the current ride offer has expired.</div>`;
                             return;
                         }
-                    }
 
-                    // Render form
-                    const createRideFormHTML = `<form method="POST">
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="fromState">State</label>
-                                    <input type="text" id="fromState" value="${state}" required>
+                        // Render form
+                        const createRideFormHTML = `<form method="POST">
+                                <div class="input-group">
+                                    <div class="input-wrapper">
+                                        <label for="fromState">State</label>
+                                        <input type="text" id="fromState" value="${state}" required>
+                                    </div>
+                                    <div class="input-wrapper">
+                                        <label for="fromCity">City</label>
+                                        <input type="text" id="fromCity" value="${city}" required>
+                                    </div>
                                 </div>
-                                <div class="input-wrapper">
-                                    <label for="fromCity">City</label>
-                                    <input type="text" id="fromCity" value="${city}" required>
+                                <div class="input-group">
+                                    <div class="input-wrapper">
+                                        <label for="toState">State</label>
+                                        <input type="text" id="toState" placeholder="Destination State" required>
+                                    </div>
+                                    <div class="input-wrapper">
+                                        <label for="toCity">City</label>
+                                        <input type="text" id="toCity" placeholder="Destination City" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="toState">State</label>
-                                    <input type="text" id="toState" placeholder="Destination State" required>
+                                <div class="input-group">
+                                    <div class="input-wrapper">
+                                        <label for="departure">Departure Date</label>
+                                        <input type="date" id="departureDate" required>
+                                    </div>
+                                    <div class="input-wrapper">
+                                        <label for="departure">Departure Time</label>
+                                        <input type="time" id="departureTime" required>
+                                    </div>
                                 </div>
-                                <div class="input-wrapper">
-                                    <label for="toCity">City</label>
-                                    <input type="text" id="toCity" placeholder="Destination City" required>
+                                <div class="input-group">
+                                    <div class="input-wrapper">
+                                        <label for="price">Price (₦)</label>
+                                        <input type="number" id="price" placeholder="eg 2500" min="0" required>
+                                    </div>
+                                    <div class="input-wrapper">
+                                        <label for="seats">Seats</label>
+                                        <input type="number" id="seats" placeholder="eg 4" min="1" required>
+                                    </div>
+                                    <div class="input-wrapper">
+                                        <label for="pickupLocation">Pick up location</label>
+                                        <input type="text" id="pickupLocation" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="departure">Departure Date</label>
-                                    <input type="date" id="departureDate" required>
+                                <div class="payment-information">
+                                    <p>Please note that RideMyWay does not handle payments for rides.</p>
                                 </div>
-                                <div class="input-wrapper">
-                                    <label for="departure">Departure Time</label>
-                                    <input type="time" id="departureTime" required>
+                                <div class="btn-wrapper">
+                                    <button type="submit" class="form-btn" id="submit">Create ride offer <i class="fa fa-spinner fa-spin" id="spinner"></i> </button>
                                 </div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-wrapper">
-                                    <label for="price">Price (₦)</label>
-                                    <input type="number" id="price" placeholder="eg 2500" min="0" required>
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="seats">Seats</label>
-                                    <input type="number" id="seats" placeholder="eg 4" min="1" required>
-                                </div>
-                                <div class="input-wrapper">
-                                    <label for="pickupLocation">Pick up location</label>
-                                    <input type="text" id="pickupLocation" required>
-                                </div>
-                            </div>
-                            <div class="payment-information">
-                                <p>Please note that RideMyWay does not handle payments for rides.</p>
-                            </div>
-                            <div class="btn-wrapper">
-                                <button type="submit" class="form-btn" id="submit">Create ride offer <i class="fa fa-spinner fa-spin" id="spinner"></i> </button>
-                            </div>
-                        </form>`;
+                            </form>`;
 
-                        // Append to DOM
-                        formBody.innerHTML = createRideFormHTML;
+                            // Append to DOM
+                            formBody.innerHTML = createRideFormHTML;
 
-                    // Get Submit button
-                    const submit = document.getElementById('submit');
-
-                    // create ride url
-                    const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/users/rides';
-
-                    // onclick
-                    submit.addEventListener('click', (e) => {
-                        e.preventDefault();
-
-                        const fromState = document.getElementById('fromState').value;
-                        const fromCity = document.getElementById('fromCity').value;
-                        const toState = document.getElementById('toState').value;
-                        const toCity = document.getElementById('toCity').value;
-                        const price = document.getElementById('price').value;
-                        const seats = document.getElementById('seats').value;
-                        const pickupLocation = document.getElementById('pickupLocation').value;
-                        const departureDate = document.getElementById('departureDate').value;
-                        const departureTime = document.getElementById('departureTime').value;
+                        // Get Submit button
+                        const submit = document.getElementById('submit');
 
                         // Get spinner
                         const spinner = document.getElementById('spinner');
 
-                        // Display spinner while systems processes request
-                        spinner.style.opacity = '1';
+                        // create ride url
+                        const url = 'https://enjames-ridemyway.herokuapp.com/api/v1/users/rides';
 
-                        // prevent abrupt ride Offers
-                        if (departureDate === today) {
-                            return PageFunctions.showMessage('fail', 'Departure date is too abrupt, tomorrow would be just fine.');
-                        }
-                        if (departureDate < today) {
-                            return PageFunctions.showMessage('fail', 'Departure date is in the past, please set a date in the future. Tomorrow would be just fine.');
-                        }
+                        // onclick
+                        submit.addEventListener('click', (e) => {
+                            e.preventDefault();
 
-                        const userData = {
-                            fromState,
-                            fromCity,
-                            toState,
-                            toCity,
-                            price,
-                            seats,
-                            pickupLocation,
-                            departureDate,
-                            departureTime
-                        };
+                            // Display spinner while systems processes request
+                            spinner.style.opacity = '1';
 
-                        const fetchDataObject = {
-                            method: 'POST',
-                            body: JSON.stringify(userData),
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            credentials: 'include'
-                        }
+                            const fromState = document.getElementById('fromState').value;
+                            const fromCity = document.getElementById('fromCity').value;
+                            const toState = document.getElementById('toState').value;
+                            const toCity = document.getElementById('toCity').value;
+                            const price = document.getElementById('price').value;
+                            const seats = document.getElementById('seats').value;
+                            const pickupLocation = document.getElementById('pickupLocation').value;
+                            const departureDate = document.getElementById('departureDate').value;
+                            const departureTime = document.getElementById('departureTime').value;
 
-                        fetch(url, fetchDataObject)
-                            .then(res => res.json())
-                            .then((res) => {
-                                PageFunctions.showMessage(res.status, res.message);
-                                if (res.status === 'success') {
-                                    return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
-                                }
-                            })
-                            .catch(error => PageFunctions.showMessage(res.status, res.message));
-                    }, false);
+
+                            // Get today in user's entry format for comparison
+                            const now = new Date();
+                            let month = now.getMonth() + 1;
+                            let today;
+                            if (month > 9) {
+                                today = `${now.getFullYear()}-${month}-${now.getDate()}`;
+                            } else {
+                                today = `${now.getFullYear()}-0${now.getMonth()}-${now.getDate()}`;
+                            }
+
+                            // prevent abrupt ride Offers
+                            if (departureDate === today) {
+                                return PageFunctions.showMessage('fail', 'Departure date is too abrupt, tomorrow would be just fine.');
+                            }
+                            if (departureDate < today) {
+                                return PageFunctions.showMessage('fail', 'Departure date is in the past, please set a date in the future. Tomorrow would be just fine.');
+                            }
+
+                            const userData = {
+                                fromState,
+                                fromCity,
+                                toState,
+                                toCity,
+                                price,
+                                seats,
+                                pickupLocation,
+                                departureDate,
+                                departureTime
+                            };
+
+                            const fetchDataObject = {
+                                method: 'POST',
+                                body: JSON.stringify(userData),
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                credentials: 'include'
+                            }
+
+                            fetch(url, fetchDataObject)
+                                .then(res => res.json())
+                                .then((res) => {
+                                    PageFunctions.showMessage(res.status, res.message);
+                                    if (res.status === 'success') {
+                                        return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
+                                    }
+                                })
+                                .catch(error => PageFunctions.showMessage(res.status, res.message));
+                        }, false);
+                    } else {
+                        PageFunctions.showMessage(resp.status, resp.message);
+                    }
                 })
                 .catch(err => PageFunctions.showMessage('error', 'There was a problem while fetching rides'));
         })
