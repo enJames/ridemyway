@@ -100,10 +100,18 @@ const ridesController = {
             pickupLocation
         } = req.body;
 
-        const today = new Date();
-        const tomorrow = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate() + 1}`;
+        // Get current date in user's format for comparison
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        let today;
 
-        if (!departureDate >= tomorrow) {
+        if (month > 9) {
+            today = `${now.getFullYear()}-${month}-${now.getDate()}`;
+        } else {
+            today = `${now.getFullYear()}-0${now.getMonth()}-${now.getDate()}`;
+        }
+
+        if (!departureDate >= today) {
             return sendResponse(res, 405, 'fail', 'Departure date is too sudden. Consider changing to a later date');
         }
 
