@@ -39,7 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(resp => resp.json())
                 .then((resp) => {
                     const now = new Date();
-                    const today = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
+                    let month = now.getMonth() + 1;
+                    let today;
+                    if (month > 9) {
+                        today = `${now.getFullYear()}-${month}-${now.getDate()}`;
+                    } else {
+                        today = `${now.getFullYear()}-0${now.getMonth()}-${now.getDate()}`;
+                    }
 
                     if (resp.status === 'success') {
                         const { departureDate } = resp.data.rideDetails;
