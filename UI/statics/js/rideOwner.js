@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
 
+            // DOM hook
+            const profileBody = document.getElementById('profileBody');
+
             if (res.status === 'success') {
                 // activate logout functionality
                 PageFunctions.enableLogout();
@@ -30,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                     .then(resp => resp.json())
                     .then((resp) => {
-                        const profileBody = document.getElementById('profileBody');
                         const {
                             id, firstname, lastname, email, gender, phone, city, state, imgUrl
                         } = resp.data;
@@ -111,6 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         profileBody.innerHTML = `<div class="no-running">Unable to fetch user's information at the moment. Please reload the page.</div>.`
                     })
                     .catch(() => PageFunctions.showMessage('error', 'An error occurred. Please try reloading the page.'));
+            } else {
+                profileBody.innerHTML = `<div class="no-running">To view this page, please <a href="login.html">login<a/> or <a href="signup.html">create an account<a/> if you don't have one.</div>`
             }
         })
         .catch(() => PageFunctions.showMessage('error', 'An error occurred. Please try reloading the page.'));
