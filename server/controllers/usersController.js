@@ -186,11 +186,21 @@ const usersController = {
                 // Update database with image url
                 connectionPool.query(
                     `UPDATE "Users" SET
-                        "imgUrl" = '${result.url}',
-                        "completeness" = '100%'
+                        "imgUrl" = '${result.url}'
                     WHERE "id" = ${userId} RETURNING "imgUrl"`
                 )
-                    .then(imgData => sendResponse(res, 200, 'success', 'Image uploaded', imgData.rows[0].imgUrl));
+                    .then((imgData) => {
+                        const percentage = checkProfileCompleteness(imgData.rows[0]);
+
+                        // Update completeness column
+                        connectionPool.query(
+                            `UPDATE "Users"
+                            SET
+                                "completeness" = '${percentage}'
+                            WHERE "id" = ${userId} RETURNING *`
+                        )
+                            .then(() => sendResponse(res, 200, 'success', 'Image uploaded', imgData.rows[0].imgUrl));
+                    });
             });
     },
     logOutUser: (req, res) => {
