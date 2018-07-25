@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
         .then(res => res.json())
         .then((res) => {
+            PageFunctions.changeNavigation(res.status, 'ride-offer');
             // DOM hook
             const profileBody = document.getElementById('profileBody');
 
