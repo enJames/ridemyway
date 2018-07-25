@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <span>Driver</span>
                                 </div>
                                 <div class="item-details">
-                                    <a href="profile.html?driver=${driver.id}"
+                                    <a href="profile.html?rideOwner=${driver.id}"
                                         <span>${driver.firstname} ${driver.lastname}</span>
                                     </a>
                                 </div>
