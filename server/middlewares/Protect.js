@@ -25,27 +25,6 @@ const Protect = {
 
         return next();
     },
-    checkUserIsLoggedIn: (req, res) => {
-        // if a user is not logged in
-        if (!req.cookies.token) {
-            return sendResponse(res, 401, 'fail', 'Not authenticated');
-        }
-        // for tests
-        // if (req.headers.cookies) {
-        //     const token = req.headers.cookies.split('=')[1].split(';')[0];
-        //     const decoded = jwt.verify(token, process.env.secret);
-        //     req.authData = decoded;
-        //
-        //     return next();
-        // }
-
-        const decoded = jwt.verify(req.cookies.token, process.env.secret);
-        // if token is not valid, allow signup
-        if (!decoded) {
-            return sendResponse(res, 401, 'fail', 'Not authenticated');
-        }
-        return sendResponse(res, 200, 'success', 'Authenticated', decoded);
-    },
     verifyUser: (req, res, next) => {
         if (req.cookies.token) {
             const decoded = jwt.verify(req.cookies.token, process.env.secret);

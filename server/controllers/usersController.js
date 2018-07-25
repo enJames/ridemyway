@@ -126,7 +126,7 @@ const usersController = {
         const { userId } = req.authData;
 
         connectionPool.query(
-            `SELECT "firstname", "lastname", "email", "gender", "phone", "city", "state", "imgUrl", "completeness"
+            `SELECT "id", "firstname", "lastname", "email", "gender", "phone", "city", "state", "imgUrl", "completeness"
             FROM "Users" WHERE "id" = ${userId}`
         )
             .then((userData) => {

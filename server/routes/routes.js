@@ -8,7 +8,7 @@ const routes = express.Router();
 
 // Middlewares
 const {
-    checkParams, verifyUser, authorizeAction, checkUserIsLoggedIn
+    checkParams, verifyUser, authorizeAction
 } = Protect;
 
 const {
@@ -117,8 +117,6 @@ routes.put(
     verifyUser,
     uploadImage
 );
-
-routes.get('/auth/check', checkUserIsLoggedIn);
 
 routes.post('/auth/signup', validateSignupForm, createUser);
 routes.post('/auth/login', validateLoginForm, loginUser);
