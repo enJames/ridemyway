@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
         .then(res => res.json())
         .then((res) => {
+            PageFunctions.changeNavigation(res.status, 'all-offers');
+
             if (res.status === 'success') {
-                PageFunctions.changeNavigation(res.status, 'all-offers');
                 PageFunctions.enableLogout();
                 PageFunctions.displayUserNavigation();
 
