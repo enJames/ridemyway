@@ -5,11 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
         .then(res => res.json())
         .then((res) => {
-            // if user is logged in
-            if (res.status === 'fail' && res.message === 'Not authenticated') {
-                return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
-            }
-
             // DOM hook
             const profileBody = document.getElementById('profileBody');
 
