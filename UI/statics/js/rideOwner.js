@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const profileBody = document.getElementById('profileBody');
                         const {
                             id, firstname, lastname, email, gender, phone, city, state, imgUrl
-                        } = res.data;
+                        } = resp.data;
 
                         if (resp.status === 'success') {
                             const profileBodyHTML = `<div class="profile-section left">
