@@ -172,7 +172,16 @@ body {
 .btn-reject {
     background-color: rgb(100,10,0);
 }
-
+.btn-wrapper {
+    width: 200px;
+    margin: auto auto 30px;
+}
+.btn-wrapper button {
+    font-size: 18px;
+}
+.btn-wrapper button:hover {
+    background-color: rgb(10,100,150);
+}
 
 
 

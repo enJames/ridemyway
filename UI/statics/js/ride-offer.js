@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const getRideUrl = `https://enjames-ridemyway.herokuapp.com/api/v1/rides/${rideId}`;
 
             fetch(getRideUrl)
-                .then(res => res.json())
-                .then((res) => {
+                .then(resp => resp.json())
+                .then((resp) => {
                     const viewRideHook = document.getElementById('viewRideHook');
-                    const { rideDetails, driver } = res.data;
+                    const { rideDetails, driver } = resp.data;
 
                     const ridesHTML = `<div class="ride-offer-wrapper">
                         <div class="ride-offer">
@@ -102,12 +102,31 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                     </div>
-                    <div class="btn-container">
-                        <a href="all-offers.html">Join this ride</a>
+                    <div class="btn-wrapper">
+                        <button type="submit" class="form-btn" id="submit">Join ride <i class="fa fa-spinner fa-spin" id="spinner"></i> </button>
                     </div>`
 
                     // Append rides to div for viewing
                     viewRideHook.innerHTML = ridesHTML;
+
+                    // Get button
+                    const submit = document.getElementById('submit');
+
+                    submit.addEventListener('click', () => {
+                        e.preventDefault();
+
+                        // Display spinner while systems processes request
+                        spinner.style.opacity = '1';
+
+                        joinRideUrl = `https://enjames-ridemyway.herokuapp.com/api/v1/rides/${rideId}/requests`;
+
+                        fetch(joinRideUrl, {
+                            method: 'POST',
+                            credentials: 'include'
+                        })
+                            .then(response = response.json())
+                            .then(response => PageFunctions.showMessage(response.status, response.message));
+                    }, false);
                 })
 
         })
