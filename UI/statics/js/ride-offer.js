@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             method: 'POST',
                             credentials: 'include'
                         })
-                            .then(response = response.json())
+                            .then(response => response.json())
                             .then(response => PageFunctions.showMessage(response.status, response.message));
                     }, false);
                 })
