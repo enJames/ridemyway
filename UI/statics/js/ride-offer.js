@@ -112,8 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Get button
                     const submit = document.getElementById('submit');
 
-                    submit.addEventListener('click', (e) => {
-                        e.preventDefault();
+                    submit.addEventListener('click', (event) => {
+                        event.preventDefault();
 
                         // Display spinner while systems processes request
                         spinner.style.opacity = '1';
