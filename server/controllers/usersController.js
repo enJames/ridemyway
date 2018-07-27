@@ -103,7 +103,7 @@ const usersController = {
                 }
 
                 connectionPool.query(
-                    `SELECT "fromState", "toState", "departureDate", "departureTime" FROM "RideOffers"
+                    `SELECT "RideOffers"."id", "fromState", "toState", "departureDate", "departureTime" FROM "RideOffers"
                     JOIN "JoinRide" ON "RideOffers"."id" = "JoinRide"."rideId"
                     WHERE "JoinRide"."userId" = ${userId}`
                 )
