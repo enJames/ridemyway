@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <p>Departure Time: <span>${PageFunctions.to12hrFormat(runningOffer.departureTime)}</span></p>
                             </div>
                             <div class="btn-container">
-                                <a href="responses.html?rideId=${runningOffer.rideId}">See details</a>
+                                <a href="responses.html?rideId=${runningOffer.id}">See details</a>
                             </div>`
                         } else {
                             runningOfferHTML = `<p class="no-running">${runningOffer}. <a class="no-running-ref" href="create.html">Create a ride</a></p>`;
