@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 PageFunctions.enableLogout();
 
                 const { imgUrl } = res.data;
+                const rideId = window.location.search.substr(-1).split('=')[0];
 
                 // Get image element and set src to current user image
                 const userAvatar = document.getElementById('userAvatar');
@@ -54,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (imgUrl !== null) {
                     userAvatar.src = imgUrl;
                 }
+
+                const
 
                 fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/users/rides/${rideId}/requests`, {
                     method: 'GET',
@@ -197,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             PageFunctions.collapseToggle(view, acceptedResponses, acceptedResponsesContainer);
                         }, false);
                     })
-                    .catch(error => PageFunctions.showMessage(resp.status, resp.message));
+                    .catch(error => console.error('There was an error', error));
             }
         })
         .catch(error => console.error('There was an error', error));
