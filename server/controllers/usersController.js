@@ -170,9 +170,9 @@ const usersController = {
                     `UPDATE "Users"
                     SET
                         "completeness" = '${percentage}'
-                    WHERE "id" = ${userId} RETURNING *`
+                    WHERE "id" = ${userId} RETURNING "completeness"`
                 )
-                    .then(() => sendResponse(res, 200, 'success', 'Profile updated'));
+                    .then(updatedData => sendResponse(res, 200, 'success', 'Profile updated', updatedData.rows[0]));
             });
     },
     uploadImage: (req, res) => {
