@@ -181,7 +181,7 @@ const ridesController = {
 
                 // Search for the Users that requested to join the ride
                 connectionPool.query(
-                    `SELECT "JoinRide"."id" as "resquestId", "JoinRide"."status", "firstname", "lastname", "phone", "imgUrl"
+                    `SELECT "JoinRide"."id" as "requestId", "JoinRide"."status", "Users"."id" as "userId", "firstname", "lastname", "phone", "imgUrl"
                         FROM "JoinRide"
                         JOIN "RideOffers" ON "JoinRide"."rideId" = "RideOffers"."id"
                         JOIN "Users" ON "JoinRide"."userId" = "Users"."id"
