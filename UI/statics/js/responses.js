@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     userAvatar.src = imgUrl;
                 }
 
-                const
-
                 fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/users/rides/${rideId}/requests`, {
                     method: 'GET',
                     credentials: 'include'
