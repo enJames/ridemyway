@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then((res) => {
             PageFunctions.changeNavigation(res.status, 'ride-offer');
+            
+            const { firstname, imgUrl, completeness } = res.data;
 
             if (res.status === 'success') {
                 PageFunctions.enableLogout();
@@ -15,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Get elements
                 const viewRideHook = document.getElementById('viewRideHook');
                 const userAvatar = document.getElementById('userAvatar');
-                const { firstname, imgUrl, completeness } = res.data;
 
                 if (imgUrl !== null) {
                     userAvatar.src = imgUrl;
