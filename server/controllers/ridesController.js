@@ -9,9 +9,9 @@ const ridesController = {
             if (!rideData.rows.length === 0) {
                 return sendResponse(res, 404, 'fail', 'No ride offers yet');
             }
-            return sendResponse(res, 200, 'success', 'all ride offers', rideData.rows);
+            return sendResponse(res, 200, 'success', 'All ride offers', rideData.rows);
         })
-        .catch(error => sendResponse(res, 500, 'error', 'connection error while fetching rides', error)),
+        .catch(error => sendResponse(res, 500, 'error', 'Connection error while fetching rides', error)),
     getARideOffer: (req, res) => {
         const { rideId } = req.params;
         // Search for the ride
@@ -21,7 +21,7 @@ const ridesController = {
 
                 // If ride does not
                 if (!rideDetails) {
-                    return sendResponse(res, 404, 'fail', 'ride does not exist');
+                    return sendResponse(res, 404, 'fail', 'Ride does not exist');
                 }
 
                 connectionPool.query(
@@ -37,23 +37,38 @@ const ridesController = {
 
                         return sendResponse(res, 200, 'success', 'Ride found', responseObject);
                     });
-            })
-            .catch(error => sendResponse(res, 500, 'error', 'connection error while fetching ride', error));
+            });
     },
     joinRide: (req, res) => {
         const { rideId } = req.params;
         const { userId } = req.authData;
         // Check that ride exists
-        connectionPool.query(`SELECT "userId" FROM "RideOffers" WHERE "id" = '${rideId}'`)
+        connectionPool.query(
+            `SELECT "availableSeats", "status", "userId" FROM "RideOffers"
+                WHERE "id" = '${rideId}'`
+        )
             .then((rideData) => {
                 if (!rideData.rows[0]) {
-                    return sendResponse(res, 404, 'fail', 'ride does not exist');
+                    return sendResponse(res, 404, 'fail', 'Ride does not exist');
                 }
                 const rideCreatorId = rideData.rows[0].userId;
+                const {
+                    availableSeats, status
+                } = rideData.rows[0];
 
                 // Check that user is not trying to join his own ride
                 if (rideCreatorId === userId) {
                     return sendResponse(res, 405, 'fail', 'You cannot join your own ride');
+                }
+
+                // Check if ride is fully booked
+                if (availableSeats === 0 || availableSeats === '0') {
+                    return sendResponse(res, 403, 'fail', 'Ride is fully booked');
+                }
+
+                // Check if ride has expired
+                if (status === 'expired') {
+                    return sendResponse(res, 403, 'fail', 'Ride is expired');
                 }
 
                 // Retrieve ride creators' firstname and lastname
@@ -69,18 +84,18 @@ const ridesController = {
                         )
                             .then((joinRideData) => {
                                 // check if results were returned
-                                if (!joinRideData.rows[0]) {
-                                    // Persist join request to database
-                                    connectionPool.query(
-                                        `INSERT INTO "JoinRide" ("rideId", "userId", "status")
-                                        VALUES ('${rideId}', '${userId}', 'pending')`
-                                    )
-                                        .then(() => {
-                                            const response = `Your join request has been processed and its pending ${firstname}'s response`;
-                                            return sendResponse(res, 201, 'success', response);
-                                        });
+                                if (joinRideData.rows.length > 0) {
+                                    return sendResponse(res, 405, 'fail', 'You already joined this ride');
                                 }
-                                return sendResponse(res, 405, 'fail', 'You already joined this ride');
+                                // Persist join request to database
+                                connectionPool.query(
+                                    `INSERT INTO "JoinRide" ("rideId", "userId", "status")
+                                        VALUES ('${rideId}', '${userId}', 'pending')`
+                                )
+                                    .then(() => {
+                                        const response = `Your join request has been processed and its pending ${firstname}'s response`;
+                                        return sendResponse(res, 201, 'success', response);
+                                    });
                             });
                     });
             });
@@ -103,23 +118,23 @@ const ridesController = {
         // Get current date in user's format for comparison
         const now = new Date();
         const month = now.getMonth() + 1;
-        let today;
+        let tomorrow;
 
         if (month > 9) {
-            today = `${now.getFullYear()}-${month}-${now.getDate()}`;
+            tomorrow = `${now.getFullYear()}-${month}-${now.getDate() + 1}`;
         } else {
-            today = `${now.getFullYear()}-0${now.getMonth()}-${now.getDate()}`;
+            tomorrow = `${now.getFullYear()}-0${month}-${now.getDate() + 1}`;
         }
 
-        if (!departureDate >= today) {
-            return sendResponse(res, 405, 'fail', 'Departure date is too sudden. Consider changing to a later date');
+        if (departureDate < tomorrow) {
+            return sendResponse(res, 405, 'fail', 'Departure is in the past or too sudden. Consider changing to a later date');
         }
 
         // check that user has no pending ride offer
-        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "userId" = ${userId} AND "departureDate" >= NOW()::date`)
+        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "userId" = '${userId}' AND "departureDate" >= NOW()::date`)
             .then((rideData) => {
                 if (rideData.rows.length > 0) {
-                    return sendResponse(res, 200, 'fail', 'You still have a pending ride offer');
+                    return sendResponse(res, 405, 'fail', 'You still have a pending ride offer');
                 }
 
                 // If no pending ride offer, create ride offer
@@ -131,9 +146,12 @@ const ridesController = {
                         "toCity",
                         "price",
                         "seats",
+                        "acceptedRequests",
+                        "availableSeats",
                         "departureDate",
                         "departureTime",
                         "pickupLocation",
+                        "status",
                         "userId"
                     ) VALUES (
                         '${fromState}',
@@ -142,9 +160,12 @@ const ridesController = {
                         '${toCity}',
                         '${price}',
                         '${seats}',
+                        '0',
+                        '${seats}',
                         '${departureDate}',
                         '${departureTime}',
                         '${pickupLocation}',
+                        'Running',
                         '${userId}'
                     )`
                 )
@@ -160,7 +181,7 @@ const ridesController = {
 
                 // Search for the Users that requested to join the ride
                 connectionPool.query(
-                    `SELECT "firstname", "lastname", "phone", "imgUrl"
+                    `SELECT "JoinRide"."id" as "resquestId", "JoinRide"."status", "firstname", "lastname", "phone", "imgUrl"
                         FROM "JoinRide"
                         JOIN "RideOffers" ON "JoinRide"."rideId" = "RideOffers"."id"
                         JOIN "Users" ON "JoinRide"."userId" = "Users"."id"
@@ -174,22 +195,20 @@ const ridesController = {
                         }
 
                         // Ride offer and requested users
-                        const result = {
+                        const responseObject = {
                             rideOffer,
                             requestedUsers
                         };
-                        return sendResponse(res, 200, 'success', `found ${requestedUsers.length} requests`, result);
-                    })
-                    .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
-            })
-            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
+                        return sendResponse(res, 200, 'success', `found ${requestedUsers.length} requests`, responseObject);
+                    });
+            });
     },
     acceptRejectRideRequest: (req, res) => {
         const { rideId, requestId } = req.params;
         const { action } = req.body;
 
         if (action !== 'accept' && action !== 'decline') {
-            return sendResponse(res, 400, 'fail', 'action must be explicitly stated as either "accept" or "decline"');
+            return sendResponse(res, 400, 'fail', 'Action must be explicitly stated as either "accept" or "decline"');
         }
 
         connectionPool.query(
@@ -198,7 +217,7 @@ const ridesController = {
             .then((requestData) => {
                 const request = requestData.rows[0];
                 if (!request) {
-                    return sendResponse(res, 404, 'fail', 'request does not exist');
+                    return sendResponse(res, 404, 'fail', 'Request does not exist');
                 }
 
                 if (request.status === 'pending') {
@@ -208,17 +227,53 @@ const ridesController = {
                             SET "status" = 'accepted'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
-                            .then(() => sendResponse(res, 200, 'success', 'accepted ride request successfully'));
+                            .then(() => {
+                                connectionPool.query(
+                                    `SELECT "seats", "acceptedRequests", "userId" FROM "RideOffers"
+                                        WHERE "id" = '${rideId}' AND "status" = 'Running'`
+                                )
+                                    .then((rideData) => {
+                                        const {
+                                            seats, acceptedRequests, userId
+                                        } = rideData.rows[0];
+                                        const seatsInt = parseInt(seats, 10);
+                                        const acceptedRequestsInt = parseInt(acceptedRequests, 10);
+                                        const newAcceptedRequests = acceptedRequestsInt + 1;
+
+                                        const newAvailableSeats = seatsInt - newAcceptedRequests;
+
+                                        connectionPool.query(
+                                            `UPDATE "RideOffers" SET
+                                                "acceptedRequests" = ${newAcceptedRequests},
+                                                "availableSeats" = ${newAvailableSeats}
+                                            WHERE rideId = ${rideId} AND "userId" = ${userId}`
+                                        )
+                                            .then(() => {
+                                                connectionPool.query(
+                                                    `SELECT "firstname", "lastname" FROM "Users"
+                                                        WHERE "id" = ${request.userId}`
+                                                )
+                                                    .then((userData) => {
+                                                        const {
+                                                            firstname, lastname
+                                                        } = userData.rows[0];
+                                                        sendResponse(
+                                                            res, 200, 'success', `${firstname} ${lastname} has been added to your ride successfully.`
+                                                        );
+                                                    });
+                                            });
+                                    });
+                            });
                     }
                     if (action === 'decline') {
                         connectionPool.query(
                             `UPDATE "JoinRide" SET "status" = 'declined'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
-                            .then(() => sendResponse(res, 200, 'success', 'declined ride request successfully'));
+                            .then(() => sendResponse(res, 200, 'success', 'Declined ride request successfully'));
                     }
 
-                    return sendResponse(res, 404, 'fail', 'request not understood');
+                    return sendResponse(res, 404, 'fail', 'Request not understood');
                 }
 
                 if (request.status === 'accept') {
@@ -230,23 +285,49 @@ const ridesController = {
                             `UPDATE "JoinRide" SET "status" = 'declined'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
-                            .then(() => sendResponse(res, 200, 'success', 'declined ride request successfully'));
+                            .then(() => {
+                                connectionPool.query(
+                                    `SELECT "seats", "acceptedRequests", "userId" FROM "RideOffers"
+                                        WHERE "id" = '${rideId}' AND "status" = 'Running'`
+                                )
+                                    .then((rideData) => {
+                                        const {
+                                            seats, acceptedRequests, userId
+                                        } = rideData.rows[0];
+                                        const seatsInt = parseInt(seats, 10);
+                                        const acceptedRequestsInt = parseInt(acceptedRequests, 10);
+                                        const newAcceptedRequests = acceptedRequestsInt - 1;
+
+                                        const newAvailableSeats = seatsInt - newAcceptedRequests;
+
+                                        connectionPool.query(
+                                            `UPDATE "RideOffers" SET
+                                                "acceptedRequests" = ${newAcceptedRequests},
+                                                "availableSeats" = ${newAvailableSeats}
+                                            WHERE rideId = ${rideId} AND "userId" = ${userId}`
+                                        )
+                                            .then(() => {
+                                                connectionPool.query(
+                                                    `SELECT "firstname", "lastname" FROM "Users"
+                                                        WHERE "id" = ${request.userId}`
+                                                )
+                                                    .then((userData) => {
+                                                        const {
+                                                            firstname, lastname
+                                                        } = userData.rows[0];
+                                                        sendResponse(
+                                                            res, 200, 'success', `${firstname} ${lastname} has been removed from your successfully.`
+                                                        );
+                                                    });
+                                            });
+                                    });
+                            });
                     }
-                    return sendResponse(res, 400, 'fail', 'request not understood');
+                    return sendResponse(res, 400, 'fail', 'Request not understood');
                 }
 
                 // if request.status is decline
-                if (action === 'accept') {
-                    connectionPool.query(
-                        `UPDATE "JoinRide"
-                        SET "status" = 'accepted'
-                        WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
-                    )
-                        .then(() => sendResponse(res, 200, 'success', 'accepted ride request successfully'));
-                }
-                if (action === 'decline') {
-                    return sendResponse(res, 400, 'fail', 'you already declined request');
-                }
+                return sendResponse(res, 400, 'fail', 'Declined requests cannot be accepted again');
             });
     },
     updateRideOffer: (req, res) => {
@@ -259,10 +340,13 @@ const ridesController = {
             toState,
             toCity,
             price,
+            seats,
             departureDate,
             departureTime,
             pickupLocation
         } = req.body;
+
+        // Query database to get number of accepted requests
 
         connectionPool.query(
             `UPDATE "RideOffers" SET
@@ -271,6 +355,7 @@ const ridesController = {
                 "toState"='${toState}',
                 "toCity"='${toCity}',
                 "price"='${price}',
+                "seats"='${seats}',
                 "departureDate"='${departureDate}',
                 "departureTime"='${departureTime}',
                 "pickupLocation"='${pickupLocation}'

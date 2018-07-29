@@ -55,22 +55,20 @@ describe('--- Rides route testing ----', () => {
                 .end((req, res) => {
                     res.should.have.status(404);
                     assert.equal(res.body.status, 'fail');
-                    assert.equal(res.body.message, 'ride does not exist');
+                    assert.equal(res.body.message, 'Ride does not exist');
                     done();
                 });
         });
-        /*
         it('On error:: incorrect id', (done) => {
             chai
                 .request(app)
                 .get('/api/v1/rides/hey')
                 .end((req, res) => {
-                    res.should.have.status(401);
-                    assert.equal(res.body.message, 'Invalid ride ID');
-                    assert.exists(res.body.responseObject);
+                    res.should.have.status(400);
+                    assert.exists(res.body.status);
+                    assert.exists(res.body.message);
                     done();
                 });
         });
-        */
     });
 });
