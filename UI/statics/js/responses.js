@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
 
                         // If no pending requests after looping
-                        if (acceptedRequestsHTML.length === 0) {
+                        if (pendingRequestsHTML.length === 0) {
                             pendingRequestsHTML = `<div class="no-running">There are currently no pending requests for this ride.</div>`;
                         }
                         const rideOfferDetailsHTML = `<div class="ride-offer-wrapper">
