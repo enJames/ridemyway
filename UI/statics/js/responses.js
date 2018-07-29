@@ -199,5 +199,5 @@ document.addEventListener('DOMContentLoaded', () => {
                     .catch(error => PageFunctions.showMessage(resp.status, resp.message));
             }
         })
-        .catch(error => PageFunctions.showMessage('error', error));
+        .catch(error => PageFunctions.showMessage('error', 'There was an error'));
 });
