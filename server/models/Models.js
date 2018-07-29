@@ -24,9 +24,12 @@ const Models = () => {
                 "toCity" VARCHAR NOT NULL,
                 "price" VARCHAR NOT NULL,
                 "seats" INTEGER NOT NULL,
+                "acceptedRequests" INTEGER,
+                "availableSeats" INTEGER,
                 "departureDate" date NOT NULL,
                 "departureTime" TIME NOT NULL,
                 "pickupLocation" VARCHAR NOT NULL,
+                "status" VARCHAR NOT NULL,
                 "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
                 "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)

@@ -10,52 +10,56 @@ should();
 
 
 describe('--- auth route testing ----', () => {
-    /*
     describe('/auth/signup: POST: Sign up a user', () => {
-        it('On success:: All good: Sign up successful', (done) => {
+        /* it('On success:: All good: Sign up successful', (done) => {
             chai
                 .request(app)
                 .post('/api/v1/auth/signup')
                 .set('Accept', 'application/json')
                 .send({
                     firstname: 'Sohn',
-                    lastname: 'Clohn',
-                    gender: 'Male',
                     email: 'sohn@clohn.com',
                     password: 'notess',
-                    repassword: 'notess',
+                    confirmPassword: 'notess',
+                    /* lastname: 'Clohn',
+                    gender: 'Male',
                     phone: '75264230001',
                     city: 'Iklinaku',
-                    state: 'Cross River'
+                    state: 'Cross River' //
                 })
                 .end((req, res) => {
                     res.should.have.status(201);
                     assert.equal(res.body.status, 'success');
-                    assert.equal(res.body.data, null);
+                    assert.equal(res.body.message, 'Your account has been created');
+                    done();
+                });
+        }); */
+        it('On success:: All good: Sign up successful', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/auth/signup')
+                .set('Accept', 'application/json')
+                .send({
+                    firstname: 'King',
+                    email: 'kig@enejo.com',
+                    password: 'notess',
+                    confirmPassword: 'notess',
+                    /* lastname: 'Clohn',
+                    gender: 'Male',
+                    phone: '75264230001',
+                    city: 'Iklinaku',
+                    state: 'Cross River' */
+                })
+                .end((req, res) => {
+                    res.should.have.status(500);
+                    assert.equal(res.body.status, 'error');
+                    assert.equal(res.body.message, 'Email already exists');
                     done();
                 });
         });
-    }); */
+    });
     describe('/auth/login: POST: User Login', () => {
-        // let theCookie;
-        //
-        // before((done) => {
-        //     chai
-        //         .request(app)
-        //         .post('/api/v1/auth/login')
-        //         .send({
-        //             email: 'king@enejo.com',
-        //             password: 'notess'
-        //         })
-        //         .type('form')
-        //         .end((req, res) => {
-        //             theCookie = res.header['set-cookie'];
-        //             res.should.have.status(200);
-        //             assert.equal(res.body.status, 'success');
-        //             done();
-        //         });
-        // });
-        it('On error:: deny access', (done) => {
+        it('On error:: deny access: email not registered', (done) => {
             chai
                 .request(app)
                 .post('/api/v1/auth/login')
@@ -67,7 +71,21 @@ describe('--- auth route testing ----', () => {
                     res.should.have.status(401);
                     assert.equal(res.body.status, 'fail');
                     assert.equal(res.body.message, 'Email or password incorrect');
-                    assert.equal(res.body.data, null);
+                    done();
+                });
+        });
+        it('On error:: deny access: password incorrect', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/auth/login')
+                .send({
+                    email: 'king@enejo.com',
+                    password: 'note'
+                })
+                .end((req, res) => {
+                    res.should.have.status(401);
+                    assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'Email or password incorrect');
                     done();
                 });
         });

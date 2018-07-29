@@ -41,9 +41,14 @@ const usersController = {
                         maxAge: (1000 * 60 * 60 * 2)
                     });
 
-                    return sendResponse(res, 201, 'success', 'your account has been created');
+                    return sendResponse(res, 201, 'success', 'Your account has been created');
                 }))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error', error));
+            .catch((error) => {
+                if (error.detail.indexOf('email') !== -1) {
+                    return sendResponse(res, 500, 'error', 'Email already exists');
+                }
+                return sendResponse(res, 500, 'error', 'Error while communicating with the database', error);
+            });
     },
     loginUser: (req, res) => {
         const { email, password } = req.body;

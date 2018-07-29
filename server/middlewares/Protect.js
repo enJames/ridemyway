@@ -12,14 +12,14 @@ const Protect = {
         // check rideId
         if (rideId) {
             if (!numberRegex.test(rideId)) {
-                return sendResponse(res, 400, 'fail', 'ride id not recognised');
+                return sendResponse(res, 400, 'fail', 'Invalid ride id');
             }
         }
 
         // check requestId
         if (requestId) {
             if (!numberRegex.test(requestId)) {
-                return sendResponse(res, 400, 'fail', 'request id not recognised');
+                return sendResponse(res, 400, 'fail', 'Invalid request id');
             }
         }
 

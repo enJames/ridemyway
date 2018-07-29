@@ -29,7 +29,31 @@ describe('Logged in category', () => {
                     done();
                 });
         });
-        it('On success:: create ride: users/rides', (done) => {
+        // it('On success:: users/rides: create a ride', (done) => {
+        //     chai
+        //         .request(app)
+        //         .post('/api/v1/users/rides')
+        //         .set('cookies', theCookie)
+        //         .type('form')
+        //         .send({
+        //             fromState: 'Benue',
+        //             fromCity: 'Ugbokolo',
+        //             toState: 'Enugu',
+        //             toCity: 'Obolafor',
+        //             price: 800,
+        //             seats: 4,
+        //             departureDate: '2018-07-30',
+        //             departureTime: '10:00am',
+        //             pickupLocation: 'Ugbokolo Market'
+        //         })
+        //         .end((req, res) => {
+        //             expect(res).to.have.status(201);
+        //             assert.equal(res.body.status, 'success');
+        //             assert.equal(res.body.message, 'Ride offer created');
+        //             done();
+        //         });
+        // });
+        it('On error:: users/rides: Have a pending rideOffer', (done) => {
             chai
                 .request(app)
                 .post('/api/v1/users/rides')
@@ -42,13 +66,14 @@ describe('Logged in category', () => {
                     toCity: 'Obolafor',
                     price: 800,
                     seats: 4,
-                    departureDate: '2018-07-02',
+                    departureDate: '2018-07-30',
                     departureTime: '10:00am',
                     pickupLocation: 'Ugbokolo Market'
                 })
                 .end((req, res) => {
-                    expect(res).to.have.status(201);
-                    assert.equal(res.body.status, 'success');
+                    expect(res).to.have.status(405);
+                    assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'You still have a pending ride offer');
                     done();
                 });
         });
@@ -66,11 +91,12 @@ describe('Logged in category', () => {
         it('On success:: users/rides/1/requests: accessing a ride you do not own should fail', (done) => {
             chai
                 .request(app)
-                .get('/api/v1/users/rides/2/requests')
+                .get('/api/v1/users/rides/1/requests')
                 .set('cookies', theCookie)
                 .end((req, res) => {
                     expect(res).to.have.status(405);
                     assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'Not authorized');
                     done();
                 });
         });
@@ -83,14 +109,14 @@ describe('Logged in category', () => {
                 .end((req, res) => {
                     expect(res).to.have.status(400);
                     assert.equal(res.body.status, 'fail');
-                    assert.equal(res.body.message, 'ride id not recognised');
+                    assert.equal(res.body.message, 'Invalid ride id');
                     done();
                 });
         });
         it('On success:: Make a join ride request: already joined', (done) => {
             chai
                 .request(app)
-                .post('/api/v1/rides/2/requests')
+                .post('/api/v1/rides/1/requests')
                 .send({})
                 .set('cookies', theCookie)
                 .end((req, res) => {
@@ -100,10 +126,10 @@ describe('Logged in category', () => {
                     done();
                 });
         });
-        it('On error:: users/rides/1/requests: Ride exists, no requests', (done) => {
+        it('On error:: users/rides/2/requests: Ride exists, no requests', (done) => {
             chai
                 .request(app)
-                .get('/api/v1/users/rides/1/requests')
+                .get('/api/v1/users/rides/2/requests')
                 .set('cookies', theCookie)
                 .end((req, res) => {
                     expect(res).to.have.status(404);
@@ -112,10 +138,10 @@ describe('Logged in category', () => {
                     done();
                 });
         });
-        it('On error:: rides/1/requests: cannot join own ride', (done) => {
+        it('On error:: rides/2/requests: cannot join own ride', (done) => {
             chai
                 .request(app)
-                .post('/api/v1/rides/1/requests')
+                .post('/api/v1/rides/2/requests')
                 .set('cookies', theCookie)
                 .end((req, res) => {
                     expect(res).to.have.status(405);
