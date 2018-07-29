@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (res.status === 'fail') {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html');
             }
+
+            PageFunctions.enableLogout();
+            
             // Get image element and set src to current user image
             const userAvatar = document.getElementById('userAvatar');
             const imagePreview = document.getElementById('imagePreview');
