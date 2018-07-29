@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (month > 9) {
                                 today = `${now.getFullYear()}-${month}-${now.getDate()}`;
                             } else {
-                                today = `${now.getFullYear()}-0${now.getMonth()}-${now.getDate()}`;
+                                today = `${now.getFullYear()}-0${month}-${now.getDate()}`;
                             }
 
                             // prevent abrupt ride Offers
