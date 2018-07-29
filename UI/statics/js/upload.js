@@ -64,7 +64,5 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     })
             }, false);
-
-            PageFunctions.toggleProfileIndicatorText(res.data.completeness);
         });
 }, false);
