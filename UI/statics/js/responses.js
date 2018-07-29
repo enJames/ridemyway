@@ -5,11 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const userNavToggler = document.getElementById('userNavToggler');
     const userNav = document.getElementById('userNav');
 
-    // Elements in responses page
-
-    const acceptedResponses = document.getElementById('acceptedResponses'); // Collapsible Div
-    const acceptedResponsesContainer = document.getElementById('acceptedResponsesContainer'); // Child Div
-
     // Toggle collapse
     navigationToggler.addEventListener('click', () => {
         PageFunctions.collapseToggle(navigationToggler, navigationDiv, navigationItemsWrapper)
@@ -191,6 +186,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         rideOfferDetailsHook.innerHTML = rideOfferDetailsHTML;
                         pendingRequestsHook.innerHTML = pendingRequestsHTML;
 
+                        // Elements in responses page                    
+                        const acceptedResponses = document.getElementById('acceptedResponses'); // Collapsible Div
+                        const acceptedResponsesContainer = document.getElementById('acceptedResponsesContainer'); // Child Div
                         const view = document.getElementById('view'); // View button
 
                         //Accepted Responses toggler
