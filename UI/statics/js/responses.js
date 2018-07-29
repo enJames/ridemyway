@@ -73,34 +73,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             // Get requests
                             requestedUsers.forEach((joinRequest) => {
-                                const { requestId, status, firstname, lastname, phone, imgUrl } = joinRequest;
+                                const { requestId, status, userId, firstname, lastname, phone, imgUrl } = joinRequest;
 
                                 if (status === 'accept') {
                                     acceptedRequestsHTML += `<div class="responses-wrapper">
-                                                <a href="requests.html?requestId=${requestId}">
-                                                    <div class="responses">
-                                                        <div class="responses-user">
-                                                            <div class="responses-user-name">
-                                                                <div class="avatar">
-                                                                    <img src="${imgUrl}" alt="Avatar">
-                                                                </div>
-                                                                <div class="user-name">
-                                                                    <h3>
-                                                                        <a href="requests.html?requestId=${requestId}">
-                                                                            ${firstname} ${lastname}
-                                                                        </a>
-                                                                    </h3>
-                                                                    <p>${phone}</p>
-                                                                </div>
+                                                <div class="responses">
+                                                    <div class="responses-user">
+                                                        <div class="responses-user-name">
+                                                            <div class="avatar">
+                                                                <img src="${imgUrl}" alt="Avatar">
                                                             </div>
-                                                        </div>
-                                                        <div class="responses-btn">
-                                                            <div class="responses-btn-decline-for-accepted">
-                                                                <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
+                                                            <div class="user-name">
+                                                                <h3>
+                                                                    <a href="user-profile.html?userId=${userId}">
+                                                                        ${firstname} ${lastname}
+                                                                    </a>
+                                                                </h3>
+                                                                <p>${phone}</p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                    <div class="responses-btn">
+                                                        <div class="responses-btn-decline-for-accepted">
+                                                            <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>`;
                                 }
                                 if (status === 'pending') {
@@ -113,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                             </div>
                                                             <div class="user-name">
                                                                 <h3>
-                                                                    <a href="requests.html?requestId=${requestId}">
+                                                                    <a href="user-profile.html?userId=${userId}">
                                                                         ${firstname} ${lastname}
                                                                     </a>
                                                                 </h3>

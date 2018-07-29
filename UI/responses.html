@@ -79,33 +79,11 @@
                 </div>
             </div>
         </nav>
+        <p id="message"></p>
         <div class="view-offer" id="rideOfferDetailsHook">
-            <div class="responses-wrapper">
-                        <div class="responses">
-                            <div class="responses-user">
-                                <div class="responses-user-name">
-                                    <div class="avatar">
-                                        <img src="${imgUrl}" alt="Avatar">
-                                    </div>
-
-                                    <div class="user-name">
-                                        <h3><a href="requests.html?requestId=${requestId}">
-                                            ${firstname} ${lastname}
-                                        </a></h3>
-                                        <p>${phone}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="responses-btn">
-                                <div class="responses-btn-accept">
-                                    <button type="button" class="btn-accept" value="accept" id="${requestId}">Accept</button>
-                                </div>
-                                <div class="responses-btn-decline">
-                                    <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="loading">
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
         </div>
         <!-- Pending Ride Request -->
         <div class="view-offer">
