@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         pendingRequestsHook.innerHTML = pendingRequestsHTML;
 
                         const view = document.getElementById('view'); // View button
-                        
+
                         //Accepted Responses toggler
                         view.addEventListener('click', () => {
                             PageFunctions.collapseToggle(view, acceptedResponses, acceptedResponsesContainer);
@@ -199,5 +199,5 @@ document.addEventListener('DOMContentLoaded', () => {
                     .catch(error => PageFunctions.showMessage(resp.status, resp.message));
             }
         })
-        .catch(error => PageFunctions.showMessage(res.status, res.message));
+        .catch(error => PageFunctions.showMessage('error', error));
 });
