@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             fromState, fromCity, toState, toCity, price, seats, acceptedRequests, availableSeats
                         } = rideOffer;
                         const { requestId, status, firstname, lastname, phone, imgUrl } = requestedUsers;
-                        const noAccepted
                         let acceptedRequestsHTML = '';
                         let pendingRequestsHTML = '';
 
