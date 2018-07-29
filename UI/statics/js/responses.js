@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </div>
                                     </div>
                                     <div class="offer-price">
-                                        <h3>₦<span>${price.toLocaleString()}</span></h3>
+                                        <h3>₦<span>${parseInt(price, 10).toLocaleString()}</span></h3>
                                     </div>
                                 </div>
                             </div>
