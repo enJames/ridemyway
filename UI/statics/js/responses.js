@@ -64,19 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then((resp) => {
                         const rideOfferDetailsHook = document.getElementById('rideOfferDetailsHook');
                         const pendingRequestsHook = document.getElementById('pendingRequestsHook');
+                        let acceptedRequestsHTML = '';
+                        let pendingRequestsHTML = '';
+
+                        if (!resp.data) {
+                            rideOfferDetailsHook.innerHTML = `<div class="no-running">${resp.message}</div>`;
+                            pendingRequestsHook.innerHTML = `<div class="no-running">${resp.message}</div>`;
+                            return;
+                        }
                         const { rideOffer, requestedUsers } = resp.data;
                         const {
                             fromState, fromCity, toState, toCity, price, seats, acceptedRequests, availableSeats
                         } = rideOffer;
                         const { requestId, status, firstname, lastname, phone, imgUrl } = requestedUsers;
-                        let acceptedRequestsHTML = '';
-                        let pendingRequestsHTML = '';
-
-                        if (typeof(requestedUsers) === 'string') {
-                            rideOfferDetailsHook.innerHTML = `<div class="no-running">${requestedUsers}</div>`;
-                            pendingRequestsHook.innerHTML = `<div class="no-running">${requestedUsers}</div>`;
-                            return;
-                        }
 
                         // Get requests
                         requestedUsers.forEach((joinRequest) => {
