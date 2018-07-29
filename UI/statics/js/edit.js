@@ -143,8 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(url, fetchDataObject)
                     .then(resp => resp.json())
                     .then((resp) => {
-                        PageFunctions.toggleProfileIndicatorText(res.data.completeness);
-                        return PageFunctions.showMessage(resp.status, resp.message);
+                        PageFunctions.toggleProfileIndicatorText(resp.data.completeness);
+                        PageFunctions.showMessage(resp.status, resp.message);
                     })
                     .catch(error => console.error('There was a problem', error));
             }, false);
