@@ -44,21 +44,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 return location.replace('https://enjames.github.io/ridemyway/UI/login.html?auth=false');
             }
             if (res.status === 'success') {
-                PageFunctions.changeNavigation('success', 'responses');
-                PageFunctions.displayUserNavigation();
                 PageFunctions.enableLogout();
+
+                const { imgUrl } = res.data;
 
                 // Get image element and set src to current user image
                 const userAvatar = document.getElementById('userAvatar');
 
                 if (imgUrl !== null) {
-                    userAvatar.src = res.data.imgUrl;
+                    userAvatar.src = imgUrl;
                 }
 
-                const { firstname } = res.data;
-
-                fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/users/rides/${rideId}/requests`)
-                    .then(resp.json())
+                fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/users/rides/${rideId}/requests`, {
+                    method: 'GET',
+                    credentials: 'include'
+                })
+                    .then(resp => resp.json())
                     .then((resp) => {
                         const rideOfferDetailsHook = document.getElementById('rideOfferDetailsHook');
                         const pendingRequestsHook = document.getElementById('pendingRequestsHook');
