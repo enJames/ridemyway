@@ -2,6 +2,9 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" href="statics/img/logormw.png">
         <link rel="stylesheet" href="statics/css/master.css">
@@ -9,7 +12,7 @@
         <link rel="stylesheet" href="statics/css/general.css">
         <link rel="stylesheet" href="statics/css/dashboard.css">
         <link rel="stylesheet" href="statics/css/ride-offer.css">
-        <link rel="stylesheet" href="statics/css/responses.css">
+        <link rel="stylesheet" href="statics/css/profile.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Ride offer — Ride My Way</title>
@@ -24,10 +27,6 @@
             </button>
             <div class="navigation" id="navigationId">
                 <div class="navigation-items-wrapper">
-                    <form class="navigation-form" method="POST">
-                        <input type="search" id="searchInput" placeholder="Search a ride">
-                        <button type="submit" id="submit">Search</button>
-                    </form>
                     <ul class="navigation-ul">
                         <li class="navigation-li"> <a href="dashboard.html">Dashboard</a></li>
                         <li class="navigation-li"><a href="all-offers.html">Ride Offers</a></li>
@@ -79,40 +78,19 @@
                 </div>
             </div>
         </nav>
-        <div class="view-offer" id="rideOfferDetailsHook">
-            <div class="responses-wrapper">
-                        <div class="responses">
-                            <div class="responses-user">
-                                <div class="responses-user-name">
-                                    <div class="avatar">
-                                        <img src="${imgUrl}" alt="Avatar">
-                                    </div>
-
-                                    <div class="user-name">
-                                        <h3><a href="requests.html?requestId=${requestId}">
-                                            ${firstname} ${lastname}
-                                        </a></h3>
-                                        <p>${phone}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="responses-btn">
-                                <div class="responses-btn-accept">
-                                    <button type="button" class="btn-accept" value="accept" id="${requestId}">Accept</button>
-                                </div>
-                                <div class="responses-btn-decline">
-                                    <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        </div>
-        <!-- Pending Ride Request -->
-        <div class="view-offer">
-            <div class="header text-center">
-                <h2>Pending ride requests</h2>
+        <div class="profile">
+            <p id="message"></p>
+            <div class="profile-completeness">
+                <p id="profileCompletenessIndicator">88%</p>
+                <div id="description">
+                    <p>Profile completeness:</p>
+                    <a href="edit.html">Update</a>
+                </div>
             </div>
-            <div class="responses-container" id="pendingRequestsHook">
+            <div class="profile-header">
+                <h2>Ride Creator</h2>
+            </div>
+            <div class="profile-body" id="profileBody">
                 <div class="loading">
                     <i class="fa fa-spinner fa-spin"></i>
                 </div>
@@ -121,20 +99,10 @@
         <footer>
             <div class="container">
                 <h3>Footer Information</h3>
-                <div class="footer-wrapper">
-                    <div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                </div>
             </div>
         </footer>
         <script src="statics/js/PageFunctions.js"></script>
-        <script src="statics/js/responses.js"></script>
+        <script src="statics/js/otherPages.js"></script>
+        <script src="statics/js/userProfile.js"></script>
     </body>
 </html>

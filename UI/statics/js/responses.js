@@ -85,7 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                     <img src="${imgUrl}" alt="Avatar">
                                                                 </div>
                                                                 <div class="user-name">
-                                                                    <h3>${firstname} ${lastname}</h3>
+                                                                    <h3>
+                                                                        <a href="requests.html?requestId=${requestId}">
+                                                                            ${firstname} ${lastname}
+                                                                        </a>
+                                                                    </h3>
                                                                     <p>${phone}</p>
                                                                 </div>
                                                             </div>
@@ -101,29 +105,31 @@ document.addEventListener('DOMContentLoaded', () => {
                                 }
                                 if (status === 'pending') {
                                     pendingRequestsHTML += `<div class="responses-wrapper">
-                                                <a href="requests.html?requestId=${requestId}">
-                                                    <div class="responses">
-                                                        <div class="responses-user">
-                                                            <div class="responses-user-name">
-                                                                <div class="avatar">
-                                                                    <img src="${imgUrl}" alt="Avatar">
-                                                                </div>
-                                                                <div class="user-name">
-                                                                    <h3>${firstname} ${lastname}</h3>
-                                                                    <p>${phone}</p>
-                                                                </div>
+                                                <div class="responses">
+                                                    <div class="responses-user">
+                                                        <div class="responses-user-name">
+                                                            <div class="avatar">
+                                                                <img src="${imgUrl}" alt="Avatar">
                                                             </div>
-                                                        </div>
-                                                        <div class="responses-btn">
-                                                            <div class="responses-btn-accept">
-                                                                <button type="button" class="btn-accept" value="accept" id="${requestId}">Accept</button>
-                                                            </div>
-                                                            <div class="responses-btn-decline">
-                                                                <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
+                                                            <div class="user-name">
+                                                                <h3>
+                                                                    <a href="requests.html?requestId=${requestId}">
+                                                                        ${firstname} ${lastname}
+                                                                    </a>
+                                                                </h3>
+                                                                <p>${phone}</p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                    <div class="responses-btn">
+                                                        <div class="responses-btn-accept">
+                                                            <button type="button" class="btn-accept" value="accept" id="${requestId}">Accept</button>
+                                                        </div>
+                                                        <div class="responses-btn-decline">
+                                                            <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>`;
                                 }
                             });
