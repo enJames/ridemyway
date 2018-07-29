@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </div>
                                     </div>
                                     <div class="offer-price">
-                                        <h3>₦<span>${price}</span></h3>
+                                        <h3>₦<span>${price.toLocaleString()}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         rideOfferDetailsHook.innerHTML = rideOfferDetailsHTML;
                         pendingRequestsHook.innerHTML = pendingRequestsHTML;
 
-                        // Elements in responses page                    
+                        // Elements in responses page
                         const acceptedResponses = document.getElementById('acceptedResponses'); // Collapsible Div
                         const acceptedResponsesContainer = document.getElementById('acceptedResponsesContainer'); // Child Div
                         const view = document.getElementById('view'); // View button
