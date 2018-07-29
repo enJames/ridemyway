@@ -12,13 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 PageFunctions.enableLogout();
                 PageFunctions.displayUserNavigation();
 
-                // Get image element and set src to current user image
+                // Get elements
+                const viewRideHook = document.getElementById('viewRideHook');
                 const userAvatar = document.getElementById('userAvatar');
-                const { imgUrl } = res.data;
+                const { firstname, imgUrl, completeness } = res.data;
 
                 if (imgUrl !== null) {
                     userAvatar.src = imgUrl;
                 }
+            }
+
+            if (completeness !== '100%') {
+                PageFunctions.toggleProfileIndicatorText(completeness);
+                viewRideHook.innerHTML = `<div class="no-running">We are so sorry ${firstname}, you cannot join a ride yet because your profile is less than 100%. Please <a href="edit.html">update</a> your profile information and upload a clear profile picture, then try again.</div>`;
+                return;
             }
 
             // Get ride id from params
@@ -28,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch(getRideUrl)
                 .then(resp => resp.json())
                 .then((resp) => {
-                    const viewRideHook = document.getElementById('viewRideHook');
                     const { rideDetails, driver } = resp.data;
 
                     const ridesHTML = `<div class="ride-offer-wrapper">
