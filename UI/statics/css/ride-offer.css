@@ -110,6 +110,10 @@ body {
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
 }
+.responses-wrapper a {
+    color: black;
+    text-decoration: none;
+}
 .responses {
     display: flex;
     flex-wrap: wrap;
@@ -153,11 +157,14 @@ body {
     display:flex;
     align-items: center;
 }
-.responses-btn-accept, .responses-btn-reject {
+.responses-btn-accept, .responses-btn-decline {
     flex-basis: 50%;
     text-align: center;
 }
-.btn-accept, .btn-reject {
+.responses-btn-decline-for-accepted {
+    margin: auto;
+}
+.btn-accept, .btn-decline {
     width: 100px;
     height: 40px;
     font-size: 18px;
@@ -169,7 +176,7 @@ body {
 .btn-accept {
     background-color: rgb(0,100,10);
 }
-.btn-reject {
+.btn-decline {
     background-color: rgb(100,10,0);
 }
 .btn-wrapper {

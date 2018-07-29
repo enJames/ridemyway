@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (loggedInUserId) {
                         // Check if ride belongs to logged in user
                             if (loggedInUserId === ride.userId) {
-                                location = 'responses.html';
+                                location = `responses.html?rideId=${ride.id}`;
                             } else {
                                 location = `ride-offer.html?rideId=${ride.id}`;
                             }
