@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             requestedUsers.forEach((joinRequest) => {
                                 const { requestId, status, userId, firstname, lastname, phone, imgUrl } = joinRequest;
 
-                                if (status === 'accept') {
+                                if (status === 'accepted') {
                                     acceptedRequestsHTML += `<div class="responses-wrapper">
                                                 <div class="responses">
                                                     <div class="responses-user">
@@ -229,7 +229,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                         credentials: 'include'
                                     })
                                         .then(response => response.json())
-                                        .then((response) => PageFunctions.showMessage(response.status, response.message));
+                                        .then((response) => {
+                                            PageFunctions.showMessage(response.status, response.message);
+                                            window.location.reload();
+                                        });
                                 }, false);
                             });
                         }
