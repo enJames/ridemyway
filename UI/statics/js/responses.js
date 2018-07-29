@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     </div>
                                                     <div class="responses-btn">
                                                         <div class="responses-btn-decline-for-accepted">
-                                                            <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
+                                                            <button type="button" class="actionBtn btn-decline" name="${firstname} ${lastname}" value="decline" id="${requestId}">Decline</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -121,10 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     </div>
                                                     <div class="responses-btn">
                                                         <div class="responses-btn-accept">
-                                                            <button type="button" class="btn-accept" value="accept" id="${requestId}">Accept</button>
+                                                            <button type="button" class="actionBtn btn-accept" name="${firstname} ${lastname}" value="accept" id="${requestId}">Accept</button>
                                                         </div>
                                                         <div class="responses-btn-decline">
-                                                            <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
+                                                            <button type="button" class="actionBtn btn-decline" name="${firstname} ${lastname}" value="decline" id="${requestId}">Decline</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -199,7 +199,41 @@ document.addEventListener('DOMContentLoaded', () => {
                             view.addEventListener('click', () => {
                                 PageFunctions.collapseToggle(view, acceptedResponses, acceptedResponsesContainer);
                             }, false);
+
+                            // Accept or Decline requests
+                            document.querySelectorAll('.actionBtn').forEach((button) => {
+                                button.addEventListener('click', () => {
+                                    const action = button.value;
+                                    const name = button.name;
+                                    const id = button.id;
+                                    const url = `https://enjames-ridemyway.herokuapp.com/api/v1/users/rides/${rideId}/requests/${id}`;
+                                    let confirmation;
+
+                                    if (action === 'accept') {
+                                        confirmation = confirm(`We strongly recommend that you reach out to ${name} before adding them to your trip, are sure you want to accept?`);
+                                    } else if (action === 'decline') {
+                                        confirmation = confirm(`By declining ${name} would not be joining your trip. Are sure you want to decline?`);
+                                    }
+
+                                    if (!confirmation) {
+                                        return PageFunctions.showMessage('fail', 'Action cancelled');
+                                    }
+
+                                    fetch(url, {
+                                        method: 'PUT',
+                                        body: JSON.stringify({ action }),
+                                        headers: {
+                                            'Accept': 'application/json',
+                                            'Content-Type': 'application/json'
+                                        },
+                                        credentials: 'include'
+                                    })
+                                        .then(response => response.json())
+                                        .then((response) => PageFunctions.showMessage(response.status, response.message));
+                                }, false);
+                            });
                         }
+
 
                     })
                     .catch(error => console.error('There was an error', error));
