@@ -58,12 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                     .then(resp => resp.json())
                     .then((resp) => {
-                        console.log(resp);
                         PageFunctions.showMessage(resp.status, resp.message);
                         if (resp.status === 'success') {
                             return location.href = 'https://enjames.github.io/ridemyway/UI/profile.html';
                         }
                     })
             }, false);
+
+            PageFunctions.toggleProfileIndicatorText(res.data.completeness);
         });
 }, false);
