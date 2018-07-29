@@ -6,18 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const userNav = document.getElementById('userNav');
 
     // Elements in responses page
-    const view = document.getElementById('view'); // View button
+
     const acceptedResponses = document.getElementById('acceptedResponses'); // Collapsible Div
     const acceptedResponsesContainer = document.getElementById('acceptedResponsesContainer'); // Child Div
 
     // Toggle collapse
     navigationToggler.addEventListener('click', () => {
         PageFunctions.collapseToggle(navigationToggler, navigationDiv, navigationItemsWrapper)
-    }, false);
-
-    //Accepted Responses toggler
-    view.addEventListener('click', () => {
-        PageFunctions.collapseToggle(view, acceptedResponses, acceptedResponsesContainer);
     }, false);
 
     // Toggle User nav display
@@ -193,6 +188,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Append to DOM
                         rideOfferDetailsHook.innerHTML = rideOfferDetailsHTML;
                         pendingRequestsHook.innerHTML = pendingRequestsHTML;
+
+                        const view = document.getElementById('view'); // View button
+                        
+                        //Accepted Responses toggler
+                        view.addEventListener('click', () => {
+                            PageFunctions.collapseToggle(view, acceptedResponses, acceptedResponsesContainer);
+                        }, false);
                     })
                     .catch(error => PageFunctions.showMessage(resp.status, resp.message));
             }
