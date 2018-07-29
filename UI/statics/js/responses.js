@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Get requests
                             requestedUsers.forEach((joinRequest) => {
                                 const { requestId, status, firstname, lastname, phone, imgUrl } = joinRequest;
-                                
+
                                 if (status === 'accept') {
                                     acceptedRequestsHTML += `<div class="responses-wrapper">
                                                 <a href="requests.html?requestId=${requestId}">
@@ -118,8 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                                             <div class="responses-btn-accept">
                                                                 <button type="button" class="btn-accept" value="accept" id="${requestId}">Accept</button>
                                                             </div>
-                                                            <div class="responses-btn-reject">
-                                                                <button type="button" class="btn-reject" value="decline" id="${requestId}">Reject</button>
+                                                            <div class="responses-btn-decline">
+                                                                <button type="button" class="btn-decline" value="decline" id="${requestId}">Decline</button>
                                                             </div>
                                                         </div>
                                                     </div>
