@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formBody = document.getElementById('formBody');
 
             if (completeness !== '100%') {
-                formBody.innerHTML = `<div class="no-running">We are so sorry ${firstname}, you cannot create a ride yet because your profile is less than 100%. Please <a href="edit.html">update</a> your profile information and try again</div>`;
+                formBody.innerHTML = `<div class="no-running">We are so sorry ${firstname}, you cannot create a ride yet because your profile is less than 100%. Please <a href="edit.html">update</a> your profile information and upload a clear profile picture, then try again.</div>`;
                 return;
             }
 
