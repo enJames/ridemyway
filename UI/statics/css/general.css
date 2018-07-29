@@ -93,6 +93,7 @@
     margin: 0 auto;
     padding: 15px;
     box-sizing: border-box;
+    text-align: center;
 }
 .no-running a {
     text-decoration: none;
