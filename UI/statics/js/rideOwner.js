@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .catch(() => PageFunctions.showMessage('error', 'An error occurred. Please try reloading the page.'));
             } else {
                 profileBody.innerHTML = `<div class="no-running">To view this page, please <a href="login.html">login</a> or <a href="signup.html">create an account</a> if you don't have one.</div>`
+                profileBody.style.marginBottom = '80vh';
             }
         })
         .catch(() => PageFunctions.showMessage('error', 'An error occurred. Please try reloading the page.'));
