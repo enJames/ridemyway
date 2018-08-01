@@ -227,43 +227,39 @@ const ridesController = {
                             SET "status" = 'accepted'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
-                            .then(() => {
-                                return connectionPool.query(
-                                    `SELECT "seats", "acceptedRequests", "userId" FROM "RideOffers"
-                                        WHERE "id" = '${rideId}' AND "status" = 'Running'`
-                                )
-                                    .then((rideData) => {
-                                        const {
-                                            seats, acceptedRequests, userId
-                                        } = rideData.rows[0];
-                                        const seatsInt = parseInt(seats, 10);
-                                        const acceptedRequestsInt = parseInt(acceptedRequests, 10);
-                                        const newAcceptedRequests = acceptedRequestsInt + 1;
+                            .then(() => connectionPool.query(
+                                `SELECT "seats", "acceptedRequests", "userId" FROM "RideOffers"
+                                    WHERE "id" = '${rideId}' AND "status" = 'Running'`
+                            )
+                                .then((rideData) => {
+                                    const {
+                                        seats, acceptedRequests, userId
+                                    } = rideData.rows[0];
+                                    const seatsInt = parseInt(seats, 10);
+                                    const acceptedRequestsInt = parseInt(acceptedRequests, 10);
+                                    const newAcceptedRequests = acceptedRequestsInt + 1;
 
-                                        const newAvailableSeats = seatsInt - newAcceptedRequests;
+                                    const newAvailableSeats = seatsInt - newAcceptedRequests;
 
-                                        return connectionPool.query(
-                                            `UPDATE "RideOffers" SET
-                                                "acceptedRequests" = ${newAcceptedRequests},
-                                                "availableSeats" = ${newAvailableSeats}
-                                            WHERE "id" = ${rideId} AND "userId" = ${userId}`
+                                    return connectionPool.query(
+                                        `UPDATE "RideOffers" SET
+                                            "acceptedRequests" = ${newAcceptedRequests},
+                                            "availableSeats" = ${newAvailableSeats}
+                                        WHERE "id" = ${rideId} AND "userId" = ${userId}`
+                                    )
+                                        .then(() => connectionPool.query(
+                                            `SELECT "firstname", "lastname" FROM "Users"
+                                                WHERE "id" = ${request.userId}`
                                         )
-                                            .then(() => {
-                                                return connectionPool.query(
-                                                    `SELECT "firstname", "lastname" FROM "Users"
-                                                        WHERE "id" = ${request.userId}`
-                                                )
-                                                    .then((userData) => {
-                                                        const {
-                                                            firstname, lastname
-                                                        } = userData.rows[0];
-                                                        return sendResponse(
-                                                            res, 200, 'success', `${firstname} ${lastname} has been added to your ride successfully.`
-                                                        );
-                                                    });
-                                            });
-                                    });
-                            });
+                                            .then((userData) => {
+                                                const {
+                                                    firstname, lastname
+                                                } = userData.rows[0];
+                                                return sendResponse(
+                                                    res, 200, 'success', `${firstname} ${lastname} has been added to your ride successfully.`
+                                                );
+                                            }));
+                                }));
                     }
                     if (action === 'decline') {
                         return connectionPool.query(
@@ -281,45 +277,42 @@ const ridesController = {
                         return sendResponse(res, 400, 'fail', 'You already accepted this request');
                     }
                     if (action === 'decline') {
-                        return connectionPool.query(
+                        connectionPool.query(
                             `UPDATE "JoinRide" SET "status" = 'declined'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
-                            .then(() => {
-                                return connectionPool.query(
-                                    `SELECT "seats", "acceptedRequests", "userId" FROM "RideOffers"
+                            .then(() => connectionPool.query(
+                                `SELECT "seats", "acceptedRequests", "userId" FROM "RideOffers"
                                         WHERE "id" = '${rideId}' AND "status" = 'Running'`
-                                )
-                                    .then((rideData) => {
-                                        const {
-                                            seats, acceptedRequests, userId
-                                        } = rideData.rows[0];
-                                        const seatsInt = parseInt(seats, 10);
-                                        const acceptedRequestsInt = parseInt(acceptedRequests, 10);
-                                        const newAcceptedRequests = acceptedRequestsInt - 1;
+                            )
+                                .then((rideData) => {
+                                    const {
+                                        seats, acceptedRequests, userId
+                                    } = rideData.rows[0];
+                                    const seatsInt = parseInt(seats, 10);
+                                    const acceptedRequestsInt = parseInt(acceptedRequests, 10);
+                                    const newAcceptedRequests = acceptedRequestsInt - 1;
 
-                                        const newAvailableSeats = seatsInt - newAcceptedRequests;
-
-                                        return connectionPool.query(
-                                            `UPDATE "RideOffers" SET
-                                                "acceptedRequests" = ${newAcceptedRequests},
-                                                "availableSeats" = ${newAvailableSeats}
-                                            WHERE "id" = ${rideId} AND "userId" = ${userId}`
+                                    const newAvailableSeats = seatsInt - newAcceptedRequests;
+                                    connectionPool.query(
+                                        `UPDATE "RideOffers" SET
+                                            "acceptedRequests" = ${newAcceptedRequests},
+                                            "availableSeats" = ${newAvailableSeats}
+                                        WHERE "id" = ${rideId} AND "userId" = ${userId}`
+                                    )
+                                        .then(() => connectionPool.query(
+                                            `SELECT "firstname", "lastname" FROM "Users"
+                                                WHERE "id" = ${request.userId}`
                                         )
-                                            .then(() => connectionPool.query(
-                                                `SELECT "firstname", "lastname" FROM "Users"
-                                                    WHERE "id" = ${request.userId}`
-                                            )
-                                                .then((userData) => {
-                                                    const {
-                                                        firstname, lastname
-                                                    } = userData.rows[0];
-                                                    return sendResponse(
-                                                        res, 200, 'success', `${firstname} ${lastname} has been removed from your successfully.`
-                                                    );
-                                                }));
-                                    });
-                            });
+                                            .then((userData) => {
+                                                const {
+                                                    firstname, lastname
+                                                } = userData.rows[0];
+                                                return sendResponse(
+                                                    res, 200, 'success', `${firstname} ${lastname} has been removed from your successfully.`
+                                                );
+                                            }));
+                                }));
                     }
                     return sendResponse(res, 400, 'fail', 'Request not understood');
                 }
