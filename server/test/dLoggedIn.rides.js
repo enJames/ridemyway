@@ -66,7 +66,7 @@ describe('Logged in category', () => {
                     toCity: 'Obolafor',
                     price: 800,
                     seats: 4,
-                    departureDate: '2018-07-30',
+                    departureDate: '2018-09-30',
                     departureTime: '10:00am',
                     pickupLocation: 'Ugbokolo Market'
                 })

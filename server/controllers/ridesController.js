@@ -277,7 +277,7 @@ const ridesController = {
                         return sendResponse(res, 400, 'fail', 'You already accepted this request');
                     }
                     if (action === 'decline') {
-                        connectionPool.query(
+                        return connectionPool.query(
                             `UPDATE "JoinRide" SET "status" = 'declined'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
