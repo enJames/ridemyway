@@ -272,7 +272,7 @@ const ridesController = {
                     return sendResponse(res, 405, 'fail', 'Request not understood');
                 }
 
-                if (request.status === 'accept') {
+                if (request.status === 'accepted') {
                     if (action === 'accept') {
                         return sendResponse(res, 400, 'fail', 'You already accepted this request');
                     }
