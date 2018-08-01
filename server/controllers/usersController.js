@@ -89,7 +89,7 @@ const usersController = {
                             maxAge: (1000 * 60 * 60 * 2)
                         });
 
-                        return sendResponse(res, 200, 'success', 'account logged in');
+                        return sendResponse(res, 200, 'success', 'Account logged in');
                     });
             });
     },
@@ -239,7 +239,7 @@ const usersController = {
         // Clear cookie
         res.clearCookie('token');
 
-        return sendResponse(res, 200, 'success', 'account logged out');
+        return sendResponse(res, 200, 'success', 'Account logged out');
     }
 };
 
