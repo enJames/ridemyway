@@ -79,7 +79,22 @@
                 </div>
             </div>
         </nav>
+        <div class="alert" id="alertDiv">
+            <div class="alert-header">
+                <h3>Important!</h3>
+            </div>
+            <div class="alert-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button type="button" class="btn-action btn-action-update" id="negative">No, do not cancel this ride</button>
+                <button type="button" class="btn-action btn-action-delete" id="positive">Yes, cancel this ride<i class="fa fa-spinner fa-spin" id="spinner"></i></button>
+            </div>
+        </div>
+        <div id="dimmer"></div>
         <p id="message"></p>
+        <div class="ride-buttons">
+            <button type="button" class="btn-action btn-action-update" id="updateBtn" disabled>Update</button>
+            <button type="button" class="btn-action btn-action-delete" id="deleteBtn" disabled>Cancel</button>
+        </div>
         <div class="view-offer" id="rideOfferDetailsHook">
             <div class="loading">
                 <i class="fa fa-spinner fa-spin"></i>
@@ -114,5 +129,6 @@
         </footer>
         <script src="statics/js/PageFunctions.js"></script>
         <script src="statics/js/responses.js"></script>
+        <script src="statics/js/responsesUpdateDelete.js"></script>
     </body>
 </html>

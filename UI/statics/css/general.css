@@ -2,6 +2,7 @@
     position: fixed;
     top: 10vh;
     left: 50%;
+    z-index: 10000;
     transform: translate(-50%, -50%);
     width: 400px;
     margin: 0 auto;
@@ -99,4 +100,54 @@
     text-decoration: none;
     color: rgb(14,113,198);
     font-weight: bold;
+}
+#dimmer {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100vh;
+}
+.alert {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    z-index: 10000;
+    background-color: white;
+    width: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    transform: translate(-50%, -50%);transition: all .4s ease-in-out;
+    transition: all .7s ease-in-out
+    -webkit-transition: all .7s ease-in-out;
+    -o-transition: all .7s ease-in-out;
+    -moz-transition: all .7s ease-in-out;
+    -ms-transition: all .7s ease-in-out;
+}
+.alert-header {
+    background-color: rgb(0,30,80);
+}
+.alert-header h3 {
+    margin: 0 auto;
+    padding: 10px 0;
+    color: white;
+}
+.alert-body {
+    padding: 0 15px;
+}
+.alert .btn-action {
+    width: 96%;
+    margin: 0 auto 20px;
+}
+#positive {
+    position: relative; /* to properly position spinner */
+}
+@media screen and (max-width: 500px) {
+    .alert {
+        width: 96%;
+    }
 }

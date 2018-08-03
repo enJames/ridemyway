@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     </div>
                                                     <div class="responses-btn">
                                                         <div class="responses-btn-decline-for-accepted">
-                                                            <button type="button" class="actionBtn btn-decline" name="${firstname} ${lastname}" value="decline" id="${requestId}">Decline</button>
+                                                            <button type="button" class="btn-decline actionBtn" name="${firstname} ${lastname}" value="decline" id="${requestId}">Decline</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     </div>
                                                     <div class="responses-btn">
                                                         <div class="responses-btn-accept">
-                                                            <button type="button" class="actionBtn btn-accept" name="${firstname} ${lastname}" value="accept" id="${requestId}">Accept</button>
+                                                            <button type="button" class="actiobtn btn-accept" name="${firstname} ${lastname}" value="accept" id="${requestId}">Accept</button>
                                                         </div>
                                                         <div class="responses-btn-decline">
                                                             <button type="button" class="actionBtn btn-decline" name="${firstname} ${lastname}" value="decline" id="${requestId}">Decline</button>
@@ -236,8 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 }, false);
                             });
                         }
-
-
                     })
                     .catch(error => console.error('There was an error', error));
             }
