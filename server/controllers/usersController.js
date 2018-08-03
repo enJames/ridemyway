@@ -97,7 +97,7 @@ const usersController = {
         const { userId } = req.authData;
         const responseObject = {};
 
-        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "userId" = '${userId}'`)
+        connectionPool.query(`SELECT * FROM "RideOffers" WHERE "userId" = '${userId}' AND status = 'Running'`)
             .then((rideData) => {
                 const runningOffer = rideData.rows[0];
 

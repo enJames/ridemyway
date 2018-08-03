@@ -360,7 +360,7 @@ const ridesController = {
         const { userId } = req.authData;
 
         connectionPool.query(
-            `UPDATE "RideOffers" SET status = 'cancelled'
+            `UPDATE "RideOffers" SET status = 'Cancelled'
             WHERE "id" = '${rideId}' AND "userId" = '${userId}'`
         )
             .then(() => sendResponse(res, 200, 'success', 'Trip cancelled successfully'));
