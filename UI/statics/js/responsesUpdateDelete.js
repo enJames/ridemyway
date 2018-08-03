@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then((res) => {
                         PageFunctions.showMessage(res.status, res.message);
                         if (res.status === 'success') {
-                            return location.replace('https://enjames-ridemyway.herokuapp.com/api/v1/users/dashboard');
+                            return location.replace('https://enjames.github.io/ridemyway/UI/dashboard.html');
                         }
                     });
             }
