@@ -74,8 +74,8 @@ routes.put(
     updateRideOffer
 );
 
-// Delete ride offer | optional
-routes.update(
+// Canel ride offer | optional
+routes.put(
     '/users/rides/:rideId',
     checkParams,
     verifyUser,
