@@ -42,7 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const url =
 
-                fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/users/rides/${rideId}`)
+                fetch(`https://enjames-ridemyway.herokuapp.com/api/v1/users/rides/${rideId}`, {
+                    method: 'PUT',
+                    credentials: 'include'
+                })
                     .then(res => res.json())
                     .then((res) => {
                         PageFunctions.showMessage(res.status, res.message);
