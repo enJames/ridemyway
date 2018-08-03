@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const rideId = window.location.search.substr(-1).split('=')[1];
+    const rideId = window.location.search.substr(1).split('=')[1];
     const updateBtn = document.getElementById('updateBtn');
     const deleteBtn = document.getElementById('deleteBtn');
 
