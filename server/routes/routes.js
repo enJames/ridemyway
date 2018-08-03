@@ -36,7 +36,7 @@ const {
     createRideOffer,
     updateRideOffer,
     acceptRejectRideRequest,
-    deleteRideOffer,
+    cancelRideOffer,
     getAllJoinRequests
 } = ridesController;
 
@@ -75,12 +75,12 @@ routes.put(
 );
 
 // Delete ride offer | optional
-routes.delete(
+routes.update(
     '/users/rides/:rideId',
     checkParams,
     verifyUser,
     authorizeAction,
-    deleteRideOffer
+    cancelRideOffer
 );
 
 // Get all join request to ride offer

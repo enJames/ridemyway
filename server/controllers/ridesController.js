@@ -355,16 +355,15 @@ const ridesController = {
             .then(() => sendResponse(res, 200, 'success', 'ride offer updated'))
             .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to update ride offer', error));
     },
-    deleteRideOffer: (req, res) => {
+    cancelRideOffer: (req, res) => {
         const { rideId } = req.params;
         const { userId } = req.authData;
 
         connectionPool.query(
-            `DELETE FROM "RideOffers" WHERE "id" = '${rideId}'
-            AND "userId" = '${userId}'`
+            `UPDATE "RideOffers" SET status = 'cancelled'
+            WHERE "id" = '${rideId}' AND "userId" = '${userId}'`
         )
-            .then(() => sendResponse(res, 200, 'success', 'ride offer deleted'))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to delete ride offer', error));
+            .then(() => sendResponse(res, 200, 'success', 'Trip cancelled successfully'));
     }
 };
 
