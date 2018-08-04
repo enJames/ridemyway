@@ -120,12 +120,21 @@ const ridesController = {
         // Get current date in user's format for comparison
         const now = new Date();
         const month = now.getMonth() + 1;
+        const theDate = now.getDate();
         let tomorrow;
 
         if (month > 9) {
-            tomorrow = `${now.getFullYear()}-${month}-${now.getDate() + 1}`;
-        } else {
-            tomorrow = `${now.getFullYear()}-0${month}-${now.getDate() + 1}`;
+            if (theDate > 9) {
+                tomorrow = `${now.getFullYear()}-${month}-${now.getDate() + 1}`;
+            } else {
+                tomorrow = `${now.getFullYear()}-${month}-0${now.getDate() + 1}`;
+            }
+        } else if (month <= 9) {
+            if (theDate > 9) {
+                tomorrow = `${now.getFullYear()}-0${month}-${now.getDate() + 1}`;
+            } else {
+                tomorrow = `${now.getFullYear()}-0${month}-0${now.getDate() + 1}`;
+            }
         }
 
         if (departureDate < tomorrow) {

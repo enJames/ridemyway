@@ -116,13 +116,26 @@ describe('Logged in category', () => {
         it('On success:: Make a join ride request: already joined', (done) => {
             chai
                 .request(app)
-                .post('/api/v1/rides/1/requests')
+                .post('/api/v1/rides/4/requests')
                 .send({})
                 .set('cookies', theCookie)
                 .end((req, res) => {
                     expect(res).to.have.status(405);
                     assert.equal(res.body.status, 'fail');
                     assert.equal(res.body.message, 'You already joined this ride');
+                    done();
+                });
+        });
+        it('On success:: Make a join ride request: ride expired', (done) => {
+            chai
+                .request(app)
+                .post('/api/v1/rides/1/requests')
+                .send({})
+                .set('cookies', theCookie)
+                .end((req, res) => {
+                    expect(res).to.have.status(403);
+                    assert.equal(res.body.status, 'fail');
+                    assert.equal(res.body.message, 'Ride is expired');
                     done();
                 });
         });
