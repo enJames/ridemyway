@@ -159,7 +159,8 @@ const usersController = {
                 "gender" = '${gender}',
                 "phone" = '${phone}',
                 "city" = '${city}',
-                "state" = '${state}'
+                "state" = '${state}',
+                "updatedAt" = NOW()
             WHERE "id" = ${userId} RETURNING *`
         )
             .then((completenessData) => {
