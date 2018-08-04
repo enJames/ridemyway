@@ -2,16 +2,18 @@ import connectionPool from '../models/connectionPool';
 import Reusables from '../Reusables';
 
 const { sendResponse } = Reusables;
+const rideStatus = 'Running';
 
 const ridesController = {
-    getAllRideOffers: (req, res) => connectionPool.query('SELECT * FROM "RideOffers"')
+    getAllRideOffers: (req, res) => connectionPool.query(
+        `SELECT * FROM "RideOffers" WHERE status = '${rideStatus}'`
+    )
         .then((rideData) => {
             if (!rideData.rows.length === 0) {
                 return sendResponse(res, 404, 'fail', 'No ride offers yet');
             }
             return sendResponse(res, 200, 'success', 'All ride offers', rideData.rows);
-        })
-        .catch(error => sendResponse(res, 500, 'error', 'Connection error while fetching rides', error)),
+        }),
     getARideOffer: (req, res) => {
         const { rideId } = req.params;
         // Search for the ride
@@ -67,7 +69,7 @@ const ridesController = {
                 }
 
                 // Check if ride has expired
-                if (status === 'expired') {
+                if (status === 'Expired') {
                     return sendResponse(res, 403, 'fail', 'Ride is expired');
                 }
 
@@ -320,40 +322,6 @@ const ridesController = {
                 // if request.status is decline
                 return sendResponse(res, 400, 'fail', 'Declined requests cannot be accepted again');
             });
-    },
-    updateRideOffer: (req, res) => {
-        const { rideId } = req.params;
-        const { userId } = req.authData;
-
-        const {
-            fromState,
-            fromCity,
-            toState,
-            toCity,
-            price,
-            seats,
-            departureDate,
-            departureTime,
-            pickupLocation
-        } = req.body;
-
-        // Query database to get number of accepted requests
-
-        connectionPool.query(
-            `UPDATE "RideOffers" SET
-                "fromState"='${fromState}',
-                "fromCity"='${fromCity}',
-                "toState"='${toState}',
-                "toCity"='${toCity}',
-                "price"='${price}',
-                "seats"='${seats}',
-                "departureDate"='${departureDate}',
-                "departureTime"='${departureTime}',
-                "pickupLocation"='${pickupLocation}'
-            WHERE "id" = '${rideId}' AND "userId" = '${userId}' RETURNING *`
-        )
-            .then(() => sendResponse(res, 200, 'success', 'ride offer updated'))
-            .catch(error => sendResponse(res, 500, 'error', 'connection error while attempting to update ride offer', error));
     },
     cancelRideOffer: (req, res) => {
         const { rideId } = req.params;

@@ -34,7 +34,6 @@ const {
     getARideOffer,
     joinRide,
     createRideOffer,
-    updateRideOffer,
     acceptRejectRideRequest,
     cancelRideOffer,
     getAllJoinRequests
@@ -63,15 +62,6 @@ routes.post(
     verifyUser,
     validateCreateOfferForm,
     createRideOffer
-);
-
-// Update ride offer | optional
-routes.put(
-    '/users/rides/:rideId/update',
-    checkParams,
-    verifyUser,
-    authorizeAction,
-    updateRideOffer
 );
 
 // Canel ride offer | optional
