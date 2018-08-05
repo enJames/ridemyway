@@ -25,6 +25,26 @@ const Reusables = {
         const percentageCompleteness = Math.floor(100 * (9 - columnsWithNullValues) / 9);
 
         return `${percentageCompleteness}%`;
+    },
+    getDateString: (day = 0) => {
+        const monthArray = [
+            'Nil', 'Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+        let formDateFormat;
+
+        const requiredDate = new Date(new Date().getTime() + (day * 86400000));
+        const [weekDay, month, date, year] = requiredDate.toDateString().split(' ');
+
+        weekDay.toString(); // Just to avoid eslint error
+
+        const monthIndex = monthArray.indexOf(month);
+
+        if (monthIndex > 9) {
+            formDateFormat = `${year}-${monthIndex}-${date}`;
+        } else {
+            formDateFormat = `${year}-0${monthIndex}-${date}`;
+        }
+        return formDateFormat;
     }
 };
 

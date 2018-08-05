@@ -17,8 +17,8 @@ const Models = () => {
                 "state" VARCHAR,
                 "imgUrl" VARCHAR,
                 "completeness" VARCHAR NOT NULL,
-                "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
+                "createdAt" DATE NOT NULL DEFAULT NOW(),
+                "updatedAt" DATE NOT NULL DEFAULT NOW())`)
                 .then(() => connectionPool.query(`CREATE TABLE IF NOT EXISTS "RideOffers" (
                         "id" SERIAL PRIMARY KEY,
                         "fromState" VARCHAR NOT NULL,
@@ -29,20 +29,21 @@ const Models = () => {
                         "seats" INTEGER NOT NULL,
                         "acceptedRequests" INTEGER,
                         "availableSeats" INTEGER,
-                        "departureDate" date NOT NULL,
+                        "departureDate" DATE NOT NULL,
                         "departureTime" TIME NOT NULL,
                         "pickupLocation" VARCHAR NOT NULL,
                         "status" VARCHAR NOT NULL,
                         "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
-                        "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                        "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)
+                        "createdAt" DATE NOT NULL DEFAULT NOW(),
+                        "updatedAt" DATE NOT NULL DEFAULT NOW())`)
                     .then(() => connectionPool.query(`CREATE TABLE IF NOT EXISTS "JoinRide" (
                                 id SERIAL PRIMARY KEY,
                                 "rideId" INTEGER REFERENCES "RideOffers" (id) ON DELETE CASCADE,
                                 "userId" INTEGER REFERENCES "Users" (id) ON DELETE CASCADE,
+                                "rideDepartureDate" DATE NOT NULL,
                                 status VARCHAR NOT NULL,
-                                "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP)`)));
+                                "createdAt" DATE NOT NULL DEFAULT NOW(),
+                                "updatedAt" DATE NOT NULL DEFAULT NOW())`)));
         });
 };
 

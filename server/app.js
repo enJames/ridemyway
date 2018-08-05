@@ -11,7 +11,6 @@ import { serve, setup } from 'swagger-ui-express';
 
 import routes from './routes/routes';
 import Models from './models/Models';
-import jobs from './cronjobs/jobs';
 import swaggerDocument from './swaggerDocument';
 
 dotenv.config();
@@ -44,9 +43,6 @@ expressBusboy.extend(app, {
 
 // Create Tables
 Models();
-
-// Activate background tasks
-jobs();
 
 // API routes
 app.use('/api/v1/', routes);

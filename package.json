@@ -31,9 +31,7 @@
     "express-cors": "0.0.3",
     "jsonwebtoken": "^8.3.0",
     "morgan": "^1.9.0",
-    "node-cron": "^1.2.1",
     "pg": "^7.4.3",
-    "request": "^2.87.0",
     "swagger-ui-express": "^3.0.10"
   },
   "devDependencies": {

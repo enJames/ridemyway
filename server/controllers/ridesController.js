@@ -1,7 +1,7 @@
 import connectionPool from '../models/connectionPool';
 import Reusables from '../Reusables';
 
-const { sendResponse } = Reusables;
+const { sendResponse, getDateString } = Reusables;
 const rideStatus = 'Running';
 
 const ridesController = {
@@ -44,9 +44,10 @@ const ridesController = {
     joinRide: (req, res) => {
         const { rideId } = req.params;
         const { userId } = req.authData;
+
         // Check that ride exists
         connectionPool.query(
-            `SELECT "availableSeats", "status", "userId" FROM "RideOffers"
+            `SELECT "availableSeats", "departureDate", "status", "userId" FROM "RideOffers"
                 WHERE "id" = '${rideId}'`
         )
             .then((rideData) => {
@@ -55,7 +56,7 @@ const ridesController = {
                 }
                 const rideCreatorId = rideData.rows[0].userId;
                 const {
-                    availableSeats, status
+                    availableSeats, departureDate, status
                 } = rideData.rows[0];
 
                 // Check that user is not trying to join his own ride
@@ -73,30 +74,44 @@ const ridesController = {
                     return sendResponse(res, 403, 'fail', 'Ride is expired');
                 }
 
-                // Retrieve ride creators' firstname and lastname
-                return connectionPool.query(
-                    `SELECT "firstname" FROM "Users" WHERE "id" = '${rideCreatorId}'`
-                )
-                    .then((userData) => {
-                        const { firstname } = userData.rows[0];
+                const rideDepartureDate = departureDate.toDateString();
 
-                        // Check if user already joined the ride
+                // Check if user already joined the ride
+                connectionPool.query(
+                    `SELECT * FROM "JoinRide" WHERE "userId" = ${userId} AND "rideId" = ${rideId}`
+                )
+                    .then((joinRideData) => {
+                        // check if results were returned
+                        if (joinRideData.rows.length > 0) {
+                            return sendResponse(res, 405, 'fail', 'You already joined this ride');
+                        }
+
+                        // Check that user does not have another pending join ride request
                         connectionPool.query(
-                            `SELECT * FROM "JoinRide" WHERE "userId" = ${userId} AND "rideId" = ${rideId}`
+                            `SELECT * FROM "JoinRide"
+                            WHERE "userId" = ${userId} AND "rideDepartureDate" >= NOW()::date`
                         )
-                            .then((joinRideData) => {
-                                // check if results were returned
-                                if (joinRideData.rows.length > 0) {
-                                    return sendResponse(res, 405, 'fail', 'You already joined this ride');
+                            .then((pendingJoinRide) => {
+                                if (pendingJoinRide.rows.length > 0) {
+                                    return sendResponse(res, 405, 'fail', 'You can join only one ride at a time');
                                 }
-                                // Persist join request to database
-                                connectionPool.query(
-                                    `INSERT INTO "JoinRide" ("rideId", "userId", "status")
-                                        VALUES ('${rideId}', '${userId}', 'pending')`
+
+                                // Retrieve ride creators' firstname and lastname
+                                return connectionPool.query(
+                                    `SELECT "firstname" FROM "Users" WHERE "id" = '${rideCreatorId}'`
                                 )
-                                    .then(() => {
-                                        const response = `Your join request has been processed and its pending ${firstname}'s response`;
-                                        return sendResponse(res, 201, 'success', response);
+                                    .then((userData) => {
+                                        const { firstname } = userData.rows[0];
+
+                                        // Persist join request to database
+                                        connectionPool.query(
+                                            `INSERT INTO "JoinRide" ("rideId", "userId", "rideDepartureDate", "status")
+                                                VALUES ('${rideId}', '${userId}', '${rideDepartureDate}', 'Pending')`
+                                        )
+                                            .then(() => {
+                                                const response = `Your join request has been processed and its pending ${firstname}'s response`;
+                                                return sendResponse(res, 201, 'success', response);
+                                            });
                                     });
                             });
                     });
@@ -118,24 +133,7 @@ const ridesController = {
         } = req.body;
 
         // Get current date in user's format for comparison
-        const now = new Date();
-        const month = now.getMonth() + 1;
-        const theDate = now.getDate();
-        let tomorrow;
-
-        if (month > 9) {
-            if (theDate > 9) {
-                tomorrow = `${now.getFullYear()}-${month}-${now.getDate() + 1}`;
-            } else {
-                tomorrow = `${now.getFullYear()}-${month}-0${now.getDate() + 1}`;
-            }
-        } else if (month <= 9) {
-            if (theDate > 9) {
-                tomorrow = `${now.getFullYear()}-0${month}-${now.getDate() + 1}`;
-            } else {
-                tomorrow = `${now.getFullYear()}-0${month}-0${now.getDate() + 1}`;
-            }
-        }
+        const tomorrow = getDateString(1);
 
         if (departureDate < tomorrow) {
             return sendResponse(res, 405, 'fail', 'Departure is in the past or too sudden. Consider changing to a later date');
@@ -231,11 +229,11 @@ const ridesController = {
                     return sendResponse(res, 404, 'fail', 'Request does not exist');
                 }
 
-                if (request.status === 'pending') {
+                if (request.status === 'Pending') {
                     if (action === 'accept') {
                         return connectionPool.query(
                             `UPDATE "JoinRide"
-                            SET "status" = 'accepted'
+                            SET "status" = 'Accepted'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
                             .then(() => connectionPool.query(
@@ -274,7 +272,7 @@ const ridesController = {
                     }
                     if (action === 'decline') {
                         return connectionPool.query(
-                            `UPDATE "JoinRide" SET "status" = 'declined'
+                            `UPDATE "JoinRide" SET "status" = 'Declined'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
                             .then(() => sendResponse(res, 200, 'success', 'Declined ride request successfully'));
@@ -283,13 +281,13 @@ const ridesController = {
                     return sendResponse(res, 405, 'fail', 'Request not understood');
                 }
 
-                if (request.status === 'accepted') {
+                if (request.status === 'Accepted') {
                     if (action === 'accept') {
                         return sendResponse(res, 400, 'fail', 'You already accepted this request');
                     }
                     if (action === 'decline') {
                         return connectionPool.query(
-                            `UPDATE "JoinRide" SET "status" = 'declined'
+                            `UPDATE "JoinRide" SET "status" = 'Declined'
                             WHERE "id" = '${requestId}' AND "rideId" = '${rideId}'`
                         )
                             .then(() => connectionPool.query(

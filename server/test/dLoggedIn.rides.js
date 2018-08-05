@@ -116,7 +116,7 @@ describe('Logged in category', () => {
         it('On success:: Make a join ride request: already joined', (done) => {
             chai
                 .request(app)
-                .post('/api/v1/rides/4/requests')
+                .post('/api/v1/rides/1/requests')
                 .send({})
                 .set('cookies', theCookie)
                 .end((req, res) => {
@@ -129,7 +129,7 @@ describe('Logged in category', () => {
         it('On success:: Make a join ride request: ride expired', (done) => {
             chai
                 .request(app)
-                .post('/api/v1/rides/1/requests')
+                .post('/api/v1/rides/4/requests')
                 .send({})
                 .set('cookies', theCookie)
                 .end((req, res) => {
